@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/.netlify/functions/send-nextfiles",
+      "destination": "/api/send-nextfiles"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
