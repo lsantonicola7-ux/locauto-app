@@ -34,8 +34,8 @@ h1 .arrow{display:inline-block;background:var(--amber);color:var(--sign);border-
 .progress b{color:var(--ink)}
 .bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:14px}
 .bar i{display:block;height:100%;background:var(--amber)}
-.tools{display:flex;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5}
-.tools input{flex:1;min-width:0;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5}
+.tools input{flex:1 1 100%;min-width:0;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
 .tools button{font:600 15px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:0 14px;cursor:pointer}
 h2.region{font:700 22px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
 h2.region::after{content:"";flex:1;height:1px;background:var(--line)}
@@ -70,7 +70,8 @@ dialog button{margin-top:10px;font:600 15px "Barlow Condensed",sans-serif;text-t
 .dot.on{background:var(--ok)} .dot.off{background:#8a8f98}
 .kb{display:inline-block;font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.05em;padding:5px 8px;border-radius:6px}
 .kb1{background:var(--amber);color:#15181d} .kb2{background:var(--line);color:var(--ink)}
-.tools button{white-space:nowrap}
+.tools button{white-space:nowrap;flex:1;min-height:42px}
+@media(min-width:640px){.tools input{flex-basis:0}.tools button{flex:0 0 auto}}
 footer{color:var(--muted);font-size:13px;margin:24px 0 8px}
 @media (max-width:520px){header.sign{grid-template-columns:1fr}.mainqr{justify-self:start}}
 @media print{.tools,.actions,footer{display:none}.card{break-inside:avoid}}
