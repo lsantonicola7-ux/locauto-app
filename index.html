@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Locauto · Punti di riconsegna / Car return points</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f1ea; --panel:#ffffff; --ink:#15181d; --muted:#5d636d; --line:#dcd8cc;
+  --sign:#0b3a6e; --signInk:#ffffff; --amber:#f2b705; --ok:#1f7a4d; --warn:#a15c00;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1216; --panel:#181c22; --ink:#eef0f3; --muted:#9aa2ad; --line:#2a3039;
+  --sign:#123f73; --ok:#4cc38a; --warn:#f0a93b;}}
+:root[data-theme="dark"]{--bg:#0f1216; --panel:#181c22; --ink:#eef0f3; --muted:#9aa2ad; --line:#2a3039; --sign:#123f73; --ok:#4cc38a; --warn:#f0a93b;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:16px}
+header.sign{background:var(--sign);color:var(--signInk);border-radius:14px;padding:20px 20px 18px;display:grid;grid-template-columns:1fr;gap:16px;align-items:center;position:relative;overflow:hidden}
+header.sign::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:repeating-linear-gradient(90deg,var(--amber) 0 22px,transparent 22px 34px)}
+.kicker{font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+h1{font:700 clamp(30px,7vw,48px)/.95 "Barlow Condensed",Arial Narrow,sans-serif;margin:8px 0 10px;letter-spacing:.01em;text-transform:uppercase}
+h1 .arrow{display:inline-block;background:var(--amber);color:var(--sign);border-radius:6px;padding:0 8px;margin-right:8px}
+.sub{margin:0;opacity:.85;font-size:15px}
+.mainqr{background:#fff;border-radius:10px;padding:8px;width:124px;text-align:center}
+.mainqr canvas,.mainqr img{width:108px;height:108px;display:block;image-rendering:pixelated}
+.mainqr small{display:block;color:#15181d;font:600 11px/1.2 "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
+.progress{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px;font-size:14px;color:var(--muted)}
+.progress b{color:var(--ink)}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--amber)}
+.tools{display:flex;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5}
+.tools input{flex:1;min-width:0;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.tools button{font:600 15px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:0 14px;cursor:pointer}
+h2.region{font:700 22px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+h2.region::after{content:"";flex:1;height:1px;background:var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:grid;grid-template-columns:1fr;gap:6px}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.name{font:700 20px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.02em}
+.badge{flex:none;font:600 11px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:5px 7px;border-radius:5px;border:1px solid currentColor}
+.badge.ok{color:var(--ok)} .badge.warn{color:var(--warn)}
+.ret{font-weight:600}
+.ret::before{content:"P ";display:inline-block;background:var(--sign);color:#fff;font:700 13px/1 "Barlow Condensed",sans-serif;padding:3px 6px;border-radius:4px;margin-right:6px}
+.how{color:var(--muted);font-size:14.5px;margin:0}
+.coord{font:400 13px/1.3 "IBM Plex Mono",ui-monospace,monospace;color:var(--muted)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.actions a,.actions button{font:600 14px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:8px;padding:9px 12px;border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer}
+.actions a.waze{background:#33ccff;border-color:#33ccff;color:#0b1a24}
+.actions a.primary{background:var(--sign);border-color:var(--sign);color:#fff}
+.empty{color:var(--muted);text-align:center;padding:24px}
+dialog{border:none;border-radius:14px;padding:20px;max-width:320px;width:calc(100% - 32px);text-align:center;background:#fff;color:#15181d}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+dialog img{width:240px;height:240px;max-width:100%;image-rendering:pixelated}
+dialog h3{font:700 20px "Barlow Condensed",sans-serif;margin:0 0 8px}
+dialog button{margin-top:10px;font:600 15px "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em;padding:9px 18px;border-radius:8px;border:1px solid #ccc;background:#fff;cursor:pointer}
+.langs{display:flex;gap:6px;justify-content:flex-end;margin-top:12px}
+.langs button{font:600 14px "Barlow Condensed",sans-serif;letter-spacing:.08em;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--sign);border-color:var(--sign);color:#fff}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:none}
+.chips a{flex:none;font:600 14px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px}
+.type{font:600 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.hrs{font-size:14.5px}
+.hrs b{font-weight:600}
+.dot{display:inline-block;font:600 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:5px;color:#fff;margin-right:4px}
+.dot.on{background:var(--ok)} .dot.off{background:#8a8f98}
+.kb{display:inline-block;font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.05em;padding:5px 8px;border-radius:6px}
+.kb1{background:var(--amber);color:#15181d} .kb2{background:var(--line);color:var(--ink)}
+.tools button{white-space:nowrap}
+footer{color:var(--muted);font-size:13px;margin:24px 0 8px}
+@media (max-width:520px){header.sign{grid-template-columns:1fr}.mainqr{justify-self:start}}
+@media print{.tools,.actions,footer{display:none}.card{break-inside:avoid}}
+.fcolink{display:block;text-decoration:none;font:600 16px/1.2 "Barlow Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="sign">
+    <div>
+      <div class="kicker">Locauto Rent · Car Rental Return</div>
+      <h1><span class="arrow">↘</span><span data-t="title"></span></h1>
+      <p class="sub" data-t="sub"></p>
+    </div>
+      </header>
+  <a class="fcolink" href="/fco">✈ Rome Fiumicino Airport (FCO) → Parking A, 4th floor</a>
+
+  <div class="langs"><button type="button" data-lang="it">IT</button><button type="button" data-lang="en">EN</button></div>
+  <div class="progress"><span><b id="count">0</b> <span data-t="loaded"></span></span><span>·</span><span data-t="prog"></span></div>
+  <div class="bar"><i id="barfill"></i></div>
+
+  <div class="tools">
+    <input id="q" type="search" placeholder="" autocomplete="off">
+    <button id="onlyok" type="button" aria-pressed="false" data-t="onlyok"></button>
+    <button id="onlykb" type="button" aria-pressed="false" data-t="onlykb"></button>
+  </div>
+  <nav class="chips" id="chips"></nav>
+
+  <main id="list"></main>
+  <footer data-t="foot"></footer>
+</div>
+
+
+<script src="/d1.js"></script>
+<script src="/d2.js"></script>
+<script src="/d3.js"></script>
+<script src="/d4.js"></script>
+<script>
+const TOTAL_EXPECTED = 1;
+// t: 1 aeroporto, 2 stazione/porto, 3 città
+const DATA = window.D;
+const HOURS = {
+"Roma|Roma Fiumicino Aeroporto": "Lun-Dom 07:00-23:59",
+"Roma|Roma Ciampino Aeroporto": "Lun-Dom 08:00-23:00",
+"Roma|Termini Stazione": "Lun-Dom 07:30-20:00",
+"Roma|Tiburtina Stazione": "Lun-Ven 08:00-19:00 · Sab 08:00-13:00",
+"Roma|Via Veneto": "Lun-Ven 08:00-20:00 · Sab-Dom 08:00-13:00",
+"Roma|Appio Tuscolano": "Lun-Ven 08:00-13:00/14:30-18:00 · Sab 08:00-13:00",
+"Roma|EUR": "Lun-Ven 08:00-13:00/14:00-19:00 · Sab 08:00-13:00",
+"Roma|Fiumicino Downtown": "Lun-Ven 08:00-18:00 · Sab 08:00-13:00",
+"Roma|Nomentana": "Lun-Ven 08:00-13:00/14:00-18:00 · Sab 08:00-12:00",
+"Roma|Prati": "Lun-Ven 08:30-17:00 · Sab 08:30-13:00",
+"Civitavecchia|Stazione / Porto crociere": "Lun-Ven 08:30-13:00/15:00-18:30 · Sab-Dom 08:30-13:00",
+"Frosinone|Frosinone": "Lun-Ven 08:00-13:00/15:00-19:00 · Sab 08:00-13:00",
+"Latina|Latina": "Lun-Ven 08:30-13:00/14:30-18:30 · Sab 08:30-12:30",
+"Pomezia|Pomezia": "Lun-Ven 07:30-13:00/15:00-18:00 · Sab 07:30-13:00",
+"Milano|Milano Malpensa Terminal 1": "Lun-Dom 07:00-23:59",
+"Milano|Milano Malpensa Terminal 2": "Lun-Dom 07:00-23:59",
+"Milano|Milano Linate Aeroporto": "Lun-Dom 07:00-23:59",
+"Milano|Stazione Centrale": "Lun-Dom 08:00-20:00",
+"Milano|Corvetto": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
+"Milano|Cassala – Assago (Romolo)": "Lun-Ven 09:00-12:30/14:30-19:00 · Sab 09:00-12:30",
+"Milano|Portello": "Lun-Ven 08:30-17:30 · Sab 09:00-12:30",
+"Milano|Peschiera Borromeo": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:00",
+"Milano|Sesto San Giovanni": "Lun-Ven 08:30-12:30/14:30-18:00 · Sab 08:30-12:30",
+"Bergamo|Bergamo Aeroporto": "Lun-Dom 07:30-23:00",
+"Brescia|Stazione": "Lun-Ven 08:30-18:30 · Sab 08:30-13:30",
+"Cardano al Campo|Cardano al Campo": "Lun-Ven 08:00-18:00 · Sab 08:30-12:30",
+"Como|Como": "Lun-Ven 08:30-12:00/14:00-18:30 · Sab 08:30-12:30",
+"Cremona|Cremona": "Lun-Ven 08:30-12:00/15:00-18:30 · Sab 08:30-11:00",
+"Desenzano del Garda|Desenzano del Garda": "Lun-Ven 08:30-12:30/14:00-18:00 · Sab 08:00-12:00",
+"Erbusco|Erbusco Franciacorta": "Lun-Ven 09:00-17:00",
+"Mantova|Mantova": "Lun-Ven 08:30-12:30/14:30-18:00 · Sab 08:30-12:30",
+"Monza|Monza": "Lun-Ven 08:30-12:00/15:00-19:00 · Sab 08:30-12:00",
+"Pavia|San Martino Siccomario": "Lun-Ven 08:30-12:00/14:30-18:30",
+"Sondrio|Sondrio": "Lun-Ven 08:00-12:00/14:00-18:00 · Sab 09:00-12:00",
+"Varese|Varese": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-13:00",
+"Firenze|Firenze Aeroporto": "Lun-Dom 08:00-23:00",
+"Firenze|Città – Borgo Ognissanti (S. M. Novella)": "Lun-Ven 08:30-19:00 · Sab-Dom 08:30-13:00",
+"Firenze|Isolotto": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab-Dom 08:30-12:30",
+"Pisa|Pisa Aeroporto": "Lun-Dom 08:00-23:00",
+"Arezzo|Arezzo": "Lun-Ven 09:00-13:00/14:30-18:00 · Sab 09:00-13:00",
+"Grosseto|Grosseto": "Lun-Gio 09:00-13:00/14:30-17:30 · Ven 09:00-13:00/14:30-18:00 · Sab 09:00-13:00",
+"Prato|Prato": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
+"Siena|Siena": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab 09:00-13:00",
+"Napoli|Napoli Aeroporto": "Lun-Dom 08:00-23:00",
+"Napoli|Stazione Centrale": "Lun-Dom 07:00-21:00",
+"Napoli|Fuorigrotta": "Lun-Ven 08:30-13:00/14:00-18:00 · Sab 08:30-12:00",
+"Caserta|Casagiove": "Lun-Ven 09:00-13:00/15:00-19:00 · Sab 09:00-13:00",
+"Salerno|Stazione": "Lun-Sab 08:00-19:00 · Dom 08:00-13:00"
+,"Venezia|Venezia Aeroporto": "Lun-Dom 08:00-23:00",
+"Venezia|Mestre Stazione": "Lun-Dom 08:00-20:00",
+"Treviso|Treviso Aeroporto": "Lun-Gio 08:00-20:00 · Ven-Sab 08:00-22:00 · Dom 08:00-20:00",
+"Verona|Verona Aeroporto": "Lun-Dom 08:00-23:00",
+"Verona|Porta Nuova Stazione": "Lun-Dom 08:00-20:00",
+"Verona|Città – Strada Bresciana": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:30",
+"Padova|Stazione": "Lun-Ven 08:00-13:00/14:00-19:00 · Sab 08:00-13:00",
+"Conegliano|Conegliano": "Lun-Ven 09:00-17:00 · Sab 09:00-13:00",
+"Bologna|Bologna Aeroporto": "Lun-Dom 08:00-23:00",
+"Bologna|Stazione Centrale": "Lun-Ven 08:00-19:00 · Sab-Dom 08:00-13:00",
+"Ferrara|Ferrara": "Lun-Ven 09:00-12:30/15:00-19:00 · Sab 09:00-12:30",
+"Imola|Imola": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:00",
+"Modena|Modena": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab 09:00-13:00",
+"Parma|Parma": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab 09:00-12:00",
+"Ravenna|Ravenna": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab-Dom 08:00-12:00",
+"Rimini|Rimini": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
+"Torino|Torino Aeroporto": "Lun-Dom 08:00-23:00",
+"Torino|Porta Nuova – Via Camerana": "Lun-Sab 08:30-12:30/14:30-18:30",
+"Torino|Mirafiori": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
+"Asti|Asti": "Lun-Ven 08:00-12:00/14:30-18:30 · Sab 08:00-12:00",
+"Biella|Biella": "Lun-Ven 08:30-12:30/15:00-18:30 · Sab 08:30-12:30",
+"Novara|Novara": "Lun-Ven 08:30-12:30/14:00-18:00 · Sab 08:30-12:00"
+,"Catania|Catania Aeroporto": "Lun-Dom 08:00-23:59",
+"Catania|Città – San Giuseppe La Rena": "Lun-Ven 08:30-13:00/15:00-18:30 · Sab 08:30-13:00",
+"Palermo|Palermo Aeroporto": "Lun-Dom 08:00-23:59",
+"Palermo|Notarbartolo": "Lun-Sab 08:00-20:00",
+"Trapani|Trapani Aeroporto": "Lun-Dom 08:00-23:00",
+"Messina|Messina": "Lun-Ven 08:30-18:30 · Sab 08:30-13:30",
+"Milazzo|Milazzo": "Lun-Ven 08:30-13:00/15:00-18:30 · Sab 08:30-13:00",
+"Siracusa|Siracusa": "Lun-Ven 08:30-12:30/16:00-19:00 · Sab 08:30-12:30",
+"Bari|Bari Aeroporto": "Lun-Dom 08:00-23:00",
+"Brindisi|Brindisi Aeroporto": "Lun-Dom 08:00-23:00",
+"Foggia|Foggia": "Lun-Ven 09:00-13:00/15:30-19:00 · Sab 09:00-13:00",
+"Lecce|Lecce": "Lun-Ven 09:00-13:00/16:00-19:00 · Sab 09:00-13:00",
+"Taranto|San Giorgio Jonico": "Lun-Ven 08:30-12:30/16:00-19:30 · Sab 08:30-12:30",
+"Alghero|Alghero Aeroporto": "Lun-Dom 08:00-23:00",
+"Cagliari|Cagliari Aeroporto": "Lun-Dom 08:00-23:00",
+"Olbia|Olbia Aeroporto": "Lun-Dom 08:00-23:00",
+"Olbia|Città – Via Melis": "Lun-Ven 08:30-18:00 · Sab 08:30-14:00"
+,"Genova|Genova Aeroporto": "Lun-Sab 07:30-23:00 · Dom 08:00-23:00",
+"Genova|Casaregis": "Lun-Ven 08:00-19:00 · Sab 08:00-12:00",
+"Imperia|Imperia": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:00",
+"La Spezia|La Spezia": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
+"Ancona|Ancona": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab 09:00-12:00",
+"Pesaro|Pesaro": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
+"Perugia|Perugia": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
+"Foligno|Foligno": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
+"Terni|Terni": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
+"Termoli|Termoli": "Lun-Ven 08:30-12:30/15:30-19:00 · Sab 08:30-12:30",
+"Lamezia Terme|Lamezia Terme Aeroporto": "Lun-Dom 08:00-23:00",
+"Reggio Calabria|Reggio Calabria Aeroporto": "Lun-Dom 08:00-23:00",
+"Catanzaro|Germaneto": "Lun-Ven 08:30-17:30 · Sab 08:30-13:00",
+"Cosenza|Rende": "Lun-Ven 08:00-19:00 · Sab 08:00-13:00",
+"Matera|Matera": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-13:00",
+"Potenza|Potenza": "Lun-Ven 08:45-13:00/15:15-18:30 · Sab 08:45-12:15",
+"Trieste|Trieste Aeroporto": "Lun-Dom 08:00-23:00",
+"Udine|Stazione": "Lun-Ven 08:00-12:30/14:30-19:00 · Sab 08:00-12:30",
+"Trento|Trento": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
+"Aosta|Aosta Aeroporto": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30"
+};
+const UPDATED = "23/09/2026";
+const T = {
+ it:{title:"Punti di riconsegna",sub:"Dove lasciare l'auto, città per città, con navigazione Google Maps e Waze.",loaded:"punti caricati",prog:"Tutte le sedi Locauto in Italia",onlyok:"Solo verificati",onlykb:"🔑 Key box",kb1:"🔑 Key box fuori orario",kb2:"🌙 Riconsegna fuori orario: chiavi al personale del garage",search:"Cerca città o sede…",ok:"Verificato",warn:"Da verificare",nav:"Naviga",maps:"Vedi sulla mappa",empty:"Nessuna sede trovata.",types:{1:"✈ Aeroporto",2:"🚆 Stazione",3:"Città"},hours:"Orari ufficio",open:"Aperto ora",closed:"Chiuso ora",closedDays:{sat:"Sab-Dom chiuso",sun:"Dom chiuso"},upd:"Dati aggiornati al",
+     foot:"Fonte: schede sede su locautorent.com e Google Maps. \"Verificato\" = istruzioni di riconsegna lette sulla scheda ufficiale; \"Da verificare\" = coordinate dell'ufficio, istruzioni specifiche non ancora controllate."},
+ en:{title:"Car return points",sub:"Where to drop off your car, city by city, with Google Maps and Waze directions.",loaded:"locations loaded",prog:"All Locauto locations in Italy",onlyok:"Verified only",onlykb:"🔑 Key box",kb1:"🔑 After-hours key box",kb2:"🌙 After-hours return: keys to the garage staff",search:"Search city or location…",ok:"Verified",warn:"To be confirmed",nav:"Directions",maps:"View on map",empty:"No location found.",types:{1:"✈ Airport",2:"🚆 Train station",3:"City"},hours:"Office hours",open:"Open now",closed:"Closed now",closedDays:{sat:"Sat-Sun closed",sun:"Sun closed"},upd:"Data updated on",
+     foot:"Source: official location pages on locautorent.com and Google Maps. \"Verified\" = return instructions taken from the official page; \"To be confirmed\" = office coordinates, specific instructions not yet checked."}
+};
+const cityOrder = d => d.c; // alfabetico per città
+const mapsUrl = d => "https://www.google.com/maps/dir/?api=1&destination=" + d.lat + "," + d.lng + "&travelmode=driving";
+const wazeUrl = d => "https://waze.com/ul?ll=" + d.lat + "," + d.lng + "&navigate=yes";
+const navUrl  = d => "https://www.google.com/maps/dir/?api=1&destination=" + d.lat + "," + d.lng;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+
+
+const DAYS = {Lun:1,Mar:2,Mer:3,Gio:4,Ven:5,Sab:6,Dom:7};
+const DAY_EN = {Lun:"Mon",Mar:"Tue",Mer:"Wed",Gio:"Thu",Ven:"Fri",Sab:"Sat",Dom:"Sun"};
+function parseHours(h){ // -> [{from,to,slots:[[m1,m2],...]}]
+  return h.split(" · ").map(seg => { const [d, t] = seg.split(" "); const [a,b] = d.split("-");
+    return {from:DAYS[a], to:DAYS[b||a], slots:t.split("/").map(x => x.split("-").map(v => { const [hh,mm]=v.split(":"); return (+hh)*60+(+mm); }))}; });
+}
+function hoursText(h){
+  let out = h; const L = T[lang];
+  if (lang==="en") out = out.replace(/Lun|Mar|Mer|Gio|Ven|Sab|Dom/g, m => DAY_EN[m]);
+  if (!/Sab|Dom/.test(h)) out += " · " + L.closedDays.sat;
+  else if (!/Dom/.test(h)) out += " · " + L.closedDays.sun;
+  return out;
+}
+function isOpen(h){
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Rome",weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date()).map(p=>[p.type,p.value]));
+  const wd = {Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6,Sun:7}[parts.weekday]; const now = (+parts.hour%24)*60 + (+parts.minute);
+  return parseHours(h).some(r => wd>=r.from && wd<=r.to && r.slots.some(([a,b]) => now>=a && now<=b));
+}
+let lang = (navigator.language||"it").slice(0,2)==="it" ? "it" : "en";
+try{ const s = localStorage.getItem("lang"); if(s) lang = s; }catch(e){}
+let onlyOk = false, onlyKb = false;
+const cityName = d => lang==="en" ? d.en : d.c;
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(el => el.textContent = T[lang][el.dataset.t]);
+  document.getElementById("q").placeholder = T[lang].search;
+  document.querySelector("footer").textContent = T[lang].foot + " " + T[lang].upd + " " + UPDATED + ".";
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang===lang));
+  render();
+}
+function render(){
+  const L = T[lang], q = document.getElementById("q").value.trim().toLowerCase();
+  const rows = DATA.filter(d => (!onlyOk || d.ok) && (!onlyKb || d.kb===1) && (!q || [d.c,d.en,d.n,d.ne,d.ret,d.rete].join(" ").toLowerCase().includes(q)));
+  const byC = {};
+  rows.forEach(d => (byC[cityName(d)] = byC[cityName(d)] || []).push(d));
+  const cities = Object.keys(byC).sort((a,b)=>a.localeCompare(b));
+  document.getElementById("chips").innerHTML = cities.map(c => '<a href="#c-'+slug(c)+'">'+esc(c)+'</a>').join("");
+  document.getElementById("list").innerHTML = cities.map(c =>
+    '<h2 class="region" id="c-'+slug(c)+'">'+esc(c)+'</h2>' + byC[c].sort((a,b)=>a.t-b.t || a.n.localeCompare(b.n)).map(d =>
+      '<article class="card"><div class="top"><div><div class="type">'+L.types[d.t]+'</div><div class="name">'+esc(lang==="en"?d.ne:d.n)+'</div></div>'+
+      (d.ok ? '<span class="badge ok">'+L.ok+'</span>' : '<span class="badge warn">'+L.warn+'</span>')+'</div>'+
+      '<div class="ret">'+esc(lang==="en"?d.rete:d.ret)+'</div>'+
+      (d.kb ? '<div><span class="kb kb'+d.kb+'">'+(d.kb===1?L.kb1:L.kb2)+'</span></div>' : '')+
+      (HOURS[d.c+"|"+d.n] ? '<div class="hrs"><span class="dot '+(isOpen(HOURS[d.c+"|"+d.n])?'on':'off')+'">'+(isOpen(HOURS[d.c+"|"+d.n])?L.open:L.closed)+'</span> <b>'+L.hours+':</b> '+esc(hoursText(HOURS[d.c+"|"+d.n]))+'</div>' : '')+
+      (d.how ? '<p class="how">'+esc(lang==="en"?d.howe:d.how)+'</p>' : '')+
+      '<div class="coord">'+d.lat.toFixed(6)+', '+d.lng.toFixed(6)+(d.src?' · '+esc(lang==="en"?d.src.replace("Sito","Locauto website").replace("portali di noleggio","rental portals"):d.src):'')+'</div>'+
+      '<div class="actions"><a class="primary" href="'+navUrl(d)+'" target="_blank" rel="noopener">Google Maps</a>'+
+      '<a class="waze" href="'+wazeUrl(d)+'" target="_blank" rel="noopener">Waze</a>'+
+      '<a href="'+mapsUrl(d)+'" target="_blank" rel="noopener">'+L.maps+'</a></div></article>'
+    ).join("")
+  ).join("") || '<p class="empty">'+L.empty+'</p>';
+}
+document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { lang = b.dataset.lang; try{localStorage.setItem("lang",lang);}catch(e){} applyLang(); }));
+document.getElementById("q").addEventListener("input", render);
+document.getElementById("onlykb").addEventListener("click", e => { onlyKb = !onlyKb; e.currentTarget.setAttribute("aria-pressed", onlyKb); e.currentTarget.style.background = onlyKb ? "var(--amber)" : ""; e.currentTarget.style.color = onlyKb ? "#15181d" : ""; render(); });
+document.getElementById("onlyok").addEventListener("click", e => { onlyOk = !onlyOk; e.currentTarget.setAttribute("aria-pressed", onlyOk); e.currentTarget.style.background = onlyOk ? "var(--amber)" : ""; e.currentTarget.style.color = onlyOk ? "#15181d" : ""; render(); });
+document.getElementById("count").textContent = DATA.length;
+document.addEventListener("click",()=>{});
+document.getElementById("barfill").style.width = Math.round(DATA.filter(d=>d.ok).length / DATA.length * 100) + "%";
+applyLang();
+</script>
+</body>
+</html>
