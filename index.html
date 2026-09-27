@@ -8,15 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f3f1ea; --panel:#ffffff; --ink:#15181d; --muted:#5d636d; --line:#dcd8cc;
-  --sign:#0b3a6e; --signInk:#ffffff; --amber:#f2b705; --ok:#1f7a4d; --warn:#a15c00;
+  --bg:#eef6fb; --panel:#ffffff; --ink:#0f1c26; --muted:#546472; --line:#d2e3ee;
+  --sign:#008DCD; --signInk:#ffffff; --amber:#FFD200; --ok:#0F7A45; --warn:#a15c00;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0f1216; --panel:#181c22; --ink:#eef0f3; --muted:#9aa2ad; --line:#2a3039;
-  --sign:#123f73; --ok:#4cc38a; --warn:#f0a93b;}}
-:root[data-theme="dark"]{--bg:#0f1216; --panel:#181c22; --ink:#eef0f3; --muted:#9aa2ad; --line:#2a3039; --sign:#123f73; --ok:#4cc38a; --warn:#f0a93b;}
+  --bg:#0a1620; --panel:#10212d; --ink:#eaf3f9; --muted:#96a9b8; --line:#1f3748;
+  --sign:#0a79b0; --ok:#3fd08a; --warn:#f0a93b;}}
+:root[data-theme="dark"]{--bg:#0a1620; --panel:#10212d; --ink:#eaf3f9; --muted:#96a9b8; --line:#1f3748; --sign:#0a79b0; --ok:#3fd08a; --warn:#f0a93b; color-scheme:dark;}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -76,6 +76,14 @@ footer{color:var(--muted);font-size:13px;margin:24px 0 8px}
 @media (max-width:520px){header.sign{grid-template-columns:1fr}.mainqr{justify-self:start}}
 @media print{.tools,.actions,footer{display:none}.card{break-inside:avoid}}
 .fcolink{display:block;text-decoration:none;font:600 16px/1.2 "Barlow Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px}
+
+/* Locauto brand skin */
+.sign{background:var(--sign)!important}
+.sign::after{height:10px!important;background:linear-gradient(102deg,#5EB9E8 0 46%,#fff 46% 48.5%,#111 48.5% 52%,#fff 52% 54.5%,#00A666 54.5% 100%)!important}
+.kicker{color:#fff!important;opacity:.9}
+h1 .arrow{background:#fff!important;color:var(--sign)!important}
+.bar i{background:#00A666!important}
+.brandstrip{display:block;margin:18px auto 6px;width:100%;max-width:340px;border-radius:12px;box-shadow:0 1px 0 var(--line)}
 </style>
 </head>
 <body>
@@ -101,6 +109,7 @@ footer{color:var(--muted);font-size:13px;margin:24px 0 8px}
   <nav class="chips" id="chips"></nav>
 
   <main id="list"></main>
+  <img class="brandstrip" src="/brand.jpg" alt="Locauto Rent · Alamo · National · Enterprise" width="375" height="265">
   <footer data-t="foot"></footer>
 </div>
 

@@ -8,19 +8,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#eef1f5; --panel:#ffffff; --ink:#131820; --muted:#566070; --line:#d6dce5;
-  --sign:#0b3a6e; --blue:#0072bc; --amber:#f2b705; --amberInk:#1a1400;
+  --bg:#eef6fb; --panel:#ffffff; --ink:#0f1c26; --muted:#546472; --line:#d2e3ee;
+  --sign:#008DCD; --blue:#0079B4; --amber:#f2b705; --amberInk:#1a1400;
   --gmaps:#1a73e8; --apple:#131820; --waze:#33ccff; --wazeInk:#07202b;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   color-scheme:dark;
-  --bg:#0d1117; --panel:#161c24; --ink:#eef1f5; --muted:#9aa5b4; --line:#27303c;
-  --sign:#123f73; --blue:#3ea0e6; --apple:#f2f4f7;
+  --bg:#0a1620; --panel:#10212d; --ink:#eaf3f9; --muted:#96a9b8; --line:#1f3748;
+  --sign:#0a79b0; --blue:#5EB9E8; --apple:#f2f4f7;
 }}
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#0d1117; --panel:#161c24; --ink:#eef1f5; --muted:#9aa5b4; --line:#27303c;
-  --sign:#123f73; --blue:#3ea0e6; --apple:#f2f4f7;
+  --bg:#0a1620; --panel:#10212d; --ink:#eaf3f9; --muted:#96a9b8; --line:#1f3748;
+  --sign:#0a79b0; --blue:#5EB9E8; --apple:#f2f4f7;
 }
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -75,6 +75,14 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 @media (max-width:440px){.facts{grid-template-columns:1fr}}
 @media (max-width:380px){.park{gap:8px}.park .n{font-size:52px}}
 @media (prefers-reduced-motion:reduce){.app{transition:none}}
+
+/* Locauto brand skin */
+.sign{background:var(--sign)!important}
+.sign::after{height:10px!important;background:linear-gradient(102deg,#5EB9E8 0 46%,#fff 46% 48.5%,#111 48.5% 52%,#fff 52% 54.5%,#00A666 54.5% 100%)!important}
+.kicker{color:#fff!important;opacity:.9}
+h1 .arrow{background:#fff!important;color:var(--sign)!important}
+.bar i{background:#00A666!important}
+.brandstrip{display:block;margin:18px auto 6px;width:100%;max-width:340px;border-radius:12px;box-shadow:0 1px 0 var(--line)}
 </style>
 </head>
 <body>
@@ -145,6 +153,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
   </section>
 
   <a class="card" href="/" style="text-decoration:none;color:var(--ink);display:block"><b style="font:700 18px/1.1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.06em">Returning to another Locauto office? →</b><br><span style="color:var(--muted)">Riconsegni in un'altra sede? Tutti gli uffici Locauto in Italia</span></a>
+  <img class="brandstrip" src="/brand.jpg" alt="Locauto Rent · Alamo · National · Enterprise" width="375" height="265">
   <footer>Locauto Rent · Rome Fiumicino Airport</footer>
 </div>
 
