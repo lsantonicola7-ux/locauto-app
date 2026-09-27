@@ -90,6 +90,8 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
 .citypick summary::-webkit-details-marker{display:none}
 .citypick .chips{flex-wrap:wrap;overflow:visible;padding-top:10px}.citypick .chips a{font-size:13px;padding:5px 10px}
 .citypick[open] summary{border-color:var(--sign)}
+.actions a.gm{display:inline-flex;align-items:center;gap:7px}
+.actions a.gm img{background:#fff;border-radius:4px;padding:2px 3px;width:18px;height:22px;box-sizing:border-box;object-fit:contain}
 /* brand rails: vertical side banners on wide screens, logo strip on phones */
 .brands{max-width:880px;margin:16px auto 0;padding-inline:16px}
 .brandcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px}
@@ -321,7 +323,7 @@ function render(){
       (HOURS[d.c+"|"+d.n] ? '<div class="hrs"><span class="dot '+(isOpen(HOURS[d.c+"|"+d.n])?'on':'off')+'">'+(isOpen(HOURS[d.c+"|"+d.n])?L.open:L.closed)+'</span> <b>'+L.hours+':</b> '+esc(hoursText(HOURS[d.c+"|"+d.n]))+'</div>' : '')+
       (d.how ? '<p class="how">'+esc(lang==="en"?d.howe:d.how)+'</p>' : '')+
       '<div class="coord">'+d.lat.toFixed(6)+', '+d.lng.toFixed(6)+(d.src?' · '+esc(lang==="en"?d.src.replace("Sito","Locauto website").replace("portali di noleggio","rental portals"):d.src):'')+'</div>'+
-      '<div class="actions"><a class="primary" href="'+navUrl(d)+'" target="_blank" rel="noopener">Google Maps</a>'+
+      '<div class="actions"><a class="primary gm" href="'+navUrl(d)+'" target="_blank" rel="noopener"><img src="/logos/google-maps.svg" alt="" width="12" height="17">Google Maps</a>'+
       '<a class="waze" href="'+wazeUrl(d)+'" target="_blank" rel="noopener">Waze</a>'+
       '<a href="'+mapsUrl(d)+'" target="_blank" rel="noopener">'+L.maps+'</a></div></article>'
     ).join("")
