@@ -118,18 +118,48 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
   .seg-e{background:#169B62}.seg-n{background:#00843D}.seg-a{background:#2A5DAA}
   .rail-r img{width:100%;max-width:none;height:auto;background:#fff;border-radius:12px;padding:14px 12px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
 }
+/* hero header */
+.hero{position:relative;overflow:hidden;border-radius:18px;padding:18px 20px 30px;color:#fff;
+  background:radial-gradient(120% 140% at 100% 0%,rgba(64,184,245,.55) 0%,transparent 55%),linear-gradient(135deg,#0074BD 0%,#005a94 60%,#00477a 100%);
+  box-shadow:0 12px 30px rgba(0,70,120,.28)}
+.hero::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;border:28px solid rgba(255,255,255,.06)}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;background:
+  repeating-linear-gradient(90deg,#fff 0 26px,transparent 26px 46px) center/100% 2px no-repeat,#083556}
+.hero-top{position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.hero-logo{height:36px;width:auto;display:block}
+.hero-pill{font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);padding:7px 11px;border-radius:999px;white-space:nowrap}
+.hero-pill b{color:#FFD200}
+.hero-main{position:relative;display:flex;gap:16px;align-items:center;margin-top:20px}
+.hero-ico{flex:none;width:68px;height:68px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.28))}
+.hero h1{margin:0 0 6px;font:700 clamp(32px,8vw,52px)/.92 "Barlow Condensed",Arial Narrow,sans-serif;text-transform:uppercase;letter-spacing:.01em}
+.hero .sub{margin:0;opacity:.92;font-size:15px}
+@media (max-width:1079px){.rail-l{display:none!important}.brandcard{grid-template-columns:1fr}}
+@media (max-width:420px){.hero-logo{height:28px}.hero-pill{font-size:12px;padding:6px 9px}.hero-ico{width:56px;height:56px}}
 </style>
 </head>
 <body>
 <div class="brands"><div class="brandcard"><aside class="rail rail-l" aria-label="Locauto"><img src="/logos/locauto.svg" alt="Locauto Group" width="103" height="41"></aside><aside class="rail rail-r" aria-label="Enterprise · National · Alamo"><div class="segs"><span class="seg seg-e"><img src="/logos/enterprise.svg" alt="Enterprise Rent-A-Car" width="251" height="53"></span><span class="seg seg-n"><img src="/logos/national.svg" alt="National Car Rental" width="250" height="63"></span><span class="seg seg-a"><img src="/logos/alamo.svg" alt="Alamo Rent a Car" width="217" height="100"></span></div></aside></div></div>
 <div class="wrap">
-  <header class="sign">
-    <div>
-      <div class="kicker">Italy · Tutte le sedi</div>
-      <h1><span class="arrow">↘</span><span data-t="title"></span></h1>
-      <p class="sub" data-t="sub"></p>
+  <header class="hero">
+    <div class="hero-top">
+      <img class="hero-logo" src="/logos/locauto-white.svg" alt="Locauto Rent a car" width="320" height="82">
+      <span class="hero-pill"><span data-t="kick"></span> · <b id="npill">0</b> <span data-t="sedi"></span></span>
     </div>
-      </header>
+    <div class="hero-main">
+      <svg class="hero-ico" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="32" fill="#fff"/>
+        <ellipse cx="32" cy="53.5" rx="9" ry="2.6" fill="#FFD200"/>
+        <path d="M32 9c-9.7 0-17.5 7.6-17.5 17.1C14.5 38.8 32 53.5 32 53.5S49.5 38.8 49.5 26.1C49.5 16.6 41.7 9 32 9z" fill="#0074BD"/>
+        <path d="M25.6 25.2l2-4.6c.4-.9 1.2-1.4 2.1-1.4h4.6c.9 0 1.7.5 2.1 1.4l2 4.6" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+        <rect x="22.3" y="24.6" width="19.4" height="7.4" rx="2.4" fill="#fff"/>
+        <circle cx="26.8" cy="32.3" r="2.6" fill="#0074BD" stroke="#fff" stroke-width="1.6"/>
+        <circle cx="37.2" cy="32.3" r="2.6" fill="#0074BD" stroke="#fff" stroke-width="1.6"/>
+        <rect x="24.6" y="27" width="3" height="1.6" rx=".8" fill="#FFD200"/>
+        <rect x="36.4" y="27" width="3" height="1.6" rx=".8" fill="#FFD200"/>
+      </svg>
+      <div><h1 data-t="title"></h1><p class="sub" data-t="sub"></p></div>
+    </div>
+  </header>
   <a class="fcolink" href="/fco">✈ Rome Fiumicino Airport (FCO) → Parking A, 4th floor</a>
 
   <div class="langs"><button type="button" data-lang="it">IT</button><button type="button" data-lang="en">EN</button></div>
@@ -266,9 +296,9 @@ const HOURS = {
 };
 const UPDATED = "28/09/2026";
 const T = {
- it:{title:"Punti di riconsegna",sub:"Dove lasciare l'auto, città per città, con navigazione Google Maps e Waze.",loaded:"uffici Locauto in",prog:"città — elenco completo, come su locautorent.com",jump:"Scegli la città",onlyok:"Solo verificati",onlykb:"🔑 Key box",kb1:"🔑 Key box fuori orario",kb2:"🌙 Riconsegna fuori orario: chiavi al personale del garage",search:"Cerca città o sede…",ok:"Verificato",warn:"Da verificare",nav:"Naviga",call:"Chiama l'ufficio",empty:"Nessuna sede trovata.",types:{1:"✈ Aeroporto",2:"🚆 Stazione",3:"Città"},hours:"Orari ufficio",open:"Aperto ora",closed:"Chiuso ora",closedDays:{sat:"Sab-Dom chiuso",sun:"Dom chiuso"},upd:"Dati aggiornati al",
+ it:{title:"Punti di riconsegna",kick:"Tutta Italia",sedi:"sedi",sub:"Dove lasciare l'auto, città per città, con navigazione Google Maps, Apple Maps e Waze.",loaded:"uffici Locauto in",prog:"città — elenco completo, come su locautorent.com",jump:"Scegli la città",onlyok:"Solo verificati",onlykb:"🔑 Key box",kb1:"🔑 Key box fuori orario",kb2:"🌙 Riconsegna fuori orario: chiavi al personale del garage",search:"Cerca città o sede…",ok:"Verificato",warn:"Da verificare",nav:"Naviga",call:"Chiama l'ufficio",empty:"Nessuna sede trovata.",types:{1:"✈ Aeroporto",2:"🚆 Stazione",3:"Città"},hours:"Orari ufficio",open:"Aperto ora",closed:"Chiuso ora",closedDays:{sat:"Sab-Dom chiuso",sun:"Dom chiuso"},upd:"Dati aggiornati al",
      foot:"Fonte: schede sede su locautorent.com e Google Maps. \"Verificato\" = istruzioni di riconsegna lette sulla scheda ufficiale; \"Da verificare\" = posizione dell'ufficio, istruzioni specifiche non ancora controllate: chiamare l'ufficio prima di riconsegnare."},
- en:{title:"Car return points",sub:"Where to drop off your car, city by city, with Google Maps and Waze directions.",loaded:"Locauto offices in",prog:"cities — complete list, as on locautorent.com",jump:"Pick a city",onlyok:"Verified only",onlykb:"🔑 Key box",kb1:"🔑 After-hours key box",kb2:"🌙 After-hours return: keys to the garage staff",search:"Search city or location…",ok:"Verified",warn:"To be confirmed",nav:"Directions",call:"Call the office",empty:"No location found.",types:{1:"✈ Airport",2:"🚆 Train station",3:"City"},hours:"Office hours",open:"Open now",closed:"Closed now",closedDays:{sat:"Sat-Sun closed",sun:"Sun closed"},upd:"Data updated on",
+ en:{title:"Car return points",kick:"All of Italy",sedi:"offices",sub:"Where to drop off your car, city by city, with Google Maps, Apple Maps and Waze directions.",loaded:"Locauto offices in",prog:"cities — complete list, as on locautorent.com",jump:"Pick a city",onlyok:"Verified only",onlykb:"🔑 Key box",kb1:"🔑 After-hours key box",kb2:"🌙 After-hours return: keys to the garage staff",search:"Search city or location…",ok:"Verified",warn:"To be confirmed",nav:"Directions",call:"Call the office",empty:"No location found.",types:{1:"✈ Airport",2:"🚆 Train station",3:"City"},hours:"Office hours",open:"Open now",closed:"Closed now",closedDays:{sat:"Sat-Sun closed",sun:"Sun closed"},upd:"Data updated on",
      foot:"Source: official location pages on locautorent.com and Google Maps. \"Verified\" = return instructions taken from the official page; \"To be confirmed\" = office location, specific return instructions not yet checked: call the office before returning."}
 };
 const cityOrder = d => d.c; // alfabetico per città
@@ -338,6 +368,7 @@ document.getElementById("q").addEventListener("input", render);
 document.getElementById("onlykb").addEventListener("click", e => { onlyKb = !onlyKb; e.currentTarget.setAttribute("aria-pressed", onlyKb); e.currentTarget.style.background = onlyKb ? "var(--amber)" : ""; e.currentTarget.style.color = onlyKb ? "#15181d" : ""; render(); });
 document.getElementById("onlyok").addEventListener("click", e => { onlyOk = !onlyOk; e.currentTarget.setAttribute("aria-pressed", onlyOk); e.currentTarget.style.background = onlyOk ? "var(--amber)" : ""; e.currentTarget.style.color = onlyOk ? "#15181d" : ""; render(); });
 document.getElementById("count").textContent = DATA.length;
+document.getElementById("npill").textContent = DATA.length;
 document.addEventListener("click",()=>{});
 document.getElementById("ncity").textContent = new Set(DATA.map(d=>d.c)).size;
 applyLang();
