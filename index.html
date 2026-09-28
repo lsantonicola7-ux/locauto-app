@@ -90,6 +90,7 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
 .citypick summary::-webkit-details-marker{display:none}
 .citypick .chips{flex-wrap:wrap;overflow:visible;padding-top:10px}.citypick .chips a{font-size:13px;padding:5px 10px}
 .citypick[open] summary{border-color:var(--sign)}
+.actions a.call{background:#1a7f37;color:#fff;border-color:#1a7f37;font-size:15px;white-space:nowrap}
 .actions a.gm{display:inline-flex;align-items:center;gap:7px}
 .actions a.gm img{background:#fff;border-radius:4px;padding:2px 3px;width:18px;height:22px;box-sizing:border-box;object-fit:contain}
 /* brand rails: vertical side banners on wide screens, logo strip on phones */
@@ -155,29 +156,29 @@ const DATA = window.D;
 const HOURS = {
 "Roma|Roma Fiumicino Aeroporto": "Lun-Dom 07:00-23:59",
 "Roma|Roma Ciampino Aeroporto": "Lun-Dom 08:00-23:00",
-"Roma|Termini Stazione": "Lun-Dom 07:30-20:00",
-"Roma|Tiburtina Stazione": "Lun-Ven 08:00-19:00 · Sab 08:00-13:00",
-"Roma|Via Veneto": "Lun-Ven 08:00-20:00 · Sab-Dom 08:00-13:00",
-"Roma|Appio Tuscolano": "Lun-Ven 08:00-13:00/14:30-18:00 · Sab 08:00-13:00",
-"Roma|EUR": "Lun-Ven 08:00-13:00/14:00-19:00 · Sab 08:00-13:00",
-"Roma|Fiumicino Downtown": "Lun-Ven 08:00-18:00 · Sab 08:00-13:00",
-"Roma|Nomentana": "Lun-Ven 08:00-13:00/14:00-18:00 · Sab 08:00-12:00",
-"Roma|Prati": "Lun-Ven 08:30-17:00 · Sab 08:30-13:00",
-"Civitavecchia|Stazione / Porto crociere": "Lun-Ven 08:30-13:00/15:00-18:30 · Sab-Dom 08:30-13:00",
+"Roma|Roma Stazione Termini": "Lun-Dom 07:30-20:00",
+"Roma|Roma Tiburtina Stazione Ferroviaria": "Lun-Ven 08:00-19:00 · Sab 08:00-13:00",
+"Roma|Roma Via Veneto": "Lun-Ven 08:00-20:00 · Sab-Dom 08:00-13:00",
+"Roma|Roma Appio Tuscolano": "Lun-Ven 08:00-13:00/14:30-18:00 · Sab 08:00-13:00",
+"Roma|Roma EUR": "Lun-Ven 08:00-13:00/14:00-19:00 · Sab 08:00-13:00",
+"Roma|Roma Fiumicino Città": "Lun-Ven 08:00-18:00 · Sab 08:00-13:00",
+"Roma|Roma Nomentana": "Lun-Ven 08:00-13:00/14:00-18:00 · Sab 08:00-12:00",
+"Roma|Roma Prati": "Lun-Ven 08:30-17:00 · Sab 08:30-13:00",
+"Civitavecchia|Civitavecchia Stazione Ferroviaria": "Lun-Ven 08:30-13:00/15:00-18:30 · Sab-Dom 08:30-13:00",
 "Frosinone|Frosinone": "Lun-Ven 08:00-13:00/15:00-19:00 · Sab 08:00-13:00",
 "Latina|Latina": "Lun-Ven 08:30-13:00/14:30-18:30 · Sab 08:30-12:30",
 "Pomezia|Pomezia": "Lun-Ven 07:30-13:00/15:00-18:00 · Sab 07:30-13:00",
-"Milano|Milano Malpensa Terminal 1": "Lun-Dom 07:00-23:59",
-"Milano|Milano Malpensa Terminal 2": "Lun-Dom 07:00-23:59",
+"Milano|Milano Malpensa Aeroporto Terminal 1": "Lun-Dom 07:00-23:59",
+"Milano|Milano Malpensa Aeroporto Terminal 2": "Lun-Dom 07:00-23:59",
 "Milano|Milano Linate Aeroporto": "Lun-Dom 07:00-23:59",
-"Milano|Stazione Centrale": "Lun-Dom 08:00-20:00",
-"Milano|Corvetto": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
-"Milano|Cassala – Assago (Romolo)": "Lun-Ven 09:00-12:30/14:30-19:00 · Sab 09:00-12:30",
-"Milano|Portello": "Lun-Ven 08:30-17:30 · Sab 09:00-12:30",
-"Milano|Peschiera Borromeo": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:00",
-"Milano|Sesto San Giovanni": "Lun-Ven 08:30-12:30/14:30-18:00 · Sab 08:30-12:30",
+"Milano|Milano Stazione Centrale": "Lun-Dom 08:00-20:00",
+"Milano|Milano Corvetto": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
+"Milano|Milano Cassala - Assago": "Lun-Ven 09:00-12:30/14:30-19:00 · Sab 09:00-12:30",
+"Milano|Milano Portello": "Lun-Ven 08:30-17:30 · Sab 09:00-12:30",
+"Milano|Milano Peschiera Borromeo": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:00",
+"Milano|Milano Sesto San Giovanni": "Lun-Ven 08:30-12:30/14:30-18:00 · Sab 08:30-12:30",
 "Bergamo|Bergamo Aeroporto": "Lun-Dom 07:30-23:00",
-"Brescia|Stazione": "Lun-Ven 08:30-18:30 · Sab 08:30-13:30",
+"Brescia|Brescia Stazione Ferroviaria": "Lun-Ven 08:30-18:30 · Sab 08:30-13:30",
 "Cardano al Campo|Cardano al Campo": "Lun-Ven 08:00-18:00 · Sab 08:30-12:30",
 "Como|Como": "Lun-Ven 08:30-12:00/14:00-18:30 · Sab 08:30-12:30",
 "Cremona|Cremona": "Lun-Ven 08:30-12:00/15:00-18:30 · Sab 08:30-11:00",
@@ -185,32 +186,32 @@ const HOURS = {
 "Erbusco|Erbusco Franciacorta": "Lun-Ven 09:00-17:00",
 "Mantova|Mantova": "Lun-Ven 08:30-12:30/14:30-18:00 · Sab 08:30-12:30",
 "Monza|Monza": "Lun-Ven 08:30-12:00/15:00-19:00 · Sab 08:30-12:00",
-"Pavia|San Martino Siccomario": "Lun-Ven 08:30-12:00/14:30-18:30",
+"Pavia|Pavia San Martino Siccomario": "Lun-Ven 08:30-12:00/14:30-18:30",
 "Sondrio|Sondrio": "Lun-Ven 08:00-12:00/14:00-18:00 · Sab 09:00-12:00",
 "Varese|Varese": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-13:00",
 "Firenze|Firenze Aeroporto": "Lun-Dom 08:00-23:00",
-"Firenze|Città – Borgo Ognissanti (S. M. Novella)": "Lun-Ven 08:30-19:00 · Sab-Dom 08:30-13:00",
-"Firenze|Isolotto": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab-Dom 08:30-12:30",
+"Firenze|Firenze Borgo Ognissanti": "Lun-Ven 08:30-19:00 · Sab-Dom 08:30-13:00",
+"Firenze|Firenze Isolotto": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab-Dom 08:30-12:30",
 "Pisa|Pisa Aeroporto": "Lun-Dom 08:00-23:00",
 "Arezzo|Arezzo": "Lun-Ven 09:00-13:00/14:30-18:00 · Sab 09:00-13:00",
 "Grosseto|Grosseto": "Lun-Gio 09:00-13:00/14:30-17:30 · Ven 09:00-13:00/14:30-18:00 · Sab 09:00-13:00",
 "Prato|Prato": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
 "Siena|Siena": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab 09:00-13:00",
 "Napoli|Napoli Aeroporto": "Lun-Dom 08:00-23:00",
-"Napoli|Stazione Centrale": "Lun-Dom 07:00-21:00",
-"Napoli|Fuorigrotta": "Lun-Ven 08:30-13:00/14:00-18:00 · Sab 08:30-12:00",
-"Caserta|Casagiove": "Lun-Ven 09:00-13:00/15:00-19:00 · Sab 09:00-13:00",
-"Salerno|Stazione": "Lun-Sab 08:00-19:00 · Dom 08:00-13:00"
+"Napoli|Napoli Centrale Stazione Ferroviaria": "Lun-Dom 07:00-21:00",
+"Napoli|Napoli Fuorigrotta": "Lun-Ven 08:30-13:00/14:00-18:00 · Sab 08:30-12:00",
+"Caserta|Caserta": "Lun-Ven 09:00-13:00/15:00-19:00 · Sab 09:00-13:00",
+"Salerno|Salerno Stazione Ferroviaria": "Lun-Sab 08:00-19:00 · Dom 08:00-13:00"
 ,"Venezia|Venezia Aeroporto": "Lun-Dom 08:00-23:00",
-"Venezia|Mestre Stazione": "Lun-Dom 08:00-20:00",
+"Venezia|Venezia Mestre Stazione Ferroviaria": "Lun-Dom 08:00-20:00",
 "Treviso|Treviso Aeroporto": "Lun-Gio 08:00-20:00 · Ven-Sab 08:00-22:00 · Dom 08:00-20:00",
 "Verona|Verona Aeroporto": "Lun-Dom 08:00-23:00",
-"Verona|Porta Nuova Stazione": "Lun-Dom 08:00-20:00",
-"Verona|Città – Strada Bresciana": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:30",
-"Padova|Stazione": "Lun-Ven 08:00-13:00/14:00-19:00 · Sab 08:00-13:00",
+"Verona|Verona Porta Nuova Stazione Ferroviaria": "Lun-Dom 08:00-20:00",
+"Verona|Verona Città": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:30",
+"Padova|Padova Stazione Ferroviaria": "Lun-Ven 08:00-13:00/14:00-19:00 · Sab 08:00-13:00",
 "Conegliano|Conegliano": "Lun-Ven 09:00-17:00 · Sab 09:00-13:00",
 "Bologna|Bologna Aeroporto": "Lun-Dom 08:00-23:00",
-"Bologna|Stazione Centrale": "Lun-Ven 08:00-19:00 · Sab-Dom 08:00-13:00",
+"Bologna|Bologna Stazione Centrale": "Lun-Ven 08:00-19:00 · Sab-Dom 08:00-13:00",
 "Ferrara|Ferrara": "Lun-Ven 09:00-12:30/15:00-19:00 · Sab 09:00-12:30",
 "Imola|Imola": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:00",
 "Modena|Modena": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab 09:00-13:00",
@@ -218,15 +219,15 @@ const HOURS = {
 "Ravenna|Ravenna": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab-Dom 08:00-12:00",
 "Rimini|Rimini": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
 "Torino|Torino Aeroporto": "Lun-Dom 08:00-23:00",
-"Torino|Porta Nuova – Via Camerana": "Lun-Sab 08:30-12:30/14:30-18:30",
-"Torino|Mirafiori": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
+"Torino|Torino Porta Nuova": "Lun-Sab 08:30-12:30/14:30-18:30",
+"Torino|Torino Mirafiori": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
 "Asti|Asti": "Lun-Ven 08:00-12:00/14:30-18:30 · Sab 08:00-12:00",
 "Biella|Biella": "Lun-Ven 08:30-12:30/15:00-18:30 · Sab 08:30-12:30",
 "Novara|Novara": "Lun-Ven 08:30-12:30/14:00-18:00 · Sab 08:30-12:00"
 ,"Catania|Catania Aeroporto": "Lun-Dom 08:00-23:59",
-"Catania|Città – San Giuseppe La Rena": "Lun-Ven 08:30-13:00/15:00-18:30 · Sab 08:30-13:00",
+"Catania|Catania San Giuseppe La Rena": "Lun-Ven 08:30-13:00/15:00-18:30 · Sab 08:30-13:00",
 "Palermo|Palermo Aeroporto": "Lun-Dom 08:00-23:59",
-"Palermo|Notarbartolo": "Lun-Sab 08:00-20:00",
+"Palermo|Palermo Notarbartolo": "Lun-Sab 08:00-20:00",
 "Trapani|Trapani Aeroporto": "Lun-Dom 08:00-23:00",
 "Messina|Messina": "Lun-Ven 08:30-18:30 · Sab 08:30-13:30",
 "Milazzo|Milazzo": "Lun-Ven 08:30-13:00/15:00-18:30 · Sab 08:30-13:00",
@@ -235,15 +236,15 @@ const HOURS = {
 "Brindisi|Brindisi Aeroporto": "Lun-Dom 08:00-23:00",
 "Foggia|Foggia": "Lun-Ven 09:00-13:00/15:30-19:00 · Sab 09:00-13:00",
 "Lecce|Lecce": "Lun-Ven 09:00-13:00/16:00-19:00 · Sab 09:00-13:00",
-"Taranto|San Giorgio Jonico": "Lun-Ven 08:30-12:30/16:00-19:30 · Sab 08:30-12:30",
+"Taranto|Taranto": "Lun-Ven 08:30-12:30/16:00-19:30 · Sab 08:30-12:30",
 "Alghero|Alghero Aeroporto": "Lun-Dom 08:00-23:00",
 "Cagliari|Cagliari Aeroporto": "Lun-Dom 08:00-23:00",
 "Olbia|Olbia Aeroporto": "Lun-Dom 08:00-23:00",
-"Olbia|Città – Via Melis": "Lun-Ven 08:30-18:00 · Sab 08:30-14:00"
+"Olbia|Olbia Città": "Lun-Ven 08:30-18:00 · Sab 08:30-14:00"
 ,"Genova|Genova Aeroporto": "Lun-Sab 07:30-23:00 · Dom 08:00-23:00",
-"Genova|Casaregis": "Lun-Ven 08:00-19:00 · Sab 08:00-12:00",
-"Imperia|Imperia": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:00",
-"La Spezia|La Spezia": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
+"Genova|Genova Casaregis": "Lun-Ven 08:00-19:00 · Sab 08:00-12:00",
+"Imperia|Imperia Città": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:00",
+"La Spezia|La Spezia Città": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
 "Ancona|Ancona": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab 09:00-12:00",
 "Pesaro|Pesaro": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
 "Perugia|Perugia": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
@@ -252,26 +253,26 @@ const HOURS = {
 "Termoli|Termoli": "Lun-Ven 08:30-12:30/15:30-19:00 · Sab 08:30-12:30",
 "Lamezia Terme|Lamezia Terme Aeroporto": "Lun-Dom 08:00-23:00",
 "Reggio Calabria|Reggio Calabria Aeroporto": "Lun-Dom 08:00-23:00",
-"Catanzaro|Germaneto": "Lun-Ven 08:30-17:30 · Sab 08:30-13:00",
-"Cosenza|Rende": "Lun-Ven 08:00-19:00 · Sab 08:00-13:00",
+"Catanzaro|Catanzaro": "Lun-Ven 08:30-17:30 · Sab 08:30-13:00",
+"Cosenza|Cosenza Rende": "Lun-Ven 08:00-19:00 · Sab 08:00-13:00",
 "Matera|Matera": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-13:00",
 "Potenza|Potenza": "Lun-Ven 08:45-13:00/15:15-18:30 · Sab 08:45-12:15",
 "Trieste|Trieste Aeroporto": "Lun-Dom 08:00-23:00",
-"Udine|Stazione": "Lun-Ven 08:00-12:30/14:30-19:00 · Sab 08:00-12:30",
+"Udine|Udine Stazione": "Lun-Ven 08:00-12:30/14:30-19:00 · Sab 08:00-12:30",
 "Trento|Trento": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
 "Aosta|Aosta Aeroporto": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30"
 };
-const UPDATED = "23/09/2026";
+const UPDATED = "28/09/2026";
 const T = {
- it:{title:"Punti di riconsegna",sub:"Dove lasciare l'auto, città per città, con navigazione Google Maps e Waze.",loaded:"uffici Locauto in",prog:"città — elenco completo, come su locautorent.com",jump:"Scegli la città",onlyok:"Solo verificati",onlykb:"🔑 Key box",kb1:"🔑 Key box fuori orario",kb2:"🌙 Riconsegna fuori orario: chiavi al personale del garage",search:"Cerca città o sede…",ok:"Verificato",warn:"Da verificare",nav:"Naviga",maps:"Vedi sulla mappa",empty:"Nessuna sede trovata.",types:{1:"✈ Aeroporto",2:"🚆 Stazione",3:"Città"},hours:"Orari ufficio",open:"Aperto ora",closed:"Chiuso ora",closedDays:{sat:"Sab-Dom chiuso",sun:"Dom chiuso"},upd:"Dati aggiornati al",
-     foot:"Fonte: schede sede su locautorent.com e Google Maps. \"Verificato\" = istruzioni di riconsegna lette sulla scheda ufficiale; \"Da verificare\" = coordinate dell'ufficio, istruzioni specifiche non ancora controllate."},
- en:{title:"Car return points",sub:"Where to drop off your car, city by city, with Google Maps and Waze directions.",loaded:"Locauto offices in",prog:"cities — complete list, as on locautorent.com",jump:"Pick a city",onlyok:"Verified only",onlykb:"🔑 Key box",kb1:"🔑 After-hours key box",kb2:"🌙 After-hours return: keys to the garage staff",search:"Search city or location…",ok:"Verified",warn:"To be confirmed",nav:"Directions",maps:"View on map",empty:"No location found.",types:{1:"✈ Airport",2:"🚆 Train station",3:"City"},hours:"Office hours",open:"Open now",closed:"Closed now",closedDays:{sat:"Sat-Sun closed",sun:"Sun closed"},upd:"Data updated on",
-     foot:"Source: official location pages on locautorent.com and Google Maps. \"Verified\" = return instructions taken from the official page; \"To be confirmed\" = office coordinates, specific instructions not yet checked."}
+ it:{title:"Punti di riconsegna",sub:"Dove lasciare l'auto, città per città, con navigazione Google Maps e Waze.",loaded:"uffici Locauto in",prog:"città — elenco completo, come su locautorent.com",jump:"Scegli la città",onlyok:"Solo verificati",onlykb:"🔑 Key box",kb1:"🔑 Key box fuori orario",kb2:"🌙 Riconsegna fuori orario: chiavi al personale del garage",search:"Cerca città o sede…",ok:"Verificato",warn:"Da verificare",nav:"Naviga",call:"Chiama l'ufficio",empty:"Nessuna sede trovata.",types:{1:"✈ Aeroporto",2:"🚆 Stazione",3:"Città"},hours:"Orari ufficio",open:"Aperto ora",closed:"Chiuso ora",closedDays:{sat:"Sab-Dom chiuso",sun:"Dom chiuso"},upd:"Dati aggiornati al",
+     foot:"Fonte: schede sede su locautorent.com e Google Maps. \"Verificato\" = istruzioni di riconsegna lette sulla scheda ufficiale; \"Da verificare\" = posizione dell'ufficio, istruzioni specifiche non ancora controllate: chiamare l'ufficio prima di riconsegnare."},
+ en:{title:"Car return points",sub:"Where to drop off your car, city by city, with Google Maps and Waze directions.",loaded:"Locauto offices in",prog:"cities — complete list, as on locautorent.com",jump:"Pick a city",onlyok:"Verified only",onlykb:"🔑 Key box",kb1:"🔑 After-hours key box",kb2:"🌙 After-hours return: keys to the garage staff",search:"Search city or location…",ok:"Verified",warn:"To be confirmed",nav:"Directions",call:"Call the office",empty:"No location found.",types:{1:"✈ Airport",2:"🚆 Train station",3:"City"},hours:"Office hours",open:"Open now",closed:"Closed now",closedDays:{sat:"Sat-Sun closed",sun:"Sun closed"},upd:"Data updated on",
+     foot:"Source: official location pages on locautorent.com and Google Maps. \"Verified\" = return instructions taken from the official page; \"To be confirmed\" = office location, specific return instructions not yet checked: call the office before returning."}
 };
 const cityOrder = d => d.c; // alfabetico per città
-const mapsUrl = d => "https://www.google.com/maps/dir/?api=1&destination=" + d.lat + "," + d.lng + "&travelmode=driving";
-const wazeUrl = d => "https://waze.com/ul?ll=" + d.lat + "," + d.lng + "&navigate=yes";
-const navUrl  = d => "https://www.google.com/maps/dir/?api=1&destination=" + d.lat + "," + d.lng;
+const wazeUrl = d => d.q ? "https://waze.com/ul?q=" + encodeURIComponent(d.q) + "&navigate=yes" : "https://waze.com/ul?ll=" + d.lat + "," + d.lng + "&navigate=yes";
+const navUrl  = d => "https://www.google.com/maps/dir/?api=1&destination=" + (d.q ? encodeURIComponent(d.q) : d.lat + "," + d.lng);
+const telUrl  = t => "tel:" + t.replace(/[^+0-9]/g, "");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-");
 
@@ -322,10 +323,9 @@ function render(){
       (d.kb ? '<div><span class="kb kb'+d.kb+'">'+(d.kb===1?L.kb1:L.kb2)+'</span></div>' : '')+
       (HOURS[d.c+"|"+d.n] ? '<div class="hrs"><span class="dot '+(isOpen(HOURS[d.c+"|"+d.n])?'on':'off')+'">'+(isOpen(HOURS[d.c+"|"+d.n])?L.open:L.closed)+'</span> <b>'+L.hours+':</b> '+esc(hoursText(HOURS[d.c+"|"+d.n]))+'</div>' : '')+
       (d.how ? '<p class="how">'+esc(lang==="en"?d.howe:d.how)+'</p>' : '')+
-      '<div class="coord">'+d.lat.toFixed(6)+', '+d.lng.toFixed(6)+(d.src?' · '+esc(lang==="en"?d.src.replace("Sito","Locauto website").replace("portali di noleggio","rental portals"):d.src):'')+'</div>'+
       '<div class="actions"><a class="primary gm" href="'+navUrl(d)+'" target="_blank" rel="noopener"><img src="/logos/google-maps.svg" alt="" width="12" height="17">Google Maps</a>'+
       '<a class="waze" href="'+wazeUrl(d)+'" target="_blank" rel="noopener">Waze</a>'+
-      '<a href="'+mapsUrl(d)+'" target="_blank" rel="noopener">'+L.maps+'</a></div></article>'
+      (d.tel ? '<a class="call" href="'+telUrl(d.tel)+'" aria-label="'+L.call+' '+esc(d.tel)+'">\u260E '+esc(d.tel)+'</a>' : '')+'</div></article>'
     ).join("")
   ).join("") || '<p class="empty">'+L.empty+'</p>';
 }
