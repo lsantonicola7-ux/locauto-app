@@ -341,15 +341,43 @@ function applyLang(){
   document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang===lang));
   render();
 }
+const norm = s => String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+// ranking: city / office name first, address text only on whole-word starts
+function score(d, q){
+  let s = 0;
+  const words = q.split(" ");
+  for (const [f, wgt] of [[d.n,1],[d.ne,1],[d.c,.95],[d.en,.9]]) {
+    const t = norm(f); let v = 0;
+    if (t === q) v = 100;
+    else if (t.startsWith(q)) v = 85;
+    else if ((" " + t).includes(" " + q)) v = 70;
+    else if (words.every(w => (" " + t).includes(" " + w))) v = 55;
+    else if (q.length >= 4 && t.includes(q)) v = 45;
+    s = Math.max(s, v * wgt);
+  }
+  if (!s) {
+    const t = " " + norm([d.ret, d.rete, d.how, d.howe].join(" "));
+    if (words.every(w => w.length >= 3 && t.includes(" " + w))) s = 10;
+  }
+  return s;
+}
 function render(){
   const L = T[lang], q = document.getElementById("q").value.trim().toLowerCase();
-  const rows = DATA.filter(d => (!onlyOk || d.ok) && (!onlyKb || d.kb===1) && (!q || [d.c,d.en,d.n,d.ne,d.ret,d.rete].join(" ").toLowerCase().includes(q)));
+  const qn = norm(q);
+  let rows = DATA.filter(d => (!onlyOk || d.ok) && (!onlyKb || d.kb===1));
+  const SC = new Map();
+  if (qn) {
+    rows.forEach(d => SC.set(d, score(d, qn)));
+    rows = rows.filter(d => SC.get(d) > 0);
+    if (rows.some(d => SC.get(d) >= 40)) rows = rows.filter(d => SC.get(d) >= 40); // name matches hide address-only matches
+  }
   const byC = {};
   rows.forEach(d => (byC[cityName(d)] = byC[cityName(d)] || []).push(d));
-  const cities = Object.keys(byC).sort((a,b)=>a.localeCompare(b));
+  const best = c => Math.max(...byC[c].map(d => SC.get(d) || 0));
+  const cities = Object.keys(byC).sort((a,b)=> (best(b)-best(a)) || a.localeCompare(b));
   document.getElementById("chips").innerHTML = cities.map(c => '<a href="#c-'+slug(c)+'">'+esc(c)+'</a>').join("");
   document.getElementById("list").innerHTML = cities.map(c =>
-    '<h2 class="region" id="c-'+slug(c)+'">'+esc(c)+'</h2>' + byC[c].sort((a,b)=>a.t-b.t || a.n.localeCompare(b.n)).map(d =>
+    '<h2 class="region" id="c-'+slug(c)+'">'+esc(c)+'</h2>' + byC[c].sort((a,b)=>((SC.get(b)||0)-(SC.get(a)||0)) || a.t-b.t || a.n.localeCompare(b.n)).map(d =>
       '<article class="card"><div class="top"><div><div class="type">'+L.types[d.t]+'</div><div class="name">'+esc(lang==="en"?d.ne:d.n)+'</div></div>'+
       (d.ok ? '<span class="badge ok">'+L.ok+'</span>' : '<span class="badge warn">'+L.warn+'</span>')+'</div>'+
       '<div class="ret">'+esc(lang==="en"?d.rete:d.ret)+'</div>'+
