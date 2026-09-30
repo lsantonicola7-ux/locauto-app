@@ -157,6 +157,18 @@ body{background:radial-gradient(900px 400px at 50% -120px,rgba(0,116,189,.10),tr
 .tools .mic[hidden]{display:none}
 .tools .mic.on{background:#D92D20;color:#fff;animation:mp 1.1s infinite}
 @keyframes mp{0%{box-shadow:0 0 0 0 rgba(217,45,32,.5)}100%{box-shadow:0 0 0 12px rgba(217,45,32,0)}}
+.qwrap.rec input{border-color:#D92D20;box-shadow:0 0 0 3px rgba(217,45,32,.2)}
+.tools .mic.on svg{display:none}
+.tools .mic.on::after{content:"";width:14px;height:14px;border-radius:3px;background:#fff}
+.vstat{display:flex;align-items:center;gap:10px;margin-top:8px;padding:10px 13px;border-radius:12px;background:rgba(217,45,32,.1);border:1px solid rgba(217,45,32,.35);color:var(--ink);font-weight:600;font-size:15px;line-height:1.3}
+.vstat.err{background:rgba(240,169,59,.16);border-color:rgba(240,169,59,.5)}
+.vstat #vtxt{min-width:0;overflow-wrap:anywhere}
+.vstat .bars{display:flex;align-items:center;gap:3px;height:22px;flex:none}
+.vstat .bars[hidden]{display:none}
+.vstat .bars i{display:block;width:4px;height:22px;border-radius:2px;background:#D92D20;transform-origin:center;animation:eq .9s infinite ease-in-out}
+.vstat .bars i:nth-child(2){animation-delay:.12s}.vstat .bars i:nth-child(3){animation-delay:.24s}.vstat .bars i:nth-child(4){animation-delay:.36s}.vstat .bars i:nth-child(5){animation-delay:.48s}
+@keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.vstat .bars i,.tools .mic.on{animation:none}}
 @media(min-width:640px){.qwrap{flex-basis:0}}
 .tools input:focus{outline:none;border-color:#0074BD;box-shadow:0 0 0 4px rgba(0,116,189,.15)}
 .tools button,.citypick summary{border-radius:14px;box-shadow:0 2px 8px rgba(15,28,38,.04)}
@@ -219,7 +231,7 @@ h2.region::after{order:2}
   <div class="progress"><span><b id="count">0</b> <span data-t="loaded"></span> <b id="ncity">0</b> <span data-t="prog"></span></span></div>
 
   <div class="tools">
-    <div class="qwrap"><input id="q" type="search" placeholder="" autocomplete="off"><button id="mic" type="button" class="mic" hidden aria-label="Voice search"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button></div>
+    <div class="qwrap"><input id="q" type="search" placeholder="" autocomplete="off"><button id="mic" type="button" class="mic" hidden aria-label="Voice search"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><div id="vstat" class="vstat" role="status" aria-live="polite" hidden><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span id="vtxt"></span></div></div>
     <button id="onlyok" type="button" aria-pressed="false" data-t="onlyok"></button>
     <button id="onlykb" type="button" aria-pressed="false" data-t="onlykb"></button>
   </div>
@@ -477,20 +489,71 @@ document.getElementById("onlyok").addEventListener("click", e => { onlyOk = !onl
     }
     return q;
   }
-  let rec = null;
-  mic.addEventListener("click", () => {
-    if (rec) { try{rec.stop();}catch(e){} return; }
-    rec = new SR(); rec.lang = {it:"it-IT",en:"en-US",fr:"fr-FR",es:"es-ES",pt:"pt-BR"}[lang]; rec.interimResults = true; rec.maxAlternatives = 1;
-    const inp = document.getElementById("q");
-    mic.classList.add("on");
-    rec.onresult = ev => {
-      const txt = Array.from(ev.results).map(r => r[0].transcript).join(" ");
-      inp.value = pick(txt) || txt; render();
+  const V = {
+    it:{listen:"Sto ascoltando… di' il nome di una città",allow:"Consenti l'uso del microfono quando il browser lo chiede",denied:"Microfono bloccato. Abilitalo nelle impostazioni del browser e riprova.",none:"Non ho sentito nulla. Tocca il microfono e riprova.",retry:"Microfono pronto. Tocca di nuovo il microfono e parla.",nomic:"Nessun microfono trovato.",net:"La ricerca vocale ha bisogno della connessione a internet."},
+    en:{listen:"Listening… say a city name",allow:"Allow microphone access when your browser asks",denied:"Microphone blocked. Enable it in your browser settings and try again.",none:"I didn't hear anything. Tap the microphone and try again.",retry:"Microphone ready. Tap the microphone again and speak.",nomic:"No microphone found.",net:"Voice search needs an internet connection."},
+    fr:{listen:"J'écoute… dites le nom d'une ville",allow:"Autorisez l'accès au micro quand le navigateur le demande",denied:"Micro bloqué. Activez-le dans les réglages du navigateur et réessayez.",none:"Je n'ai rien entendu. Touchez le micro et réessayez.",retry:"Micro prêt. Touchez de nouveau le micro et parlez.",nomic:"Aucun micro trouvé.",net:"La recherche vocale nécessite une connexion internet."},
+    es:{listen:"Escuchando… di el nombre de una ciudad",allow:"Permite el acceso al micrófono cuando el navegador lo pida",denied:"Micrófono bloqueado. Actívalo en los ajustes del navegador e inténtalo de nuevo.",none:"No he oído nada. Toca el micrófono e inténtalo de nuevo.",retry:"Micrófono listo. Toca de nuevo el micrófono y habla.",nomic:"No se encontró ningún micrófono.",net:"La búsqueda por voz necesita conexión a internet."},
+    pt:{listen:"Ouvindo… diga o nome de uma cidade",allow:"Permita o acesso ao microfone quando o navegador pedir",denied:"Microfone bloqueado. Ative nas configurações do navegador e tente novamente.",none:"Não ouvi nada. Toque no microfone e tente novamente.",retry:"Microfone pronto. Toque de novo no microfone e fale.",nomic:"Nenhum microfone encontrado.",net:"A busca por voz precisa de conexão com a internet."}
+  };
+  const L = () => V[lang] || V.en;
+  const inp = document.getElementById("q"), wrap = inp.parentNode, vstat = document.getElementById("vstat"), vtxt = document.getElementById("vtxt"), bars = vstat.querySelector(".bars");
+  const LANGTAG = {it:"it-IT",en:"en-US",fr:"fr-FR",es:"es-ES",pt:"pt-BR"};
+  let rec = null, gotStart = false, heard = false, tries = 0, watchdog = null, busy = false, lastTap = 0;
+  function ui(state, msg){
+    const on = state === "listen";
+    mic.classList.toggle("on", on); wrap.classList.toggle("rec", on); mic.setAttribute("aria-pressed", on);
+    if (state === "idle") { vstat.hidden = true; return; }
+    vstat.hidden = false; vstat.className = "vstat" + (state === "err" ? " err" : ""); bars.hidden = state === "err";
+    vtxt.textContent = msg || L().listen;
+  }
+  function drop(){ clearTimeout(watchdog); const r = rec; rec = null; if (r) { try{ r.abort(); }catch(e){} } }
+  function start(){
+    drop(); gotStart = false; heard = false;
+    let r;
+    try { r = new SR(); } catch(e) { ui("err", L().retry); return; }
+    rec = r; r.lang = LANGTAG[lang] || "en-US"; r.interimResults = true; r.maxAlternatives = 1; r.continuous = false;
+    ui("listen");
+    // if the browser never reports that listening started (e.g. it was interrupted by the permission prompt), free the button
+    watchdog = setTimeout(() => { if (rec === r && !gotStart) { drop(); ui("err", L().retry); } }, 8000);
+    r.onstart = () => { if (rec === r) { gotStart = true; clearTimeout(watchdog); ui("listen"); } };
+    r.onresult = ev => {
+      if (rec !== r) return; heard = true;
+      const txt = Array.from(ev.results).map(x => x[0].transcript).join(" ");
+      inp.value = pick(txt) || txt; vtxt.textContent = "“" + txt + "”"; render();
     };
-    const end = () => { mic.classList.remove("on"); rec = null; };
-    rec.onerror = end; rec.onend = end;
-    try { rec.start(); } catch(e) { end(); }
+    r.onerror = ev => {
+      if (rec !== r) return; const e = ev.error; if (e === "aborted") return;
+      rec = null; clearTimeout(watchdog);
+      ui("err", e === "not-allowed" || e === "service-not-allowed" ? L().denied : e === "audio-capture" ? L().nomic : e === "network" ? L().net : L().none);
+    };
+    r.onend = () => {
+      if (rec !== r) return; rec = null; clearTimeout(watchdog);
+      if (heard) { setTimeout(() => { if (!rec) ui("idle"); }, 1200); return; }
+      if (!gotStart && tries < 1) { tries++; setTimeout(start, 350); return; }   // interrupted before it began: try once more
+      ui("err", gotStart ? L().none : L().retry);
+    };
+    try { r.start(); } catch(e) { rec = null; clearTimeout(watchdog); ui("err", L().retry); }
+  }
+  function ensureMic(cb){
+    let known = false; try{ known = localStorage.getItem("micok") === "1"; }catch(e){}
+    if (known || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return cb();
+    busy = true; ui("listen", L().allow);
+    navigator.mediaDevices.getUserMedia({audio:true}).then(st => {
+      st.getTracks().forEach(t => t.stop()); try{ localStorage.setItem("micok","1"); }catch(e){}
+      busy = false; cb();
+    }).catch(err => { busy = false; ui("err", err && err.name === "NotFoundError" ? L().nomic : L().denied); });
+  }
+  mic.addEventListener("click", () => {
+    const now = Date.now(); if (now - lastTap < 350) return; lastTap = now;
+    if (busy) return;
+    if (rec) { if (gotStart) { try{ rec.stop(); }catch(e){ drop(); ui("idle"); } } else { drop(); ui("idle"); } return; }
+    tries = 0; ensureMic(start);
   });
+  // if the user grants the permission later (e.g. from the browser bar), start right away
+  try { navigator.permissions && navigator.permissions.query({name:"microphone"}).then(p => {
+    p.onchange = () => { if (p.state === "granted") { try{ localStorage.setItem("micok","1"); }catch(e){} if (!rec && !busy && Date.now() - lastTap < 60000 && !vstat.hidden) { tries = 0; start(); } } };
+  }).catch(()=>{}); } catch(e) {}
 })();
 document.getElementById("count").textContent = DATA.length;
 document.getElementById("npill").textContent = DATA.length;
