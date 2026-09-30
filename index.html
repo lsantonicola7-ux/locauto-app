@@ -502,14 +502,17 @@ window.FB = (function(){
   const done = () => { try{ return JSON.parse(localStorage.getItem("fbdone")||"{}"); }catch(e){ return {}; } };
   const mark = o => { if (TEST) return; try{ const m = done(); m[o] = 1; localStorage.setItem("fbdone", JSON.stringify(m)); }catch(e){} };
   const hd = {apikey:KEY, Authorization:"Bearer "+KEY, "Content-Type":"application/json"};
+  // the Supabase API answers 503 while it reloads its schema: retry a few times before giving up
+  function fx(url, opt, n){ n = n == null ? 4 : n;
+    return fetch(url, opt).then(r => (r.status === 503 && n > 0) ? new Promise(res => setTimeout(res, 2500)).then(() => fx(url, opt, n-1)) : r); }
   function load(){
     if (counts) return Promise.resolve(counts);
-    return fetch(URL_+"/rest/v1/rpc/ok_counts",{method:"POST",headers:hd,body:"{}"}).then(r => r.ok ? r.json() : []).then(rows => {
+    return fx(URL_+"/rest/v1/rpc/ok_counts",{method:"POST",headers:hd,body:"{}"}).then(r => r.ok ? r.json() : []).then(rows => {
       counts = {}; (rows||[]).forEach(r => counts[r.office] = r.n); return counts;
     }).catch(() => ({}));
   }
   function post(o, ok, note, pos){
-    return fetch(URL_+"/rest/v1/feedback",{method:"POST",headers:Object.assign({Prefer:"return=minimal"},hd),
+    return fx(URL_+"/rest/v1/feedback",{method:"POST",headers:Object.assign({Prefer:"return=minimal"},hd),
       body:JSON.stringify({office:(TEST?"TEST · ":"")+o, ok:ok, note:note||null, lat:pos?pos.lat:null, lng:pos?pos.lng:null, lang:lang})}).then(r => { if (!r.ok) return r.text().then(b => { throw new Error(r.status+" "+b.slice(0,120)); }); });
   }
   function lock(el, on){ el.querySelectorAll("button").forEach(b => b.disabled = on); }
