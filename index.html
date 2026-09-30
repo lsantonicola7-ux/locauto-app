@@ -488,7 +488,7 @@ document.getElementById("onlyok").addEventListener("click", e => { onlyOk = !onl
 
 // customer feedback: "is this return point correct?" (asked until 2 customers confirmed an office)
 window.FB = (function(){
-  const TEST = /[?&]test=1/.test(location.search), URL_ = "https://nlayutvqnfxnecgjftbf.supabase.co", KEY = "sb_publishable_B61DpBL8-pT5NCzOtbDKTg_SZL0EzxC", NEED = 2;
+  const TEST = /[?&]test=1/.test(location.search), URL_ = "https://nlayutvqnfxnecgjftbf.supabase.co", KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sYXl1dHZxbmZ4bmVjZ2pmdGJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzOTY5MzIsImV4cCI6MjA5NDk3MjkzMn0.lnrwUGnHV1aHkdUR_SmkEhi4DOhaDeR3p_O5k5C83F8", NEED = 2;
   const X = {
     it:{q:"La riconsegna è andata come descritto qui?",yes:"👍 Sì, tutto giusto",no:"👎 No, non è giusto",where:"Dove hai riconsegnato davvero? Scrivilo (o dettalo con il microfono della tastiera):",loc:"📍 Sono qui, invia la mia posizione",send:"Invia",thanks:"Grazie! Segnalazione ricevuta.",thx_ok:"Grazie per la conferma!",locok:"Posizione aggiunta ✓",locko:"Posizione non disponibile: scrivi due parole.",need:"Scrivi qualcosa o invia la posizione.",err:"Invio non riuscito, riprova tra poco.",ph:"Es. ingresso a sinistra, parcheggio P2…"},
     en:{q:"Did the return go as described here?",yes:"👍 Yes, all correct",no:"👎 No, it's wrong",where:"Where did you actually return it? Write it (or dictate with your keyboard microphone):",loc:"📍 I'm here — send my location",send:"Send",thanks:"Thank you! Report received.",thx_ok:"Thanks for confirming!",locok:"Location added ✓",locko:"Location unavailable: write a few words.",need:"Write something or send your location.",err:"Could not send, please try again shortly.",ph:"E.g. entrance on the left, car park P2…"},
@@ -509,14 +509,14 @@ window.FB = (function(){
   }
   function post(o, ok, note, pos){
     return fetch(URL_+"/rest/v1/feedback",{method:"POST",headers:Object.assign({Prefer:"return=minimal"},hd),
-      body:JSON.stringify({office:(TEST?"TEST · ":"")+o, ok:ok, note:note||null, lat:pos?pos.lat:null, lng:pos?pos.lng:null, lang:lang})}).then(r => { if (!r.ok) throw 0; });
+      body:JSON.stringify({office:(TEST?"TEST · ":"")+o, ok:ok, note:note||null, lat:pos?pos.lat:null, lng:pos?pos.lng:null, lang:lang})}).then(r => { if (!r.ok) return r.text().then(b => { throw new Error(r.status+" "+b.slice(0,120)); }); });
   }
   function lock(el, on){ el.querySelectorAll("button").forEach(b => b.disabled = on); }
   function paint(el){
     const o = el.dataset.o, t = tx();
     el.innerHTML = '<p>'+t.q+'</p><div class="row"><button type="button" class="yes">'+t.yes+'</button><button type="button" class="no">'+t.no+'</button></div>';
     el.querySelector(".yes").onclick = () => { lock(el,true);
-      post(o,true).then(() => { mark(o); if (counts) counts[o] = (counts[o]||0)+1; el.innerHTML = '<p class="thanks">'+t.thx_ok+'</p>'; }).catch(() => { lock(el,false); alert(t.err); }); };
+      post(o,true).then(() => { mark(o); if (counts) counts[o] = (counts[o]||0)+1; el.innerHTML = '<p class="thanks">'+t.thx_ok+'</p>'; }).catch(e => { lock(el,false); alert(t.err+" ("+(e&&e.message||"rete")+")"); }); };
     el.querySelector(".no").onclick = () => {
       el.innerHTML = '<p>'+t.where+'</p><textarea placeholder="'+t.ph+'" maxlength="500"></textarea><div class="row"><button type="button" class="loc">'+t.loc+'</button><button type="button" class="send">'+t.send+'</button></div><div class="hint"></div>';
       let pos = null; const hint = el.querySelector(".hint"), ta = el.querySelector("textarea");
@@ -524,7 +524,7 @@ window.FB = (function(){
         navigator.geolocation.getCurrentPosition(p => { pos = {lat:+p.coords.latitude.toFixed(6), lng:+p.coords.longitude.toFixed(6)}; hint.textContent = t.locok; }, () => { hint.textContent = t.locko; }, {enableHighAccuracy:true, timeout:15000}); };
       el.querySelector(".send").onclick = () => { const note = ta.value.trim(); if (!note && !pos) { hint.textContent = t.need; return; }
         lock(el,true);
-        post(o,false,note,pos).then(() => { mark(o); el.innerHTML = '<p class="thanks">'+t.thanks+'</p>'; }).catch(() => { lock(el,false); hint.textContent = t.err; }); };
+        post(o,false,note,pos).then(() => { mark(o); el.innerHTML = '<p class="thanks">'+t.thanks+'</p>'; }).catch(e => { lock(el,false); hint.textContent = t.err+" ("+(e&&e.message||"rete")+")"; }); };
     };
     el.hidden = false;
   }
