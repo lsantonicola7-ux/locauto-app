@@ -160,15 +160,27 @@ body{background:radial-gradient(900px 400px at 50% -120px,rgba(0,116,189,.10),tr
 .qwrap.rec input{border-color:#D92D20;box-shadow:0 0 0 3px rgba(217,45,32,.2)}
 .tools .mic.on svg{display:none}
 .tools .mic.on::after{content:"";width:14px;height:14px;border-radius:3px;background:#fff}
-.vstat{display:flex;align-items:center;gap:10px;margin-top:8px;padding:10px 13px;border-radius:12px;background:rgba(217,45,32,.1);border:1px solid rgba(217,45,32,.35);color:var(--ink);font-weight:600;font-size:15px;line-height:1.3}
+.vstat{flex:1 1 100%;box-sizing:border-box;display:flex;align-items:center;gap:10px;margin-top:8px;padding:10px 13px;border-radius:12px;background:rgba(217,45,32,.1);border:1px solid rgba(217,45,32,.35);color:var(--ink);font-weight:600;font-size:15px;line-height:1.3}
 .vstat.err{background:rgba(240,169,59,.16);border-color:rgba(240,169,59,.5)}
 .vstat #vtxt{min-width:0;overflow-wrap:anywhere}
 .vstat .bars{display:flex;align-items:center;gap:3px;height:22px;flex:none}
-.vstat .bars[hidden]{display:none}
+.vstat[hidden],.vstat .bars[hidden]{display:none}
 .vstat .bars i{display:block;width:4px;height:22px;border-radius:2px;background:#D92D20;transform-origin:center;animation:eq .9s infinite ease-in-out}
 .vstat .bars i:nth-child(2){animation-delay:.12s}.vstat .bars i:nth-child(3){animation-delay:.24s}.vstat .bars i:nth-child(4){animation-delay:.36s}.vstat .bars i:nth-child(5){animation-delay:.48s}
 @keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
 @media (prefers-reduced-motion:reduce){.vstat .bars i,.tools .mic.on{animation:none}}
+.fb{margin-top:10px;padding:12px;border-radius:12px;background:rgba(0,116,189,.07);border:1px solid rgba(0,116,189,.22)}
+.fb p{margin:0 0 9px;font-weight:700;font-size:15px;line-height:1.3}
+.fb .row{display:flex;gap:8px;flex-wrap:wrap}
+.fb[hidden]{display:none}
+.fb button{flex:1 1 130px;min-height:46px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 15px "Barlow Condensed",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;padding:8px 10px}
+.fb button.yes{background:#1a7f37;border-color:#1a7f37;color:#fff}
+.fb button.send{background:#0074BD;border-color:#0074BD;color:#fff}
+.fb button:disabled{opacity:.6}
+.fb textarea{width:100%;box-sizing:border-box;min-height:70px;margin:8px 0;padding:10px;border-radius:10px;border:1px solid var(--line);font:16px/1.3 system-ui,sans-serif;background:transparent;color:var(--ink);resize:vertical}
+.fb .thanks{font-weight:700;color:#1a7f37;margin:0}
+.fb .hint{font-size:13px;opacity:.85;margin-top:6px}
+@media print{.fb{display:none}}
 @media(min-width:640px){.qwrap{flex-basis:0}}
 .tools input:focus{outline:none;border-color:#0074BD;box-shadow:0 0 0 4px rgba(0,116,189,.15)}
 .tools button,.citypick summary{border-radius:14px;box-shadow:0 2px 8px rgba(15,28,38,.04)}
@@ -231,7 +243,7 @@ h2.region::after{order:2}
   <div class="progress"><span><b id="count">0</b> <span data-t="loaded"></span> <b id="ncity">0</b> <span data-t="prog"></span></span></div>
 
   <div class="tools">
-    <div class="qwrap"><input id="q" type="search" placeholder="" autocomplete="off"><button id="mic" type="button" class="mic" hidden aria-label="Voice search"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><div id="vstat" class="vstat" role="status" aria-live="polite" hidden><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span id="vtxt"></span></div></div>
+    <div class="qwrap"><input id="q" type="search" placeholder="" autocomplete="off"><button id="mic" type="button" class="mic" hidden aria-label="Voice search"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button></div><div id="vstat" class="vstat" role="status" aria-live="polite" hidden><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span id="vtxt"></span></div>
     <button id="onlyok" type="button" aria-pressed="false" data-t="onlyok"></button>
     <button id="onlykb" type="button" aria-pressed="false" data-t="onlykb"></button>
   </div>
@@ -464,14 +476,64 @@ function render(){
       '<div class="actions"><a class="primary gm" href="'+navUrl(d)+'" target="_blank" rel="noopener"><img src="/logos/google-maps.svg" alt="" width="12" height="17">Google Maps</a>'+
       '<a class="waze" href="'+wazeUrl(d)+'" target="_blank" rel="noopener">Waze</a>'+
       '<a class="apple gm" href="'+appleUrl(d)+'" target="_blank" rel="noopener"><img src="/logos/apple-maps.svg" alt="" width="18" height="18">Apple Maps</a>'+
-      (d.tel ? '<a class="call" href="'+telUrl(d.tel)+'" aria-label="'+L.call+' '+esc(d.tel)+'">\u260E '+esc(d.tel)+'</a>' : '')+'</div></article>'
+      (d.tel ? '<a class="call" href="'+telUrl(d.tel)+'" aria-label="'+L.call+' '+esc(d.tel)+'">\u260E '+esc(d.tel)+'</a>' : '')+'</div>'+(FB.skip(d)?'':'<div class="fb" data-o="'+esc(d.n)+'" hidden></div>')+'</article>'
     ).join("")
   ).join("") || '<p class="empty">'+L.empty+'</p>';
+  if (window.FB) FB.mount();
 }
 document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { lang = b.dataset.lang; try{localStorage.setItem("lang",lang);}catch(e){} loadTr(lang, applyLang); }));
 document.getElementById("q").addEventListener("input", render);
 document.getElementById("onlykb").addEventListener("click", e => { onlyKb = !onlyKb; e.currentTarget.setAttribute("aria-pressed", onlyKb); e.currentTarget.style.background = onlyKb ? "var(--amber)" : ""; e.currentTarget.style.color = onlyKb ? "#15181d" : ""; render(); });
 document.getElementById("onlyok").addEventListener("click", e => { onlyOk = !onlyOk; e.currentTarget.setAttribute("aria-pressed", onlyOk); e.currentTarget.style.background = onlyOk ? "var(--amber)" : ""; e.currentTarget.style.color = onlyOk ? "#15181d" : ""; render(); });
+
+// customer feedback: "is this return point correct?" (asked until 2 customers confirmed an office)
+window.FB = (function(){
+  const URL_ = "https://nlayutvqnfxnecgjftbf.supabase.co", KEY = "sb_publishable_B61DpBL8-pT5NCzOtbDKTg_SZL0EzxC", NEED = 2;
+  const X = {
+    it:{q:"La riconsegna è andata come descritto qui?",yes:"👍 Sì, tutto giusto",no:"👎 No, non è giusto",where:"Dove hai riconsegnato davvero? Scrivilo (o dettalo con il microfono della tastiera):",loc:"📍 Sono qui, invia la mia posizione",send:"Invia",thanks:"Grazie! Segnalazione ricevuta.",thx_ok:"Grazie per la conferma!",locok:"Posizione aggiunta ✓",locko:"Posizione non disponibile: scrivi due parole.",need:"Scrivi qualcosa o invia la posizione.",err:"Invio non riuscito, riprova tra poco.",ph:"Es. ingresso a sinistra, parcheggio P2…"},
+    en:{q:"Did the return go as described here?",yes:"👍 Yes, all correct",no:"👎 No, it's wrong",where:"Where did you actually return it? Write it (or dictate with your keyboard microphone):",loc:"📍 I'm here — send my location",send:"Send",thanks:"Thank you! Report received.",thx_ok:"Thanks for confirming!",locok:"Location added ✓",locko:"Location unavailable: write a few words.",need:"Write something or send your location.",err:"Could not send, please try again shortly.",ph:"E.g. entrance on the left, car park P2…"},
+    fr:{q:"La restitution s'est-elle passée comme décrit ici ?",yes:"👍 Oui, tout est correct",no:"👎 Non, c'est faux",where:"Où avez-vous réellement restitué le véhicule ? Écrivez-le (ou dictez avec le micro du clavier) :",loc:"📍 Je suis ici — envoyer ma position",send:"Envoyer",thanks:"Merci ! Signalement reçu.",thx_ok:"Merci pour la confirmation !",locok:"Position ajoutée ✓",locko:"Position indisponible : écrivez quelques mots.",need:"Écrivez quelque chose ou envoyez votre position.",err:"Envoi impossible, réessayez dans un instant.",ph:"Ex. entrée à gauche, parking P2…"},
+    es:{q:"¿La devolución fue como se describe aquí?",yes:"👍 Sí, todo correcto",no:"👎 No, es incorrecto",where:"¿Dónde devolviste realmente el coche? Escríbelo (o dicta con el micrófono del teclado):",loc:"📍 Estoy aquí: enviar mi ubicación",send:"Enviar",thanks:"¡Gracias! Aviso recibido.",thx_ok:"¡Gracias por confirmar!",locok:"Ubicación añadida ✓",locko:"Ubicación no disponible: escribe unas palabras.",need:"Escribe algo o envía tu ubicación.",err:"No se pudo enviar, inténtalo de nuevo en un momento.",ph:"Ej. entrada a la izquierda, parking P2…"},
+    pt:{q:"A devolução foi como descrito aqui?",yes:"👍 Sim, tudo certo",no:"👎 Não, está errado",where:"Onde devolveu realmente o carro? Escreva (ou dite com o microfone do teclado):",loc:"📍 Estou aqui — enviar minha localização",send:"Enviar",thanks:"Obrigado! Aviso recebido.",thx_ok:"Obrigado pela confirmação!",locok:"Localização adicionada ✓",locko:"Localização indisponível: escreva algumas palavras.",need:"Escreva algo ou envie a localização.",err:"Não foi possível enviar, tente novamente em instantes.",ph:"Ex. entrada à esquerda, estacionamento P2…"}
+  };
+  const tx = () => X[lang] || X.en;
+  let counts = null;
+  const done = () => { try{ return JSON.parse(localStorage.getItem("fbdone")||"{}"); }catch(e){ return {}; } };
+  const mark = o => { try{ const m = done(); m[o] = 1; localStorage.setItem("fbdone", JSON.stringify(m)); }catch(e){} };
+  const hd = {apikey:KEY, Authorization:"Bearer "+KEY, "Content-Type":"application/json"};
+  function load(){
+    if (counts) return Promise.resolve(counts);
+    return fetch(URL_+"/rest/v1/rpc/ok_counts",{method:"POST",headers:hd,body:"{}"}).then(r => r.ok ? r.json() : []).then(rows => {
+      counts = {}; (rows||[]).forEach(r => counts[r.office] = r.n); return counts;
+    }).catch(() => ({}));
+  }
+  function post(o, ok, note, pos){
+    return fetch(URL_+"/rest/v1/feedback",{method:"POST",headers:Object.assign({Prefer:"return=minimal"},hd),
+      body:JSON.stringify({office:o, ok:ok, note:note||null, lat:pos?pos.lat:null, lng:pos?pos.lng:null, lang:lang})}).then(r => { if (!r.ok) throw 0; });
+  }
+  function lock(el, on){ el.querySelectorAll("button").forEach(b => b.disabled = on); }
+  function paint(el){
+    const o = el.dataset.o, t = tx();
+    el.innerHTML = '<p>'+t.q+'</p><div class="row"><button type="button" class="yes">'+t.yes+'</button><button type="button" class="no">'+t.no+'</button></div>';
+    el.querySelector(".yes").onclick = () => { lock(el,true);
+      post(o,true).then(() => { mark(o); if (counts) counts[o] = (counts[o]||0)+1; el.innerHTML = '<p class="thanks">'+t.thx_ok+'</p>'; }).catch(() => { lock(el,false); alert(t.err); }); };
+    el.querySelector(".no").onclick = () => {
+      el.innerHTML = '<p>'+t.where+'</p><textarea placeholder="'+t.ph+'" maxlength="500"></textarea><div class="row"><button type="button" class="loc">'+t.loc+'</button><button type="button" class="send">'+t.send+'</button></div><div class="hint"></div>';
+      let pos = null; const hint = el.querySelector(".hint"), ta = el.querySelector("textarea");
+      el.querySelector(".loc").onclick = () => { if (!navigator.geolocation) { hint.textContent = t.locko; return; }
+        navigator.geolocation.getCurrentPosition(p => { pos = {lat:+p.coords.latitude.toFixed(6), lng:+p.coords.longitude.toFixed(6)}; hint.textContent = t.locok; }, () => { hint.textContent = t.locko; }, {enableHighAccuracy:true, timeout:15000}); };
+      el.querySelector(".send").onclick = () => { const note = ta.value.trim(); if (!note && !pos) { hint.textContent = t.need; return; }
+        lock(el,true);
+        post(o,false,note,pos).then(() => { mark(o); el.innerHTML = '<p class="thanks">'+t.thanks+'</p>'; }).catch(() => { lock(el,false); hint.textContent = t.err; }); };
+    };
+    el.hidden = false;
+  }
+  return {
+    skip: d => d.n === "Roma Fiumicino Aeroporto",
+    mount: () => { if (URL_.indexOf("__") === 0) return; load().then(c => { const dn = done();
+      document.querySelectorAll(".fb[data-o]").forEach(el => { const o = el.dataset.o; if (dn[o] || (c[o]||0) >= NEED) return; paint(el); }); }); }
+  };
+})();
 
 // voice search (Web Speech API): dictate a city / office, the list is filtered
 (function(){
