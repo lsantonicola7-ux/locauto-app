@@ -488,7 +488,7 @@ document.getElementById("onlyok").addEventListener("click", e => { onlyOk = !onl
 
 // customer feedback: "is this return point correct?" (asked until 2 customers confirmed an office)
 window.FB = (function(){
-  const URL_ = "https://nlayutvqnfxnecgjftbf.supabase.co", KEY = "sb_publishable_B61DpBL8-pT5NCzOtbDKTg_SZL0EzxC", NEED = 2;
+  const TEST = /[?&]test=1/.test(location.search), URL_ = "https://nlayutvqnfxnecgjftbf.supabase.co", KEY = "sb_publishable_B61DpBL8-pT5NCzOtbDKTg_SZL0EzxC", NEED = 2;
   const X = {
     it:{q:"La riconsegna è andata come descritto qui?",yes:"👍 Sì, tutto giusto",no:"👎 No, non è giusto",where:"Dove hai riconsegnato davvero? Scrivilo (o dettalo con il microfono della tastiera):",loc:"📍 Sono qui, invia la mia posizione",send:"Invia",thanks:"Grazie! Segnalazione ricevuta.",thx_ok:"Grazie per la conferma!",locok:"Posizione aggiunta ✓",locko:"Posizione non disponibile: scrivi due parole.",need:"Scrivi qualcosa o invia la posizione.",err:"Invio non riuscito, riprova tra poco.",ph:"Es. ingresso a sinistra, parcheggio P2…"},
     en:{q:"Did the return go as described here?",yes:"👍 Yes, all correct",no:"👎 No, it's wrong",where:"Where did you actually return it? Write it (or dictate with your keyboard microphone):",loc:"📍 I'm here — send my location",send:"Send",thanks:"Thank you! Report received.",thx_ok:"Thanks for confirming!",locok:"Location added ✓",locko:"Location unavailable: write a few words.",need:"Write something or send your location.",err:"Could not send, please try again shortly.",ph:"E.g. entrance on the left, car park P2…"},
@@ -499,7 +499,7 @@ window.FB = (function(){
   const tx = () => X[lang] || X.en;
   let counts = null;
   const done = () => { try{ return JSON.parse(localStorage.getItem("fbdone")||"{}"); }catch(e){ return {}; } };
-  const mark = o => { try{ const m = done(); m[o] = 1; localStorage.setItem("fbdone", JSON.stringify(m)); }catch(e){} };
+  const mark = o => { if (TEST) return; try{ const m = done(); m[o] = 1; localStorage.setItem("fbdone", JSON.stringify(m)); }catch(e){} };
   const hd = {apikey:KEY, Authorization:"Bearer "+KEY, "Content-Type":"application/json"};
   function load(){
     if (counts) return Promise.resolve(counts);
@@ -509,7 +509,7 @@ window.FB = (function(){
   }
   function post(o, ok, note, pos){
     return fetch(URL_+"/rest/v1/feedback",{method:"POST",headers:Object.assign({Prefer:"return=minimal"},hd),
-      body:JSON.stringify({office:o, ok:ok, note:note||null, lat:pos?pos.lat:null, lng:pos?pos.lng:null, lang:lang})}).then(r => { if (!r.ok) throw 0; });
+      body:JSON.stringify({office:(TEST?"TEST · ":"")+o, ok:ok, note:note||null, lat:pos?pos.lat:null, lng:pos?pos.lng:null, lang:lang})}).then(r => { if (!r.ok) throw 0; });
   }
   function lock(el, on){ el.querySelectorAll("button").forEach(b => b.disabled = on); }
   function paint(el){
@@ -529,9 +529,9 @@ window.FB = (function(){
     el.hidden = false;
   }
   return {
-    skip: d => d.n === "Roma Fiumicino Aeroporto",
-    mount: () => { if (URL_.indexOf("__") === 0) return; load().then(c => { const dn = done();
-      document.querySelectorAll(".fb[data-o]").forEach(el => { const o = el.dataset.o; if (dn[o] || (c[o]||0) >= NEED) return; paint(el); }); }); }
+    skip: d => !TEST && d.n === "Roma Fiumicino Aeroporto",
+    mount: () => { if (URL_.indexOf("__") === 0) return; (TEST ? Promise.resolve({}) : load()).then(c => { const dn = done();
+      document.querySelectorAll(".fb[data-o]").forEach(el => { const o = el.dataset.o; if (!TEST && (dn[o] || (c[o]||0) >= NEED)) return; paint(el); }); }); }
   };
 })();
 
