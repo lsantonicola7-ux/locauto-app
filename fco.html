@@ -198,7 +198,6 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
       <li><span data-k="s2">Enter <b>Car Park A</b> and take the ticket at the barrier.</span></li>
       <li><span data-k="s3">Drive up to the <b>4th floor</b> and use the ticket to enter the Locauto area.</span></li>
     </ol>
-    <div class="kb" data-k="kb"><b>After hours:</b> leave the keys in the key box next to the Locauto office, 4th floor.</div>
   </section>
 
   <section class="card office" aria-labelledby="h-info">
@@ -261,7 +260,7 @@ applyLang();
     var h=romeHour(); if(h===null) return;
     var closed=h<7; // open 07:00-24:00, every day
     var b=document.getElementById("closednow"); if(b) b.hidden=!closed;
-    var k=document.querySelector(".kb"); if(k) k.classList.toggle("on",closed);
+    
   }
   upd(); setInterval(upd,60000);
   document.addEventListener("visibilitychange",upd); window.addEventListener("pageshow",upd);
