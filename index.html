@@ -171,6 +171,17 @@ body{background:radial-gradient(900px 400px at 50% -120px,rgba(0,116,189,.10),tr
 @media (prefers-reduced-motion:reduce){.vstat .bars i,.tools .mic.on{animation:none}}
 @media(min-width:640px){.qwrap{flex-basis:0}}
 .tools.typing #onlykb,.tools.typing .citypick{display:none}
+.rp{margin-top:2px}
+.rp .rpbtn{background:none;border:0;padding:6px 0;font:600 13px Barlow,sans-serif;color:var(--muted);text-decoration:underline;cursor:pointer}
+.rp p{margin:0 0 8px;font-weight:600;font-size:14.5px;line-height:1.3}
+.rp .row{display:flex;gap:8px;flex-wrap:wrap}
+.rp button.loc,.rp button.send{flex:1 1 130px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 15px "Barlow Condensed",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.rp button.send{background:#0074BD;border-color:#0074BD;color:#fff}
+.rp button:disabled{opacity:.6}
+.rp textarea{width:100%;box-sizing:border-box;min-height:70px;margin:0 0 8px;padding:10px;border-radius:10px;border:1px solid var(--line);font:16px/1.3 system-ui,sans-serif;background:transparent;color:var(--ink);resize:vertical}
+.rp .thanks{color:#1a7f37;margin:0}
+.rp .hint{font-size:13px;opacity:.85;margin-top:6px}
+@media print{.rp{display:none}}
 .kbnow{font-weight:700;font-size:15px;line-height:1.3;padding:10px 12px;border-radius:12px;background:rgba(255,210,0,.22);border:1px solid rgba(224,161,0,.55);color:var(--ink)}
 .tools #onlykb{color:var(--ink);-webkit-text-fill-color:var(--ink);opacity:1}
 .tools input::placeholder{color:var(--muted);opacity:1;-webkit-text-fill-color:var(--muted)}
@@ -475,9 +486,10 @@ function render(){
       '<div class="actions"><a class="primary gm" href="'+navUrl(d)+'" target="_blank" rel="noopener"><img src="/logos/google-maps.svg" alt="" width="12" height="17">Google Maps</a>'+
       '<a class="waze" href="'+wazeUrl(d)+'" target="_blank" rel="noopener">Waze</a>'+
       '<a class="apple gm" href="'+appleUrl(d)+'" target="_blank" rel="noopener"><img src="/logos/apple-maps.svg" alt="" width="18" height="18">Apple Maps</a>'+
-      (d.tel ? '<a class="call" href="'+telUrl(d.tel)+'" aria-label="'+L.call+' '+esc(d.tel)+'">\u260E '+esc(d.tel)+'</a>' : '')+'</div>'+'</article>'
+      (d.tel ? '<a class="call" href="'+telUrl(d.tel)+'" aria-label="'+L.call+' '+esc(d.tel)+'">\u260E '+esc(d.tel)+'</a>' : '')+'</div><div class="rp" data-o="'+esc(d.n)+'"></div></article>'
     ).join("")
   ).join("") || '<p class="empty">'+L.empty+'</p>';
+  if (window.RP) RP.mount();
 }
 document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { lang = b.dataset.lang; try{localStorage.setItem("lang",lang);}catch(e){} loadTr(lang, applyLang); }));
 document.getElementById("q").addEventListener("input", render);
@@ -486,6 +498,38 @@ document.getElementById("q").addEventListener("input", render);
   q.addEventListener("focus", () => tools.classList.add("typing"));
   q.addEventListener("blur", () => setTimeout(() => tools.classList.remove("typing"), 150)); })();
 document.getElementById("onlykb").addEventListener("click", e => { onlyKb = !onlyKb; e.currentTarget.setAttribute("aria-pressed", onlyKb); e.currentTarget.style.background = onlyKb ? "var(--amber)" : ""; e.currentTarget.style.color = onlyKb ? "#15181d" : ""; render(); });
+
+// "Report a mistake": a small form per office, sent to Formspree (the recipient address stays inside the Formspree account)
+window.RP = (function(){
+  const URL_ = "https://formspree.io/f/xeaowqnq";
+  const X = {
+    it:{btn:"⚠️ Segnala un errore",ask:"Cosa non corrisponde? Se puoi, scrivi dove hai riconsegnato davvero.",ph:"Es. l'ingresso è sulla sinistra…",loc:"📍 Invia la mia posizione",send:"Invia",ok:"Grazie, segnalazione inviata!",locok:"Posizione aggiunta ✓",locko:"Posizione non disponibile.",need:"Scrivi due parole o invia la posizione.",err:"Invio non riuscito, riprova tra poco."},
+    en:{btn:"⚠️ Report a mistake",ask:"What doesn't match? If you can, tell us where you actually returned the car.",ph:"E.g. the entrance is on the left…",loc:"📍 Send my location",send:"Send",ok:"Thank you, report sent!",locok:"Location added ✓",locko:"Location unavailable.",need:"Write a few words or send your location.",err:"Could not send, please try again shortly."},
+    fr:{btn:"⚠️ Signaler une erreur",ask:"Qu'est-ce qui ne correspond pas ? Si possible, indiquez où vous avez réellement restitué le véhicule.",ph:"Ex. l'entrée est à gauche…",loc:"📍 Envoyer ma position",send:"Envoyer",ok:"Merci, signalement envoyé !",locok:"Position ajoutée ✓",locko:"Position indisponible.",need:"Écrivez quelques mots ou envoyez votre position.",err:"Envoi impossible, réessayez dans un instant."},
+    es:{btn:"⚠️ Informar de un error",ask:"¿Qué no coincide? Si puedes, indica dónde devolviste realmente el coche.",ph:"Ej. la entrada está a la izquierda…",loc:"📍 Enviar mi ubicación",send:"Enviar",ok:"¡Gracias, aviso enviado!",locok:"Ubicación añadida ✓",locko:"Ubicación no disponible.",need:"Escribe unas palabras o envía tu ubicación.",err:"No se pudo enviar, inténtalo de nuevo en un momento."},
+    pt:{btn:"⚠️ Informar um erro",ask:"O que não corresponde? Se puder, diga onde devolveu realmente o carro.",ph:"Ex. a entrada é à esquerda…",loc:"📍 Enviar minha localização",send:"Enviar",ok:"Obrigado, aviso enviado!",locok:"Localização adicionada ✓",locko:"Localização indisponível.",need:"Escreva algumas palavras ou envie a localização.",err:"Não foi possível enviar, tente novamente em instantes."}
+  };
+  const tx = () => X[lang] || X.en;
+  function open(el){
+    const t = tx(), o = el.dataset.o; let pos = null;
+    el.innerHTML = '<p>'+t.ask+'</p><textarea maxlength="800" placeholder="'+t.ph+'"></textarea><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none"><div class="row"><button type="button" class="loc">'+t.loc+'</button><button type="button" class="send">'+t.send+'</button></div><div class="hint"></div>';
+    const ta = el.querySelector("textarea"), hint = el.querySelector(".hint");
+    el.querySelector(".loc").onclick = () => { if (!navigator.geolocation) { hint.textContent = t.locko; return; }
+      navigator.geolocation.getCurrentPosition(p => { pos = {lat:+p.coords.latitude.toFixed(6), lng:+p.coords.longitude.toFixed(6)}; hint.textContent = t.locok; }, () => { hint.textContent = t.locko; }, {enableHighAccuracy:true, timeout:15000}); };
+    el.querySelector(".send").onclick = () => {
+      const msg = ta.value.trim(); if (!msg && !pos) { hint.textContent = t.need; return; }
+      if (el.querySelector("[name=_gotcha]").value) return;
+      const btns = el.querySelectorAll("button"); btns.forEach(b => b.disabled = true);
+      fetch(URL_, {method:"POST", headers:{"Accept":"application/json","Content-Type":"application/json"},
+        body: JSON.stringify({_subject:"Riconsegna Locauto - segnalazione: "+o, ufficio:o, messaggio:msg||"(solo posizione)",
+          posizione: pos ? pos.lat+","+pos.lng+"  https://maps.google.com/?q="+pos.lat+","+pos.lng : "", lingua: lang, pagina: location.href})})
+        .then(r => { if (!r.ok) throw new Error(r.status); el.innerHTML = '<p class="thanks">'+t.ok+'</p>'; })
+        .catch(() => { btns.forEach(b => b.disabled = false); hint.textContent = t.err; });
+    };
+  }
+  return { mount: () => document.querySelectorAll(".rp[data-o]").forEach(el => { if (el.dataset.ready) return; el.dataset.ready = 1;
+    el.innerHTML = '<button type="button" class="rpbtn">'+tx().btn+'</button>'; el.firstChild.onclick = () => open(el); }) };
+})();
 
 // voice search (Web Speech API): dictate a city / office, the list is filtered
 (function(){
