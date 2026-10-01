@@ -170,6 +170,8 @@ body{background:radial-gradient(900px 400px at 50% -120px,rgba(0,116,189,.10),tr
 @keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
 @media (prefers-reduced-motion:reduce){.vstat .bars i,.tools .mic.on{animation:none}}
 @media(min-width:640px){.qwrap{flex-basis:0}}
+.tools.compact #onlykb,.tools.compact .citypick{display:none}
+h2.region{scroll-margin-top:var(--toolsh,70px)}
 .tools input:focus{outline:none;border-color:#0074BD;box-shadow:0 0 0 4px rgba(0,116,189,.15)}
 .tools button,.citypick summary{border-radius:14px;box-shadow:0 2px 8px rgba(15,28,38,.04)}
 h2.region{font-size:24px;margin:28px 0 12px;gap:10px}
@@ -473,7 +475,21 @@ function render(){
   ).join("") || '<p class="empty">'+L.empty+'</p>';
 }
 document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { lang = b.dataset.lang; try{localStorage.setItem("lang",lang);}catch(e){} loadTr(lang, applyLang); }));
-document.getElementById("q").addEventListener("input", render);
+(function(){
+  const q = document.getElementById("q"), tools = document.querySelector(".tools");
+  const sync = () => tools.classList.toggle("compact", document.activeElement === q || q.value.trim() !== "");
+  let t = null;
+  function toResults(){
+    if (!q.value.trim()) return;
+    const h = document.querySelector("h2.region"); if (!h) return;
+    document.documentElement.style.setProperty("--toolsh", (tools.offsetHeight + 8) + "px");
+    window.scrollTo({top: h.getBoundingClientRect().top + window.scrollY - tools.offsetHeight - 8, behavior: "auto"});
+  }
+  q.addEventListener("input", () => { render(); sync(); clearTimeout(t); t = setTimeout(toResults, 120); });
+  q.addEventListener("focus", sync);
+  q.addEventListener("blur", () => setTimeout(sync, 0));
+  q.addEventListener("search", () => { sync(); });
+})();
 document.getElementById("onlykb").addEventListener("click", e => { onlyKb = !onlyKb; e.currentTarget.setAttribute("aria-pressed", onlyKb); e.currentTarget.style.background = onlyKb ? "var(--amber)" : ""; e.currentTarget.style.color = onlyKb ? "#15181d" : ""; render(); });
 
 // voice search (Web Speech API): dictate a city / office, the list is filtered
