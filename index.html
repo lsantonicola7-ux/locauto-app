@@ -184,8 +184,11 @@ h2.region::after{order:2}
 .card .name{font-size:24px;line-height:1.05}
 .card .ret{display:flex;gap:10px;align-items:flex-start;line-height:1.35;border-radius:12px;padding:10px 12px;
   background:rgba(0,116,189,.07);border:1px solid rgba(0,116,189,.14)}
+.card.t2 .ret{background:rgba(0,166,102,.08);border-color:rgba(0,166,102,.22)}
+.card.t3 .ret{background:rgba(224,161,0,.12);border-color:rgba(224,161,0,.35)}
 .card .ret::before{content:"P";flex:none;display:grid;place-items:center;width:26px;height:26px;margin:0;border-radius:7px;padding:0;
-  background:#0074BD;color:#fff;font:700 17px/1 "Barlow Condensed",sans-serif}
+  background:var(--accent);color:#fff;font:700 17px/1 "Barlow Condensed",sans-serif}
+.card.t3 .ret::before{color:#15181d}
 .card .hrs{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
 .card .how{border-left:3px solid var(--line);padding-left:10px}
 .card .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
