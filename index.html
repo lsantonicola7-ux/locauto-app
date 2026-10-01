@@ -171,6 +171,7 @@ body{background:radial-gradient(900px 400px at 50% -120px,rgba(0,116,189,.10),tr
 @media (prefers-reduced-motion:reduce){.vstat .bars i,.tools .mic.on{animation:none}}
 @media(min-width:640px){.qwrap{flex-basis:0}}
 .tools.typing #onlykb,.tools.typing .citypick{display:none}
+.kbnow{font-weight:700;font-size:15px;line-height:1.3;padding:10px 12px;border-radius:12px;background:rgba(255,210,0,.22);border:1px solid rgba(224,161,0,.55);color:var(--ink)}
 .tools #onlykb{color:var(--ink);-webkit-text-fill-color:var(--ink);opacity:1}
 .tools input::placeholder{color:var(--muted);opacity:1;-webkit-text-fill-color:var(--muted)}
 .tools input:focus{outline:none;border-color:#0074BD;box-shadow:0 0 0 4px rgba(0,116,189,.15)}
@@ -417,6 +418,7 @@ function loadTr(l, cb){ if (!["fr","es","pt"].includes(l) || TR[l]) return cb();
 let onlyKb = false;
 
 window.addEventListener("pageshow", e => { if (e.persisted && typeof applyLang === "function") applyLang(); });
+const KBN = {it:"Ufficio chiuso ora: riconsegna con il Key box",en:"Office closed now: return with the key box",fr:"Agence fermée : restituez avec la boîte à clés",es:"Oficina cerrada ahora: devuelve con el buzón de llaves",pt:"Loja fechada agora: devolva com a caixa de chaves"};
 function applyLang(){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-t]").forEach(el => el.textContent = T[lang][el.dataset.t]);
@@ -468,6 +470,7 @@ function render(){
       '<div class="ret">'+esc(retOf(d))+'</div>'+
       (d.kb ? '<div><span class="kb kb'+d.kb+'">'+(d.kb===1?L.kb1:L.kb2)+'</span></div>' : '')+
       (HOURS[d.c+"|"+d.n] ? '<div class="hrs"><span class="dot '+(isOpen(HOURS[d.c+"|"+d.n])?'on':'off')+'">'+(isOpen(HOURS[d.c+"|"+d.n])?L.open:L.closed)+'</span> <b>'+L.hours+':</b> '+esc(hoursText(HOURS[d.c+"|"+d.n]))+'</div>' : '')+
+      (d.kb===1 && HOURS[d.c+"|"+d.n] && !isOpen(HOURS[d.c+"|"+d.n]) ? '<div class="kbnow">\uD83D\uDD11 '+KBN[lang]+'</div>' : '')+
       (howOf(d) ? '<p class="how">'+esc(howOf(d))+'</p>' : '')+
       '<div class="actions"><a class="primary gm" href="'+navUrl(d)+'" target="_blank" rel="noopener"><img src="/logos/google-maps.svg" alt="" width="12" height="17">Google Maps</a>'+
       '<a class="waze" href="'+wazeUrl(d)+'" target="_blank" rel="noopener">Waze</a>'+
