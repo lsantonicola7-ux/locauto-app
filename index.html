@@ -28,59 +28,59 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,sys
 .wrap{max-width:880px;margin:0 auto;padding:16px}
 header.sign{background:var(--sign);color:var(--signInk);border-radius:14px;padding:20px 20px 18px;display:grid;grid-template-columns:1fr;gap:16px;align-items:center;position:relative;overflow:hidden}
 header.sign::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:repeating-linear-gradient(90deg,var(--amber) 0 22px,transparent 22px 34px)}
-.kicker{font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
-h1{font:700 clamp(30px,7vw,48px)/.95 "Barlow Condensed",Arial Narrow,sans-serif;margin:8px 0 10px;letter-spacing:.01em;text-transform:uppercase}
+.kicker{font:600 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+h1{font:700 clamp(30px,7vw,48px)/.95 "Barlow Condensed","Roboto Condensed",Arial Narrow,sans-serif;margin:8px 0 10px;letter-spacing:.01em;text-transform:uppercase}
 h1 .arrow{display:inline-block;background:var(--amber);color:var(--sign);border-radius:6px;padding:0 8px;margin-right:8px}
 .sub{margin:0;opacity:.85;font-size:15px}
 .mainqr{background:#fff;border-radius:10px;padding:8px;width:124px;text-align:center}
 .mainqr canvas,.mainqr img{width:108px;height:108px;display:block;image-rendering:pixelated}
-.mainqr small{display:block;color:#15181d;font:600 11px/1.2 "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
+.mainqr small{display:block;color:#15181d;font:600 11px/1.2 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
 .progress{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px;font-size:14px;color:var(--muted)}
 .progress b{color:var(--ink)}
 .bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:14px}
 .bar i{display:block;height:100%;background:var(--amber)}
 .tools{display:flex;flex-wrap:wrap;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5}
 .tools input{flex:1 1 100%;min-width:0;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
-.tools button{font:600 15px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:0 14px;cursor:pointer}
-h2.region{font:700 22px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.tools button{font:600 15px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:0 14px;cursor:pointer}
+h2.region{font:700 22px/1 "Barlow Condensed","Roboto Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
 h2.region::after{content:"";flex:1;height:1px;background:var(--line)}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:grid;grid-template-columns:1fr;gap:6px}
 .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.name{font:700 20px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.02em}
-.badge{flex:none;font:600 11px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:5px 7px;border-radius:5px;border:1px solid currentColor}
+.name{font:700 20px/1.1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.02em}
+.badge{flex:none;font:600 11px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:5px 7px;border-radius:5px;border:1px solid currentColor}
 .badge.ok{color:var(--ok)} .badge.warn{color:var(--warn)}
 .ret{font-weight:600}
-.ret::before{content:"P ";display:inline-block;background:var(--sign);color:#fff;font:700 13px/1 "Barlow Condensed",sans-serif;padding:3px 6px;border-radius:4px;margin-right:6px}
+.ret::before{content:"P ";display:inline-block;background:var(--sign);color:#fff;font:700 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;padding:3px 6px;border-radius:4px;margin-right:6px}
 .how{color:var(--muted);font-size:14.5px;margin:0}
 .coord{font:400 13px/1.3 "IBM Plex Mono",ui-monospace,monospace;color:var(--muted)}
 .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.actions a,.actions button{font:600 14px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:8px;padding:9px 12px;border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer}
+.actions a,.actions button{font:600 14px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:8px;padding:9px 12px;border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer}
 .actions a.waze{background:#33ccff;border-color:#33ccff;color:#0b1a24}
 .actions a.primary{background:var(--sign);border-color:var(--sign);color:#fff}
 .empty{color:var(--muted);text-align:center;padding:24px}
 dialog{border:none;border-radius:14px;padding:20px;max-width:320px;width:calc(100% - 32px);text-align:center;background:#fff;color:#15181d}
 dialog::backdrop{background:rgba(0,0,0,.55)}
 dialog img{width:240px;height:240px;max-width:100%;image-rendering:pixelated}
-dialog h3{font:700 20px "Barlow Condensed",sans-serif;margin:0 0 8px}
-dialog button{margin-top:10px;font:600 15px "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em;padding:9px 18px;border-radius:8px;border:1px solid #ccc;background:#fff;cursor:pointer}
+dialog h3{font:700 20px "Barlow Condensed","Roboto Condensed",sans-serif;margin:0 0 8px}
+dialog button{margin-top:10px;font:600 15px "Barlow Condensed","Roboto Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em;padding:9px 18px;border-radius:8px;border:1px solid #ccc;background:#fff;cursor:pointer}
 .langs{display:flex;gap:6px;justify-content:flex-end;margin-top:12px}
-.langs button{font:600 14px "Barlow Condensed",sans-serif;letter-spacing:.08em;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+.langs button{font:600 14px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.08em;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
 .langs button[aria-pressed="true"]{background:var(--sign);border-color:var(--sign);color:#fff}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:none}
-.chips a{flex:none;font:600 14px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px}
-.type{font:600 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.chips a{flex:none;font:600 14px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px}
+.type{font:600 12px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 .hrs{font-size:14.5px}
 .hrs b{font-weight:600}
-.dot{display:inline-block;font:600 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:5px;color:#fff;margin-right:4px}
+.dot{display:inline-block;font:600 12px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:5px;color:#fff;margin-right:4px}
 .dot.on{background:var(--ok)} .dot.off{background:#8a8f98}
-.kb{display:inline-block;font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.05em;padding:5px 8px;border-radius:6px}
+.kb{display:inline-block;font:600 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.05em;padding:5px 8px;border-radius:6px}
 .kb1{background:var(--amber);color:#15181d} .kb2{background:var(--line);color:var(--ink)}
 .tools button{white-space:nowrap;flex:1;min-height:42px}
 @media(min-width:640px){.tools input{flex-basis:0}.tools button{flex:0 0 auto}}
 footer{color:var(--muted);font-size:13px;margin:24px 0 8px}
 @media (max-width:520px){header.sign{grid-template-columns:1fr}.mainqr{justify-self:start}}
 @media print{.tools,.actions,footer{display:none}.card{break-inside:avoid}}
-.fcolink{display:block;text-decoration:none;font:600 16px/1.2 "Barlow Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px}
+.fcolink{display:block;text-decoration:none;font:600 16px/1.2 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px}
 
 /* Locauto brand skin */
 :root{--sign:#0074BD}
@@ -91,7 +91,7 @@ footer{color:var(--muted);font-size:13px;margin:24px 0 8px}
 .kicker{color:#fff!important;opacity:.92}
 h1 .arrow{background:#fff!important;color:var(--sign)!important}
 .bar i{background:#00A666!important}
-.citypick summary{cursor:pointer;font:600 16px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);list-style:none}
+.citypick summary{cursor:pointer;font:600 16px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);list-style:none}
 .citypick summary::-webkit-details-marker{display:none}
 .citypick .chips{flex-wrap:wrap;overflow:visible;padding-top:10px}.citypick .chips a{font-size:13px;padding:5px 10px}
 .citypick[open] summary{border-color:var(--sign)}
@@ -116,7 +116,7 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
   .rail{display:flex;position:fixed;top:0;bottom:0;width:196px;z-index:20;flex-direction:column}
   .rail-l{left:0;background:linear-gradient(180deg,#0074BD,#005a94);align-items:center;justify-content:center;padding:24px}
   .rail-l img{width:100%;background:#fff;border-radius:14px;padding:18px 14px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-  .rail-l::after{content:"Car return";position:absolute;bottom:28px;left:0;right:0;text-align:center;color:#fff;opacity:.85;font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase}
+  .rail-l::after{content:"Car return";position:absolute;bottom:28px;left:0;right:0;text-align:center;color:#fff;opacity:.85;font:600 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase}
   .rail-r{right:0}
   .rail-r .segs{display:flex;flex-direction:column;height:100%;gap:0;justify-content:stretch}
   .seg{display:flex;flex:1;align-items:center;justify-content:center;padding:18px}
@@ -132,11 +132,11 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
   repeating-linear-gradient(90deg,#fff 0 26px,transparent 26px 46px) center/100% 2px no-repeat,#083556}
 .hero-top{position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .hero-logo{height:36px;width:auto;display:block}
-.hero-pill{font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);padding:7px 11px;border-radius:999px;white-space:nowrap}
+.hero-pill{font:600 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);padding:7px 11px;border-radius:999px;white-space:nowrap}
 .hero-pill b{color:#FFD200}
 .hero-main{position:relative;display:flex;gap:16px;align-items:center;margin-top:20px}
 .hero-ico{flex:none;width:68px;height:68px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.28))}
-.hero h1{margin:0 0 6px;font:700 clamp(32px,8vw,52px)/.92 "Barlow Condensed",Arial Narrow,sans-serif;text-transform:uppercase;letter-spacing:.01em}
+.hero h1{margin:0 0 6px;font:700 clamp(32px,8vw,52px)/.92 "Barlow Condensed","Roboto Condensed",Arial Narrow,sans-serif;text-transform:uppercase;letter-spacing:.01em}
 .hero .sub{margin:0;opacity:.92;font-size:15px}
 @media (max-width:1079px){.rail-l{display:none!important}.brandcard{grid-template-columns:1fr}}
 @media (max-width:420px){.hero-logo{height:28px}.hero-pill{font-size:11px;letter-spacing:.06em;padding:6px 8px}.hero-ico{width:56px;height:56px}}
@@ -145,7 +145,7 @@ body{background:radial-gradient(900px 400px at 50% -120px,rgba(0,116,189,.10),tr
 .fcolink{display:flex;align-items:center;gap:12px;border:none;border-radius:16px;padding:12px 16px;margin-top:14px;
   background:linear-gradient(95deg,#FFD200,#FFC000);color:#15181d;box-shadow:0 6px 16px rgba(255,190,0,.28);text-transform:none;letter-spacing:.02em}
 .fcolink .fi{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#15181d;color:#FFD200;font-size:20px}
-.fcolink .ft{flex:1;font:700 18px/1.15 "Barlow Condensed",sans-serif;text-transform:uppercase}
+.fcolink .ft{flex:1;font:700 18px/1.15 "Barlow Condensed","Roboto Condensed",sans-serif;text-transform:uppercase}
 .fcolink .ft small{display:block;font:500 14px/1.3 Barlow,sans-serif;text-transform:none;letter-spacing:0;opacity:.8;margin-top:2px}
 .fcolink .go{flex:none;font:700 30px/1 Barlow,sans-serif}
 .tools input{min-height:50px;border-radius:14px;font-size:17px;padding-left:44px;border:1.5px solid var(--line);
@@ -175,7 +175,7 @@ body{background:radial-gradient(900px 400px at 50% -120px,rgba(0,116,189,.10),tr
 .rp .rpbtn{background:none;border:0;padding:6px 0;font:600 13px Barlow,sans-serif;color:var(--muted);text-decoration:underline;cursor:pointer}
 .rp p{margin:0 0 8px;font-weight:600;font-size:14.5px;line-height:1.3}
 .rp .row{display:flex;gap:8px;flex-wrap:wrap}
-.rp button.loc,.rp button.send{flex:1 1 130px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 15px "Barlow Condensed",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.rp button.loc,.rp button.send{flex:1 1 130px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 15px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
 .rp button.send{background:#0074BD;border-color:#0074BD;color:#fff}
 .rp button:disabled{opacity:.6}
 .rp textarea{width:100%;box-sizing:border-box;min-height:70px;margin:0 0 8px;padding:10px;border-radius:10px;border:1px solid var(--line);font:16px/1.3 system-ui,sans-serif;background:transparent;color:var(--ink);resize:vertical}
@@ -204,7 +204,7 @@ h2.region::after{order:2}
 .card.t2 .ret{background:rgba(0,166,102,.08);border-color:rgba(0,166,102,.22)}
 .card.t3 .ret{background:rgba(224,161,0,.12);border-color:rgba(224,161,0,.35)}
 .card .ret::before{content:"P";flex:none;display:grid;place-items:center;width:26px;height:26px;margin:0;border-radius:7px;padding:0;
-  background:var(--accent);color:#fff;font:700 17px/1 "Barlow Condensed",sans-serif}
+  background:var(--accent);color:#fff;font:700 17px/1 "Barlow Condensed","Roboto Condensed",sans-serif}
 .card.t3 .ret::before{color:#15181d}
 .card .hrs{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
 .card .how{border-left:3px solid var(--line);padding-left:10px}
@@ -215,6 +215,12 @@ h2.region::after{order:2}
 .card .actions a:active{transform:scale(.97)}
 .badge{border-radius:999px;padding:5px 9px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .card .ret{background:rgba(94,185,232,.10);border-color:rgba(94,185,232,.2)}}
+.langs{flex-wrap:wrap;gap:5px}
+.langs button{padding:6px 9px}
+.card .orig{font:500 13px/1.2 Barlow,system-ui,sans-serif;color:var(--muted);margin-top:2px}
+h2.region>span:first-child{min-width:0;overflow-wrap:anywhere;line-height:1.1}
+.citypick .chips a{max-width:100%;white-space:normal}
+h2.region small.orig{font:500 13px/1 Barlow,system-ui,sans-serif;color:var(--muted);text-transform:none;letter-spacing:0;margin-left:6px}
 </style>
 </head>
 <body>
@@ -247,7 +253,7 @@ h2.region::after{order:2}
   </header>
   <a class="fcolink" href="/fco"><span class="fi">✈</span><span class="ft">Rome Fiumicino Airport (FCO)<small>Parking A · 4th floor — step-by-step guide</small></span><span class="go">›</span></a>
 
-  <div class="langs"><button type="button" data-lang="it">IT</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="fr">FR</button><button type="button" data-lang="es">ES</button><button type="button" data-lang="pt">PT</button></div>
+  <div class="langs"><button type="button" data-lang="it">IT</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="fr">FR</button><button type="button" data-lang="es">ES</button><button type="button" data-lang="pt">PT</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="zh" lang="zh-Hans">中文</button></div>
   <div class="progress"><span><b id="count">0</b> <span data-t="loaded"></span> <b id="ncity">0</b> <span data-t="prog"></span></span></div>
 
   <div class="tools">
@@ -386,7 +392,9 @@ const T = {
      foot:""},
  fr:{"title": "Points de retour", "kick": "Toute l'Italie", "sedi": "agences", "sub": "Où rendre votre voiture, ville par ville, avec itinéraires Google Maps, Apple Maps et Waze.", "loaded": "agences Locauto dans", "prog": "villes", "jump": "Choisir la ville", "onlyok": "Vérifiées seulement", "onlykb": "🔑 Boîte à clés", "kb1": "🔑 Boîte à clés hors horaires", "kb2": "🌙 Retour hors horaires : clés au personnel du garage", "search": "Chercher une ville ou une agence…", "ok": "Vérifié", "warn": "À confirmer", "nav": "Itinéraire", "call": "Appeler l'agence", "empty": "Aucune agence trouvée.", "types": {"1": "✈ Aéroport", "2": "🚆 Gare", "3": "Ville"}, "hours": "Horaires", "open": "Ouvert", "closed": "Fermé", "closedDays": {"sat": "Sam-Dim fermé", "sun": "Dim fermé"}, "upd": "Données mises à jour le", "foot": ""},
  es:{"title": "Puntos de devolución", "kick": "Toda Italia", "sedi": "oficinas", "sub": "Dónde devolver su coche, ciudad por ciudad, con navegación Google Maps, Apple Maps y Waze.", "loaded": "oficinas Locauto en", "prog": "ciudades", "jump": "Elegir ciudad", "onlyok": "Solo verificadas", "onlykb": "🔑 Buzón de llaves", "kb1": "🔑 Buzón de llaves fuera de horario", "kb2": "🌙 Devolución fuera de horario: llaves al personal del garaje", "search": "Buscar ciudad u oficina…", "ok": "Verificado", "warn": "Por confirmar", "nav": "Cómo llegar", "call": "Llamar a la oficina", "empty": "No se encontró ninguna oficina.", "types": {"1": "✈ Aeropuerto", "2": "🚆 Estación de tren", "3": "Ciudad"}, "hours": "Horario", "open": "Abierto", "closed": "Cerrado", "closedDays": {"sat": "Sáb-Dom cerrado", "sun": "Dom cerrado"}, "upd": "Datos actualizados el", "foot": ""},
- pt:{"title": "Pontos de devolução", "kick": "Toda a Itália", "sedi": "lojas", "sub": "Onde devolver o carro, cidade por cidade, com navegação Google Maps, Apple Maps e Waze.", "loaded": "lojas Locauto em", "prog": "cidades", "jump": "Escolher a cidade", "onlyok": "Só verificadas", "onlykb": "🔑 Caixa de chaves", "kb1": "🔑 Caixa de chaves fora do horário", "kb2": "🌙 Devolução fora do horário: chaves para a equipe da garagem", "search": "Buscar cidade ou loja…", "ok": "Verificado", "warn": "A confirmar", "nav": "Como chegar", "call": "Ligar para a loja", "empty": "Nenhuma loja encontrada.", "types": {"1": "✈ Aeroporto", "2": "🚆 Estação de trem", "3": "Cidade"}, "hours": "Horário", "open": "Aberto", "closed": "Fechado", "closedDays": {"sat": "Sáb-Dom fechado", "sun": "Dom fechado"}, "upd": "Dados atualizados em", "foot": ""}
+ pt:{"title": "Pontos de devolução", "kick": "Toda a Itália", "sedi": "lojas", "sub": "Onde devolver o carro, cidade por cidade, com navegação Google Maps, Apple Maps e Waze.", "loaded": "lojas Locauto em", "prog": "cidades", "jump": "Escolher a cidade", "onlyok": "Só verificadas", "onlykb": "🔑 Caixa de chaves", "kb1": "🔑 Caixa de chaves fora do horário", "kb2": "🌙 Devolução fora do horário: chaves para a equipe da garagem", "search": "Buscar cidade ou loja…", "ok": "Verificado", "warn": "A confirmar", "nav": "Como chegar", "call": "Ligar para a loja", "empty": "Nenhuma loja encontrada.", "types": {"1": "✈ Aeroporto", "2": "🚆 Estação de trem", "3": "Cidade"}, "hours": "Horário", "open": "Aberto", "closed": "Fechado", "closedDays": {"sat": "Sáb-Dom fechado", "sun": "Dom fechado"}, "upd": "Dados atualizados em", "foot": ""},
+ ru:{"title": "Пункты возврата", "kick": "Вся Италия", "sedi": "офисов", "sub": "Где вернуть автомобиль: по городам, с навигацией в Google Maps, Apple Maps и Waze.", "loaded": "офисов Locauto в", "prog": "городах", "jump": "Выбрать город", "onlyok": "Только проверенные", "onlykb": "🔑 Key box", "kb1": "🔑 Ящик для ключей (Key box) в нерабочее время", "kb2": "🌙 Возврат в нерабочее время: ключи — сотрудникам гаража", "search": "Город или офис…", "ok": "Проверено", "warn": "Требует проверки", "nav": "Маршрут", "call": "Позвонить в офис", "empty": "Офисы не найдены.", "types": {"1": "✈ Аэропорт", "2": "🚆 Вокзал", "3": "Город"}, "hours": "Часы работы", "open": "Открыто", "closed": "Закрыто", "closedDays": {"sat": "Сб-Вс закрыто", "sun": "Вс закрыто"}, "upd": "Данные обновлены", "foot": ""},
+ zh:{"title": "还车地点", "kick": "意大利全境", "sedi": "家门店", "sub": "按城市查找还车地点，支持 Google Maps、Apple Maps 和 Waze 导航。", "loaded": "家 Locauto 门店，遍布", "prog": "个城市", "jump": "选择城市", "onlyok": "仅显示已核实", "onlykb": "🔑 钥匙箱", "kb1": "🔑 非营业时间钥匙箱（Key box）", "kb2": "🌙 非营业时间还车：钥匙交给车库工作人员", "search": "搜索城市或门店…", "ok": "已核实", "warn": "待确认", "nav": "导航", "call": "致电门店", "empty": "未找到门店。", "types": {"1": "✈ 机场", "2": "🚆 火车站", "3": "市区"}, "hours": "营业时间", "open": "营业中", "closed": "已关门", "closedDays": {"sat": "周六、周日休息", "sun": "周日休息"}, "upd": "数据更新于", "foot": ""}
 };
 const cityOrder = d => d.c; // alfabetico per città
 const wazeUrl = d => d.q ? "https://waze.com/ul?q=" + encodeURIComponent(d.q) + "&navigate=yes" : "https://waze.com/ul?ll=" + d.lat + "," + d.lng + "&navigate=yes";
@@ -394,12 +402,12 @@ const navUrl  = d => "https://www.google.com/maps/dir/?api=1&destination=" + (d.
 const appleUrl = d => "https://maps.apple.com/?daddr=" + (d.q ? encodeURIComponent(d.q) : d.lat + "," + d.lng) + "&dirflg=d";
 const telUrl  = t => "tel:" + t.replace(/[^+0-9]/g, "");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+const slug = s => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,"-");
 
 
 const DAYS = {Lun:1,Mar:2,Mer:3,Gio:4,Ven:5,Sab:6,Dom:7};
 const DAY_EN = {Lun:"Mon",Mar:"Tue",Mer:"Wed",Gio:"Thu",Ven:"Fri",Sab:"Sat",Dom:"Sun"};
-const DAY_L = {en:DAY_EN,fr:{"Lun": "Lun", "Mar": "Mar", "Mer": "Mer", "Gio": "Jeu", "Ven": "Ven", "Sab": "Sam", "Dom": "Dim"},es:{"Lun": "Lun", "Mar": "Mar", "Mer": "Mié", "Gio": "Jue", "Ven": "Vie", "Sab": "Sáb", "Dom": "Dom"},pt:{"Lun": "Seg", "Mar": "Ter", "Mer": "Qua", "Gio": "Qui", "Ven": "Sex", "Sab": "Sáb", "Dom": "Dom"}};
+const DAY_L = {en:DAY_EN,fr:{"Lun": "Lun", "Mar": "Mar", "Mer": "Mer", "Gio": "Jeu", "Ven": "Ven", "Sab": "Sam", "Dom": "Dim"},es:{"Lun": "Lun", "Mar": "Mar", "Mer": "Mié", "Gio": "Jue", "Ven": "Vie", "Sab": "Sáb", "Dom": "Dom"},pt:{"Lun": "Seg", "Mar": "Ter", "Mer": "Qua", "Gio": "Qui", "Ven": "Sex", "Sab": "Sáb", "Dom": "Dom"},ru:{"Lun": "Пн", "Mar": "Вт", "Mer": "Ср", "Gio": "Чт", "Ven": "Пт", "Sab": "Сб", "Dom": "Вс"},zh:{"Lun": "周一", "Mar": "周二", "Mer": "周三", "Gio": "周四", "Ven": "周五", "Sab": "周六", "Dom": "周日"}};
 function parseHours(h){ // -> [{from,to,slots:[[m1,m2],...]}]
   return h.split(" · ").map(seg => { const [d, t] = seg.split(" "); const [a,b] = d.split("-");
     return {from:DAYS[a], to:DAYS[b||a], slots:t.split("/").map(x => x.split("-").map(v => { const [hh,mm]=v.split(":"); return (+hh)*60+(+mm); }))}; });
@@ -416,7 +424,7 @@ function isOpen(h){
   const wd = {Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6,Sun:7}[parts.weekday]; const now = (+parts.hour%24)*60 + (+parts.minute);
   return parseHours(h).some(r => wd>=r.from && wd<=r.to && r.slots.some(([a,b]) => now>=a && now<=b));
 }
-const LANGS = ["it","en","fr","es","pt"];
+const LANGS = ["it","en","fr","es","pt","ru","zh"];
 let lang = (navigator.language||"it").slice(0,2).toLowerCase(); if (!LANGS.includes(lang)) lang = "en";
 try{ const s = localStorage.getItem("lang"); if(s && LANGS.includes(s)) lang = s; }catch(e){}
 window.TR = window.TR || {};
@@ -425,32 +433,33 @@ const cityName = d => lang==="it" ? d.c : lang==="en" ? d.en : ((tr(d)||{}).en |
 const nameOf = d => lang==="it" ? d.n : lang==="en" ? d.ne : ((tr(d)||{}).ne || d.ne);
 const retOf = d => lang==="it" ? d.ret : lang==="en" ? d.rete : ((tr(d)||{}).ret || d.rete);
 const howOf = d => lang==="it" ? d.how : lang==="en" ? d.howe : ((tr(d)||{}).how || d.howe);
-function loadTr(l, cb){ if (!["fr","es","pt"].includes(l) || TR[l]) return cb(); const sc = document.createElement("script"); sc.src = "/tr_"+l+".js"; sc.onload = cb; sc.onerror = cb; document.head.appendChild(sc); }
+function loadTr(l, cb){ if (!["fr","es","pt","ru","zh"].includes(l) || TR[l]) return cb(); const sc = document.createElement("script"); sc.src = "/tr_"+l+".js"; sc.onload = cb; sc.onerror = cb; document.head.appendChild(sc); }
 let onlyKb = false;
 
 window.addEventListener("pageshow", e => { if (e.persisted && typeof applyLang === "function") applyLang(); });
-const KBN = {it:"Ufficio chiuso ora: riconsegna con il Key box",en:"Office closed now: return with the key box",fr:"Agence fermée : restituez avec la boîte à clés",es:"Oficina cerrada ahora: devuelve con el buzón de llaves",pt:"Loja fechada agora: devolva com a caixa de chaves"};
+const KBN = {it:"Ufficio chiuso ora: riconsegna con il Key box",en:"Office closed now: return with the key box",fr:"Agence fermée : restituez avec la boîte à clés",es:"Oficina cerrada ahora: devuelve con el buzón de llaves",pt:"Loja fechada agora: devolva com a caixa de chaves",ru:"Офис сейчас закрыт: оставьте ключи в ящике для ключей (Key box)",zh:"门店现已关门：请使用钥匙箱（Key box）还车"};
 function applyLang(){
-  document.documentElement.lang = lang;
+  document.documentElement.lang = lang==="zh" ? "zh-Hans" : lang;
+  if (lang==="ru" && !document.getElementById("cyrfont")) { const l = document.createElement("link"); l.id = "cyrfont"; l.rel = "stylesheet"; l.href = "https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700&display=swap"; document.head.appendChild(l); }
   document.querySelectorAll("[data-t]").forEach(el => el.textContent = T[lang][el.dataset.t]);
   document.getElementById("q").placeholder = T[lang].search;
   document.querySelector("footer").textContent = T[lang].upd + " " + UPDATED + ".";
   document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang===lang));
   render();
 }
-const norm = s => String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+const norm = s => String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^\p{L}\p{N}]+/gu," ").trim();
 // ranking: city / office name first, address text only on whole-word starts
 function score(d, q){
   let s = 0;
   const words = q.split(" ");
   const x = tr(d) || {};
-  for (const [f, wgt] of [[d.n,1],[d.ne,1],[d.c,.95],[d.en,.9],[x.ne,1],[x.en,.9]]) {
+  for (const [f, wgt] of [[d.n,1],[d.ne,1],[d.c,.95],[d.en,.9],[x.ne,1],[x.ne && x.ne.replace(/^(Аэропорт|Ж\/д вокзал)\s+/,""),1],[x.en,.9]]) {
     const t = norm(f); let v = 0;
     if (t === q) v = 100;
     else if (t.startsWith(q)) v = 85;
     else if ((" " + t).includes(" " + q)) v = 70;
     else if (words.every(w => (" " + t).includes(" " + w))) v = 55;
-    else if (q.length >= 4 && t.includes(q)) v = 45;
+    else if ((q.length >= 4 || /[\u3400-\u9fff]/.test(q)) && t.includes(q)) v = 45;
     s = Math.max(s, v * wgt);
   }
   if (!s) {
@@ -461,7 +470,7 @@ function score(d, q){
 }
 function render(){
   const L = T[lang], q = document.getElementById("q").value.trim().toLowerCase();
-  const qn = norm(q);
+  const qn = norm(q), NL = lang==="ru" || lang==="zh"; // non-Latin scripts: also show the Italian name, as on the rental agreement
   let rows = DATA.filter(d => (!onlyKb || d.kb===1));
   const SC = new Map();
   if (qn) {
@@ -475,8 +484,8 @@ function render(){
   const cities = Object.keys(byC).sort((a,b)=> (best(b)-best(a)) || a.localeCompare(b));
   document.getElementById("chips").innerHTML = cities.map(c => '<a href="#c-'+slug(c)+'">'+esc(c)+'</a>').join("");
   document.getElementById("list").innerHTML = cities.map(c =>
-    '<h2 class="region t'+Math.min(...byC[c].map(x=>x.t))+'" id="c-'+slug(c)+'"><span>'+esc(c)+'</span><span class="cnt">'+byC[c].length+'</span></h2>' + byC[c].sort((a,b)=>((SC.get(b)||0)-(SC.get(a)||0)) || ((b.n==='Roma Fiumicino Aeroporto')-(a.n==='Roma Fiumicino Aeroporto')) || a.t-b.t || a.n.localeCompare(b.n)).map(d =>
-      '<article class="card t'+d.t+'"><div class="top"><div><div class="type">'+L.types[d.t]+'</div><div class="name">'+esc(nameOf(d))+'</div></div>'+
+    '<h2 class="region t'+Math.min(...byC[c].map(x=>x.t))+'" id="c-'+slug(c)+'"><span>'+esc(c)+(NL && byC[c][0].c!==c ? ' <small class="orig">'+esc(byC[c][0].c)+'</small>' : '')+'</span><span class="cnt">'+byC[c].length+'</span></h2>' + byC[c].sort((a,b)=>((SC.get(b)||0)-(SC.get(a)||0)) || ((b.n==='Roma Fiumicino Aeroporto')-(a.n==='Roma Fiumicino Aeroporto')) || a.t-b.t || a.n.localeCompare(b.n)).map(d =>
+      '<article class="card t'+d.t+'"><div class="top"><div><div class="type">'+L.types[d.t]+'</div><div class="name">'+esc(nameOf(d))+'</div>'+(NL ? '<div class="orig">'+esc(d.n)+'</div>' : '')+'</div>'+
       '</div>'+
       '<div class="ret">'+esc(retOf(d))+'</div>'+
       (d.kb ? '<div><span class="kb kb'+d.kb+'">'+(d.kb===1?L.kb1:L.kb2)+'</span></div>' : '')+
@@ -507,7 +516,9 @@ window.RP = (function(){
     en:{btn:"⚠️ Report a mistake",ask:"What doesn't match? If you can, tell us where you actually returned the car.",ph:"E.g. the entrance is on the left…",loc:"📍 Send my location",send:"Send",ok:"Thank you, report sent!",locok:"Location added ✓",locko:"Location unavailable.",need:"Write a few words or send your location.",err:"Could not send, please try again shortly."},
     fr:{btn:"⚠️ Signaler une erreur",ask:"Qu'est-ce qui ne correspond pas ? Si possible, indiquez où vous avez réellement restitué le véhicule.",ph:"Ex. l'entrée est à gauche…",loc:"📍 Envoyer ma position",send:"Envoyer",ok:"Merci, signalement envoyé !",locok:"Position ajoutée ✓",locko:"Position indisponible.",need:"Écrivez quelques mots ou envoyez votre position.",err:"Envoi impossible, réessayez dans un instant."},
     es:{btn:"⚠️ Informar de un error",ask:"¿Qué no coincide? Si puedes, indica dónde devolviste realmente el coche.",ph:"Ej. la entrada está a la izquierda…",loc:"📍 Enviar mi ubicación",send:"Enviar",ok:"¡Gracias, aviso enviado!",locok:"Ubicación añadida ✓",locko:"Ubicación no disponible.",need:"Escribe unas palabras o envía tu ubicación.",err:"No se pudo enviar, inténtalo de nuevo en un momento."},
-    pt:{btn:"⚠️ Informar um erro",ask:"O que não corresponde? Se puder, diga onde devolveu realmente o carro.",ph:"Ex. a entrada é à esquerda…",loc:"📍 Enviar minha localização",send:"Enviar",ok:"Obrigado, aviso enviado!",locok:"Localização adicionada ✓",locko:"Localização indisponível.",need:"Escreva algumas palavras ou envie a localização.",err:"Não foi possível enviar, tente novamente em instantes."}
+    pt:{btn:"⚠️ Informar um erro",ask:"O que não corresponde? Se puder, diga onde devolveu realmente o carro.",ph:"Ex. a entrada é à esquerda…",loc:"📍 Enviar minha localização",send:"Enviar",ok:"Obrigado, aviso enviado!",locok:"Localização adicionada ✓",locko:"Localização indisponível.",need:"Escreva algumas palavras ou envie a localização.",err:"Não foi possível enviar, tente novamente em instantes."},
+    ru:{"btn": "⚠️ Сообщить об ошибке", "ask": "Что не совпадает? Если можете, напишите, где вы на самом деле вернули автомобиль.", "ph": "Напр.: въезд находится слева…", "loc": "📍 Отправить моё местоположение", "send": "Отправить", "ok": "Спасибо, сообщение отправлено!", "locok": "Местоположение добавлено ✓", "locko": "Местоположение недоступно.", "need": "Напишите пару слов или отправьте местоположение.", "err": "Не удалось отправить, попробуйте чуть позже."},
+    zh:{"btn": "⚠️ 报告错误", "ask": "哪里不相符？如果方便，请告诉我们您实际还车的位置。", "ph": "例如：入口在左侧…", "loc": "📍 发送我的位置", "send": "发送", "ok": "谢谢，已发送！", "locok": "已添加位置 ✓", "locko": "无法获取位置。", "need": "请写几句话或发送您的位置。", "err": "发送失败，请稍后再试。"}
   };
   const tx = () => X[lang] || X.en;
   function open(el){
@@ -536,7 +547,7 @@ window.RP = (function(){
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition, mic = document.getElementById("mic");
   if (!SR || !mic) return;
   mic.hidden = false;
-  const STOP = new Set("cerca cercami cerco trova trovami mostra mostrami vorrei voglio devo dove riconsegno riconsegnare riconsegna lascio lasciare l auto macchina la il lo un una a ad in di da del della dello presso sede sedi ufficio uffici punto punti per su vicino search find show me where to return the car my at in of office location please".split(" "));
+  const STOP = new Set("cerca cercami cerco trova trovami mostra mostrami vorrei voglio devo dove riconsegno riconsegnare riconsegna lascio lasciare l auto macchina la il lo un una a ad in di da del della dello presso sede sedi ufficio uffici punto punti per su vicino search find show me where to return the car my at in of office location please найди найти покажи где вернуть сдать машину машина автомобиль офис в на".split(" "));
   const clean = t => norm(t).split(" ").filter(w => w && !STOP.has(w)).join(" ");
   function pick(text){
     let q = clean(text);
@@ -552,11 +563,13 @@ window.RP = (function(){
     en:{listen:"Listening… say a city name",allow:"Allow microphone access when your browser asks",denied:"Microphone blocked. Enable it in your browser settings and try again.",none:"I didn't hear anything. Tap the microphone and try again.",retry:"Microphone ready. Tap the microphone again and speak.",nomic:"No microphone found.",net:"Voice search needs an internet connection."},
     fr:{listen:"J'écoute… dites le nom d'une ville",allow:"Autorisez l'accès au micro quand le navigateur le demande",denied:"Micro bloqué. Activez-le dans les réglages du navigateur et réessayez.",none:"Je n'ai rien entendu. Touchez le micro et réessayez.",retry:"Micro prêt. Touchez de nouveau le micro et parlez.",nomic:"Aucun micro trouvé.",net:"La recherche vocale nécessite une connexion internet."},
     es:{listen:"Escuchando… di el nombre de una ciudad",allow:"Permite el acceso al micrófono cuando el navegador lo pida",denied:"Micrófono bloqueado. Actívalo en los ajustes del navegador e inténtalo de nuevo.",none:"No he oído nada. Toca el micrófono e inténtalo de nuevo.",retry:"Micrófono listo. Toca de nuevo el micrófono y habla.",nomic:"No se encontró ningún micrófono.",net:"La búsqueda por voz necesita conexión a internet."},
-    pt:{listen:"Ouvindo… diga o nome de uma cidade",allow:"Permita o acesso ao microfone quando o navegador pedir",denied:"Microfone bloqueado. Ative nas configurações do navegador e tente novamente.",none:"Não ouvi nada. Toque no microfone e tente novamente.",retry:"Microfone pronto. Toque de novo no microfone e fale.",nomic:"Nenhum microfone encontrado.",net:"A busca por voz precisa de conexão com a internet."}
+    pt:{listen:"Ouvindo… diga o nome de uma cidade",allow:"Permita o acesso ao microfone quando o navegador pedir",denied:"Microfone bloqueado. Ative nas configurações do navegador e tente novamente.",none:"Não ouvi nada. Toque no microfone e tente novamente.",retry:"Microfone pronto. Toque de novo no microfone e fale.",nomic:"Nenhum microfone encontrado.",net:"A busca por voz precisa de conexão com a internet."},
+    ru:{"listen": "Слушаю… назовите город", "allow": "Разрешите доступ к микрофону, когда браузер спросит", "denied": "Микрофон заблокирован. Включите его в настройках браузера и попробуйте снова.", "none": "Ничего не слышно. Нажмите на микрофон и попробуйте снова.", "retry": "Микрофон готов. Нажмите на микрофон ещё раз и говорите.", "nomic": "Микрофон не найден.", "net": "Для голосового поиска нужен интернет."},
+    zh:{"listen": "正在聆听…请说出城市名称", "allow": "浏览器询问时，请允许使用麦克风", "denied": "麦克风已被禁用。请在浏览器设置中开启后重试。", "none": "没有听到声音。请点击麦克风重试。", "retry": "麦克风已就绪。请再次点击麦克风并说话。", "nomic": "未找到麦克风。", "net": "语音搜索需要联网。"}
   };
   const L = () => V[lang] || V.en;
   const inp = document.getElementById("q"), wrap = inp.parentNode, vstat = document.getElementById("vstat"), vtxt = document.getElementById("vtxt"), bars = vstat.querySelector(".bars");
-  const LANGTAG = {it:"it-IT",en:"en-US",fr:"fr-FR",es:"es-ES",pt:"pt-BR"};
+  const LANGTAG = {it:"it-IT",en:"en-US",fr:"fr-FR",es:"es-ES",pt:"pt-BR",ru:"ru-RU",zh:"zh-CN"};
   let rec = null, gotStart = false, heard = false, tries = 0, watchdog = null, busy = false, lastTap = 0;
   function ui(state, msg){
     const on = state === "listen";

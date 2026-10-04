@@ -33,18 +33,18 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,sys
 
 .sign{background:var(--sign);color:#fff;border-radius:14px;padding:18px 18px 22px;position:relative;overflow:hidden}
 .sign::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:repeating-linear-gradient(90deg,var(--amber) 0 22px,transparent 22px 34px)}
-.kicker{font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
-h1{font:800 clamp(32px,9vw,46px)/.95 "Barlow Condensed","Arial Narrow",sans-serif;text-transform:uppercase;margin:8px 0 6px;letter-spacing:.01em;text-wrap:balance}
+.kicker{font:700 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+h1{font:800 clamp(32px,9vw,46px)/.95 "Barlow Condensed","Roboto Condensed","Arial Narrow",sans-serif;text-transform:uppercase;margin:8px 0 6px;letter-spacing:.01em;text-wrap:balance}
 .sub{margin:0;opacity:.88;font-size:15px}
 
 /* Replica of the car-park sign customers will see */
 .park{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;gap:12px;background:var(--amber);color:var(--amberInk);border-radius:12px;padding:10px 14px;border:2px solid #1a1400}
-.park .p{background:#fff;border:2px solid #1a1400;border-radius:8px;font:800 44px/1 "Barlow Condensed",sans-serif;padding:4px 12px}
-.park .a{font:800 40px/1 "Barlow Condensed",sans-serif;-webkit-text-stroke:2px #1a1400;color:#fff;paint-order:stroke}
-.park .pf{font:700 20px/1.05 "Barlow Condensed",sans-serif}
-.park .n{font:800 64px/.9 "Barlow Condensed",sans-serif}
+.park .p{background:#fff;border:2px solid #1a1400;border-radius:8px;font:800 44px/1 "Barlow Condensed","Roboto Condensed",sans-serif;padding:4px 12px}
+.park .a{font:800 40px/1 "Barlow Condensed","Roboto Condensed",sans-serif;-webkit-text-stroke:2px #1a1400;color:#fff;paint-order:stroke}
+.park .pf{font:700 20px/1.05 "Barlow Condensed","Roboto Condensed",sans-serif}
+.park .n{font:800 64px/.9 "Barlow Condensed","Roboto Condensed",sans-serif}
 
-.q{font:700 22px/1.1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.04em;margin:6px 0 0}
+.q{font:700 22px/1.1 "Barlow Condensed","Roboto Condensed",sans-serif;text-transform:uppercase;letter-spacing:.04em;margin:6px 0 0}
 .q small{display:block;font:500 15px/1.3 Barlow,sans-serif;text-transform:none;letter-spacing:0;color:var(--muted);margin-top:2px}
 
 .apps{display:grid;gap:10px}
@@ -53,28 +53,28 @@ h1{font:800 clamp(32px,9vw,46px)/.95 "Barlow Condensed","Arial Narrow",sans-seri
 .app:active{transform:scale(.985)}
 .app:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 .app .ic{width:44px;height:44px;border-radius:11px;display:grid;place-items:center}
-.app .nm{font:700 22px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.02em}
+.app .nm{font:700 22px/1.1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.02em}
 .app .ds{font-size:14px;color:var(--muted)}
-.app .go{font:700 14px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.app .go{font:700 14px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
 .app.best{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
-.tag{display:none;font:700 11px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;background:var(--blue);color:#fff;border-radius:4px;padding:4px 6px;margin-left:6px;vertical-align:2px}
+.tag{display:none;font:700 11px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;background:var(--blue);color:#fff;border-radius:4px;padding:4px 6px;margin-left:6px;vertical-align:2px}
 .app.best .tag{display:inline-block}
 
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
-.card h2{font:700 18px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px}
+.card h2{font:700 18px/1 "Barlow Condensed","Roboto Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px}
 ol{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
 ol li{display:grid;grid-template-columns:28px 1fr;gap:10px;counter-increment:s}
-ol li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--sign);color:#fff;display:grid;place-items:center;font:700 16px/1 "Barlow Condensed",sans-serif}
+ol li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--sign);color:#fff;display:grid;place-items:center;font:700 16px/1 "Barlow Condensed","Roboto Condensed",sans-serif}
 ol li i{display:block;color:var(--muted);font-style:normal;font-size:14px}
 .kb{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:15px}
 .kb b{font-weight:600}
 
 .facts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.fact .l{font:700 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fact .l{font:700 12px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .fact .v{font-weight:600;font-variant-numeric:tabular-nums;user-select:all}
 .coord{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
 .coord code{font:500 14px/1.3 "IBM Plex Mono",ui-monospace,monospace;color:var(--muted);user-select:all}
-.coord button{font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:8px 10px;cursor:pointer}
+.coord button{font:700 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:8px 10px;cursor:pointer}
 .coord button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 footer{color:var(--muted);font-size:13px;text-align:center}
 @media (max-width:440px){.facts{grid-template-columns:1fr}}
@@ -110,7 +110,7 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
   .rail{display:flex;position:fixed;top:0;bottom:0;width:196px;z-index:20;flex-direction:column}
   .rail-l{left:0;background:linear-gradient(180deg,#0074BD,#005a94);align-items:center;justify-content:center;padding:24px}
   .rail-l img{width:100%;background:#fff;border-radius:14px;padding:18px 14px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-  .rail-l::after{content:"Car return";position:absolute;bottom:28px;left:0;right:0;text-align:center;color:#fff;opacity:.85;font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase}
+  .rail-l::after{content:"Car return";position:absolute;bottom:28px;left:0;right:0;text-align:center;color:#fff;opacity:.85;font:600 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase}
   .rail-r{right:0}
   .rail-r .segs{display:flex;flex-direction:column;height:100%;gap:0;justify-content:stretch}
   .seg{display:flex;flex:1;align-items:center;justify-content:center;padding:18px}
@@ -121,26 +121,26 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
 /* same look as the office cards on the main page */
 .card.office{--accent:#0074BD;position:relative;overflow:hidden;border:none;border-radius:16px;padding:16px 16px 16px 22px;gap:10px;box-shadow:0 1px 2px rgba(15,28,38,.06),0 8px 22px rgba(15,28,38,.07)}
 .card.office::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent)}
-.card.office .type{font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-.card.office .name{font:700 24px/1.05 "Barlow Condensed",sans-serif;letter-spacing:.02em;text-transform:none;margin:0}
+.card.office .type{font:700 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.card.office .name{font:700 24px/1.05 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.02em;text-transform:none;margin:0}
 .card.office .hrs{font-size:15px}
 .card.office .how{margin:0;color:var(--muted);font-size:14.5px}
 .card.office .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-.card.office .actions a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px;border-radius:12px;padding:10px 8px;font:600 15px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:#fff;box-shadow:0 2px 6px rgba(15,28,38,.10)}
+.card.office .actions a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px;border-radius:12px;padding:10px 8px;font:600 15px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:#fff;box-shadow:0 2px 6px rgba(15,28,38,.10)}
 .card.office .actions a.call{background:#1a7f37}
 .card.office .actions a.mail{background:#0074BD}
 .card.office .actions a:active,.sos:active{transform:scale(.97)}
 .road{margin-top:8px;padding-top:12px;border-top:1px dashed var(--line);display:grid;gap:8px}
-.road .l{font:600 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.sos{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;min-height:48px;border-radius:12px;padding:10px 12px;background:#C62828;color:#fff;text-decoration:none;font:600 15px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.road .l{font:600 12px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sos{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;min-height:48px;border-radius:12px;padding:10px 12px;background:#C62828;color:#fff;text-decoration:none;font:600 15px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase}
 .sos b{font-weight:700;letter-spacing:.02em}
 .sos2{text-align:center;color:var(--blue);font-size:14.5px;text-decoration:none;border-bottom:0;padding:4px}
 .closednow{display:flex;gap:12px;align-items:flex-start;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--amber);color:var(--amberInk);font-size:16px;line-height:1.3;position:relative;z-index:1}
 .closednow[hidden]{display:none}
 .closednow .ic{font-size:24px;line-height:1}
 .kb.on{border:2px solid #E0A100;background:rgba(255,210,0,.22)}
-.langs{display:flex;gap:6px;justify-content:flex-end}
-.langs button{font:600 14px "Barlow Condensed",sans-serif;letter-spacing:.08em;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 14px;min-height:36px;cursor:pointer}
+.langs{display:flex;gap:5px;justify-content:flex-end;flex-wrap:wrap}
+.langs button{font:600 14px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.08em;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 9px;min-height:36px;cursor:pointer}
 .langs button[aria-pressed="true"]{background:var(--sign);border-color:var(--sign);color:#fff}
 </style>
 </head>
@@ -159,7 +159,7 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
     </div>
   </header>
 
-  <div class="langs" id="langs"><button type="button" data-lang="it">IT</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="fr">FR</button><button type="button" data-lang="es">ES</button><button type="button" data-lang="pt">PT</button></div>
+  <div class="langs" id="langs"><button type="button" data-lang="it">IT</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="fr">FR</button><button type="button" data-lang="es">ES</button><button type="button" data-lang="pt">PT</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="zh" lang="zh-Hans">中文</button></div>
 
 
   <div class="park" role="img" aria-label="Car park sign: Parking A, Floor 4">
@@ -218,17 +218,18 @@ h1 .arrow{background:#fff!important;color:var(--sign)!important}
     </div>
   </section>
 
-  <a class="card other" href="/" style="text-decoration:none;color:var(--ink);display:block"><b data-k="otherT" style="font:700 18px/1.1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.06em">Returning to another Locauto office? →</b><br><span data-k="otherS" style="color:var(--muted)">All Locauto offices in Italy</span></a>
+  <a class="card other" href="/" style="text-decoration:none;color:var(--ink);display:block"><b data-k="otherT" style="font:700 18px/1.1 'Barlow Condensed','Roboto Condensed',sans-serif;text-transform:uppercase;letter-spacing:.06em">Returning to another Locauto office? →</b><br><span data-k="otherS" style="color:var(--muted)">All Locauto offices in Italy</span></a>
   <footer data-k="foot">Locauto Rent · Rome Fiumicino Airport</footer>
 </div>
 
 <script>
-var FT={"it": {"kicker": "Riconsegna auto", "h1": "Roma Fiumicino Aeroporto · FCO", "sub": "Riconsegna l'auto al Parcheggio A, 4° piano.", "closed": "<b>Ufficio chiuso ora: lascia le chiavi nel key box</b> accanto all'ufficio Locauto, 4° piano.", "dir": "Apri le indicazioni con", "sug": "Consigliato", "go": "Vai ›", "arrive": "Quando arrivi", "s1": "Segui le indicazioni <b>“Car Rental Return – Parcheggi A-B-C-D”</b>.", "s2": "Entra nel <b>Parcheggio A</b> e prendi il ticket alla sbarra.", "s3": "Sali al <b>4° piano</b> e usa il ticket per entrare nell'area Locauto.", "kb": "<b>Fuori orario:</b> lascia le chiavi nel key box accanto all'ufficio Locauto, 4° piano.", "type": "Aeroporto", "hrs": "<b>Lun–Dom</b> 07:00–24:00", "call": "Chiama l'ufficio", "mail": "Email", "road": "Assistenza stradale", "alt": "Numero alternativo:", "copy": "Copia coordinate", "copied": "Copiato", "otherT": "Riconsegni in un'altra sede? →", "otherS": "Tutti gli uffici Locauto in Italia", "foot": "Locauto Rent · Roma Fiumicino Aeroporto"}, "en": {"kicker": "Car return", "h1": "Rome Fiumicino Airport · FCO", "sub": "Return your car to Car Park A, 4th floor.", "closed": "<b>Office closed now: leave the keys in the key box</b> next to the Locauto office, 4th floor.", "dir": "Open directions in", "sug": "Suggested", "go": "Go ›", "arrive": "When you arrive", "s1": "Follow the signs <b>“Car Rental Return – Car Parks A-B-C-D”</b>.", "s2": "Enter <b>Car Park A</b> and take the ticket at the barrier.", "s3": "Drive up to the <b>4th floor</b> and use the ticket to enter the Locauto area.", "kb": "<b>After hours:</b> leave the keys in the key box next to the Locauto office, 4th floor.", "type": "Airport", "hrs": "<b>Mon–Sun</b> 07:00–24:00", "call": "Call office", "mail": "Email", "road": "Roadside assistance", "alt": "Alternative number:", "copy": "Copy coordinates", "copied": "Copied", "otherT": "Returning to another Locauto office? →", "otherS": "All Locauto offices in Italy", "foot": "Locauto Rent · Rome Fiumicino Airport"}, "fr": {"kicker": "Restitution du véhicule", "h1": "Rome Fiumicino Aéroport · FCO", "sub": "Rendez la voiture au Parking A, 4e étage.", "closed": "<b>Agence fermée : laissez les clés dans la boîte à clés</b> à côté de l'agence Locauto, 4e étage.", "dir": "Ouvrir l'itinéraire avec", "sug": "Conseillé", "go": "Aller ›", "arrive": "À votre arrivée", "s1": "Suivez les panneaux <b>« Car Rental Return – Car Parks A-B-C-D »</b>.", "s2": "Entrez dans le <b>Parking A</b> et prenez le ticket à la barrière.", "s3": "Montez au <b>4e étage</b> et utilisez le ticket pour entrer dans la zone Locauto.", "kb": "<b>Hors horaires :</b> laissez les clés dans la boîte à clés à côté de l'agence Locauto, 4e étage.", "type": "Aéroport", "hrs": "<b>Lun–Dim</b> 07:00–24:00", "call": "Appeler l'agence", "mail": "E-mail", "road": "Assistance routière", "alt": "Autre numéro :", "copy": "Copier les coordonnées", "copied": "Copié", "otherT": "Retour dans une autre agence ? →", "otherS": "Toutes les agences Locauto en Italie", "foot": "Locauto Rent · Rome Fiumicino Aéroport"}, "es": {"kicker": "Devolución del vehículo", "h1": "Roma Fiumicino Aeropuerto · FCO", "sub": "Devuelve el coche en el Aparcamiento A, planta 4.", "closed": "<b>Oficina cerrada ahora: deja las llaves en el buzón de llaves</b> junto a la oficina Locauto, planta 4.", "dir": "Abrir indicaciones con", "sug": "Recomendado", "go": "Ir ›", "arrive": "Cuando llegues", "s1": "Sigue las señales <b>“Car Rental Return – Car Parks A-B-C-D”</b>.", "s2": "Entra en el <b>Aparcamiento A</b> y coge el ticket en la barrera.", "s3": "Sube a la <b>planta 4</b> y usa el ticket para entrar en la zona Locauto.", "kb": "<b>Fuera de horario:</b> deja las llaves en el buzón de llaves junto a la oficina Locauto, planta 4.", "type": "Aeropuerto", "hrs": "<b>Lun–Dom</b> 07:00–24:00", "call": "Llamar a la oficina", "mail": "Correo", "road": "Asistencia en carretera", "alt": "Otro número:", "copy": "Copiar coordenadas", "copied": "Copiado", "otherT": "¿Devuelves en otra oficina? →", "otherS": "Todas las oficinas Locauto en Italia", "foot": "Locauto Rent · Roma Fiumicino Aeropuerto"}, "pt": {"kicker": "Devolução do veículo", "h1": "Roma Fiumicino Aeroporto · FCO", "sub": "Devolva o carro no Estacionamento A, 4.º andar.", "closed": "<b>Escritório fechado agora: deixe as chaves na caixa de chaves</b> junto ao escritório Locauto, 4.º andar.", "dir": "Abrir direções com", "sug": "Recomendado", "go": "Ir ›", "arrive": "Quando chegar", "s1": "Siga as placas <b>“Car Rental Return – Car Parks A-B-C-D”</b>.", "s2": "Entre no <b>Estacionamento A</b> e pegue o ticket na cancela.", "s3": "Suba ao <b>4.º andar</b> e use o ticket para entrar na área Locauto.", "kb": "<b>Fora do horário:</b> deixe as chaves na caixa de chaves junto ao escritório Locauto, 4.º andar.", "type": "Aeroporto", "hrs": "<b>Seg–Dom</b> 07:00–24:00", "call": "Ligar para o escritório", "mail": "E-mail", "road": "Assistência em estrada", "alt": "Outro número:", "copy": "Copiar coordenadas", "copied": "Copiado", "otherT": "Devolver noutro escritório? →", "otherS": "Todos os escritórios Locauto em Itália", "foot": "Locauto Rent · Roma Fiumicino Aeroporto"}};
-var LANGS=["it","en","fr","es","pt"],lang=(navigator.language||"en").slice(0,2).toLowerCase();
+var FT={"it": {"kicker": "Riconsegna auto", "h1": "Roma Fiumicino Aeroporto · FCO", "sub": "Riconsegna l'auto al Parcheggio A, 4° piano.", "closed": "<b>Ufficio chiuso ora: lascia le chiavi nel key box</b> accanto all'ufficio Locauto, 4° piano.", "dir": "Apri le indicazioni con", "sug": "Consigliato", "go": "Vai ›", "arrive": "Quando arrivi", "s1": "Segui le indicazioni <b>“Car Rental Return – Parcheggi A-B-C-D”</b>.", "s2": "Entra nel <b>Parcheggio A</b> e prendi il ticket alla sbarra.", "s3": "Sali al <b>4° piano</b> e usa il ticket per entrare nell'area Locauto.", "kb": "<b>Fuori orario:</b> lascia le chiavi nel key box accanto all'ufficio Locauto, 4° piano.", "type": "Aeroporto", "hrs": "<b>Lun–Dom</b> 07:00–24:00", "call": "Chiama l'ufficio", "mail": "Email", "road": "Assistenza stradale", "alt": "Numero alternativo:", "copy": "Copia coordinate", "copied": "Copiato", "otherT": "Riconsegni in un'altra sede? →", "otherS": "Tutti gli uffici Locauto in Italia", "foot": "Locauto Rent · Roma Fiumicino Aeroporto"}, "en": {"kicker": "Car return", "h1": "Rome Fiumicino Airport · FCO", "sub": "Return your car to Car Park A, 4th floor.", "closed": "<b>Office closed now: leave the keys in the key box</b> next to the Locauto office, 4th floor.", "dir": "Open directions in", "sug": "Suggested", "go": "Go ›", "arrive": "When you arrive", "s1": "Follow the signs <b>“Car Rental Return – Car Parks A-B-C-D”</b>.", "s2": "Enter <b>Car Park A</b> and take the ticket at the barrier.", "s3": "Drive up to the <b>4th floor</b> and use the ticket to enter the Locauto area.", "kb": "<b>After hours:</b> leave the keys in the key box next to the Locauto office, 4th floor.", "type": "Airport", "hrs": "<b>Mon–Sun</b> 07:00–24:00", "call": "Call office", "mail": "Email", "road": "Roadside assistance", "alt": "Alternative number:", "copy": "Copy coordinates", "copied": "Copied", "otherT": "Returning to another Locauto office? →", "otherS": "All Locauto offices in Italy", "foot": "Locauto Rent · Rome Fiumicino Airport"}, "fr": {"kicker": "Restitution du véhicule", "h1": "Rome Fiumicino Aéroport · FCO", "sub": "Rendez la voiture au Parking A, 4e étage.", "closed": "<b>Agence fermée : laissez les clés dans la boîte à clés</b> à côté de l'agence Locauto, 4e étage.", "dir": "Ouvrir l'itinéraire avec", "sug": "Conseillé", "go": "Aller ›", "arrive": "À votre arrivée", "s1": "Suivez les panneaux <b>« Car Rental Return – Car Parks A-B-C-D »</b>.", "s2": "Entrez dans le <b>Parking A</b> et prenez le ticket à la barrière.", "s3": "Montez au <b>4e étage</b> et utilisez le ticket pour entrer dans la zone Locauto.", "kb": "<b>Hors horaires :</b> laissez les clés dans la boîte à clés à côté de l'agence Locauto, 4e étage.", "type": "Aéroport", "hrs": "<b>Lun–Dim</b> 07:00–24:00", "call": "Appeler l'agence", "mail": "E-mail", "road": "Assistance routière", "alt": "Autre numéro :", "copy": "Copier les coordonnées", "copied": "Copié", "otherT": "Retour dans une autre agence ? →", "otherS": "Toutes les agences Locauto en Italie", "foot": "Locauto Rent · Rome Fiumicino Aéroport"}, "es": {"kicker": "Devolución del vehículo", "h1": "Roma Fiumicino Aeropuerto · FCO", "sub": "Devuelve el coche en el Aparcamiento A, planta 4.", "closed": "<b>Oficina cerrada ahora: deja las llaves en el buzón de llaves</b> junto a la oficina Locauto, planta 4.", "dir": "Abrir indicaciones con", "sug": "Recomendado", "go": "Ir ›", "arrive": "Cuando llegues", "s1": "Sigue las señales <b>“Car Rental Return – Car Parks A-B-C-D”</b>.", "s2": "Entra en el <b>Aparcamiento A</b> y coge el ticket en la barrera.", "s3": "Sube a la <b>planta 4</b> y usa el ticket para entrar en la zona Locauto.", "kb": "<b>Fuera de horario:</b> deja las llaves en el buzón de llaves junto a la oficina Locauto, planta 4.", "type": "Aeropuerto", "hrs": "<b>Lun–Dom</b> 07:00–24:00", "call": "Llamar a la oficina", "mail": "Correo", "road": "Asistencia en carretera", "alt": "Otro número:", "copy": "Copiar coordenadas", "copied": "Copiado", "otherT": "¿Devuelves en otra oficina? →", "otherS": "Todas las oficinas Locauto en Italia", "foot": "Locauto Rent · Roma Fiumicino Aeropuerto"}, "pt": {"kicker": "Devolução do veículo", "h1": "Roma Fiumicino Aeroporto · FCO", "sub": "Devolva o carro no Estacionamento A, 4.º andar.", "closed": "<b>Escritório fechado agora: deixe as chaves na caixa de chaves</b> junto ao escritório Locauto, 4.º andar.", "dir": "Abrir direções com", "sug": "Recomendado", "go": "Ir ›", "arrive": "Quando chegar", "s1": "Siga as placas <b>“Car Rental Return – Car Parks A-B-C-D”</b>.", "s2": "Entre no <b>Estacionamento A</b> e pegue o ticket na cancela.", "s3": "Suba ao <b>4.º andar</b> e use o ticket para entrar na área Locauto.", "kb": "<b>Fora do horário:</b> deixe as chaves na caixa de chaves junto ao escritório Locauto, 4.º andar.", "type": "Aeroporto", "hrs": "<b>Seg–Dom</b> 07:00–24:00", "call": "Ligar para o escritório", "mail": "E-mail", "road": "Assistência em estrada", "alt": "Outro número:", "copy": "Copiar coordenadas", "copied": "Copiado", "otherT": "Devolver noutro escritório? →", "otherS": "Todos os escritórios Locauto em Itália", "foot": "Locauto Rent · Roma Fiumicino Aeroporto"}, "ru": {"kicker": "Возврат автомобиля", "h1": "Аэропорт Рим Фьюмичино · FCO", "sub": "Верните автомобиль на парковку A, уровень 4.", "closed": "<b>Офис сейчас закрыт: оставьте ключи в ящике для ключей (Key box)</b> рядом с офисом Locauto, уровень 4.", "dir": "Открыть маршрут в", "sug": "Рекомендуем", "go": "Ехать ›", "arrive": "Когда приедете", "s1": "Следуйте указателям <b>«Car Rental Return – Car Parks A-B-C-D»</b>.", "s2": "Въезжайте на <b>парковку A</b> и возьмите талон у шлагбаума.", "s3": "Поднимитесь на <b>уровень 4</b> и по талону въезжайте в зону Locauto.", "kb": "<b>В нерабочее время:</b> оставьте ключи в ящике для ключей (Key box) рядом с офисом Locauto, уровень 4.", "type": "Аэропорт", "hrs": "<b>Пн–Вс</b> 07:00–24:00", "call": "Позвонить в офис", "mail": "Email", "road": "Помощь на дороге", "alt": "Другой номер:", "copy": "Скопировать координаты", "copied": "Скопировано", "otherT": "Возвращаете в другом офисе? →", "otherS": "Все офисы Locauto в Италии", "foot": "Locauto Rent · Аэропорт Рим Фьюмичино"}, "zh": {"kicker": "还车", "h1": "罗马菲乌米奇诺机场 · FCO", "sub": "请将车辆还至 A 停车场 Piano 4 层。", "closed": "<b>门店现已关门：请将钥匙放入钥匙箱（Key box）</b>，位于 Piano 4 层 Locauto 门店旁。", "dir": "打开导航", "sug": "推荐", "go": "前往 ›", "arrive": "到达后", "s1": "请沿 <b>“Car Rental Return – Car Parks A-B-C-D”</b> 指示牌行驶。", "s2": "进入 <b>A 停车场</b>，在道闸处取停车票。", "s3": "上行至 <b>Piano 4 层</b>，凭停车票进入 Locauto 区域。", "kb": "<b>非营业时间：</b>请将钥匙放入 Piano 4 层 Locauto 门店旁的钥匙箱（Key box）。", "type": "机场", "hrs": "<b>周一至周日</b> 07:00–24:00", "call": "致电门店", "mail": "电子邮件", "road": "道路救援", "alt": "备用号码：", "copy": "复制坐标", "copied": "已复制", "otherT": "在其他门店还车？→", "otherS": "意大利所有 Locauto 门店", "foot": "Locauto Rent · 罗马菲乌米奇诺机场"}};
+var LANGS=["it","en","fr","es","pt","ru","zh"],lang=(navigator.language||"en").slice(0,2).toLowerCase();
 if(LANGS.indexOf(lang)<0)lang="en";
 try{var sv=localStorage.getItem("lang");if(sv&&LANGS.indexOf(sv)>=0)lang=sv;}catch(e){}
 function applyLang(){
-  var t=FT[lang];document.documentElement.lang=lang;
+  var t=FT[lang];document.documentElement.lang=lang==="zh"?"zh-Hans":lang;
+  if(lang==="ru"&&!document.getElementById("cyrfont")){var l=document.createElement("link");l.id="cyrfont";l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&display=swap";document.head.appendChild(l);}
   document.querySelectorAll("[data-k]").forEach(function(e){var v=t[e.dataset.k];if(v!=null)e.innerHTML=v;});
   document.querySelectorAll("#langs [data-lang]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===lang);});
   var c=document.getElementById("copy");if(c)c.textContent=t.copy;
