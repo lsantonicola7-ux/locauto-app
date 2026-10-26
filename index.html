@@ -388,6 +388,11 @@ const HOURS = {
 "Pescara|Pescara Aeroporto": "Lun 08:30-14:30/17:00-21:00 · Mar 07:30-15:30/18:00-23:30 · Mer 07:30-13:30/17:00-21:30 · Gio 07:30-15:00/17:00-20:30 · Ven 07:30-15:00/17:00-21:00 · Sab 08:30-13:00/15:00-16:30/20:00-20:30 · Dom 09:00-12:00/14:00-15:00/19:00-20:00"
 };
 const UPDATED = "26/10/2026";
+// Orari pianificati dallo staff (prevalgono su HOURS nel periodo indicato, poi si torna a HOURS automaticamente).
+// Pescara: file "Pescara_ORARI_FESTIVITA_nov_dic_27.xlsx". Festivi 1/11, 8/12, 24/12, 26/12, 31/12 = orario standard del giorno; 25/12 chiuso.
+const HOURS_PLAN = {
+"Pescara|Pescara Aeroporto": {from:"2026-11-01", to:"2026-12-31", h:"Lun-Mer 08:30-13:30/14:30-19:30 · Gio 08:30-14:00/14:30-19:30 · Ven 08:30-15:00/17:00-22:30 · Sab 08:30-13:30/15:00-17:00 · Dom 08:30-14:00/15:30-17:30", closed:["2026-12-25"]}
+};
 const T = {
  it:{title:"Punti di riconsegna",kick:"Tutta Italia",sedi:"sedi",sub:"Dove riconsegnare l'auto, città per città, con navigazione Google Maps, Apple Maps e Waze.",loaded:"uffici Locauto in",prog:"città",jump:"Scegli la città",onlyok:"Solo verificati",onlykb:"🔑 Key box",kb1:"🔑 Key box fuori orario",kb2:"🌙 Riconsegna fuori orario: chiavi al personale del garage",search:"Cerca città o sede…",ok:"Verificato",warn:"Da verificare",nav:"Naviga",call:"Chiama l'ufficio",empty:"Nessuna sede trovata.",types:{1:"✈ Aeroporto",2:"🚆 Stazione",3:"Città"},hours:"Orari ufficio",open:"Aperto ora",closed:"Chiuso ora",closedDays:{sat:"Sab-Dom chiuso",sun:"Dom chiuso"},upd:"Dati aggiornati al",
      foot:""},
@@ -422,6 +427,12 @@ function hoursText(h){
   else if (!/Dom/.test(h)) out += " · " + L.closedDays.sun;
   return out;
 }
+const romeDate = () => new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Rome",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+const CLOSED_W = {it:"chiuso",en:"closed",fr:"fermé",es:"cerrado",pt:"fechado",ru:"закрыто",zh:"休息"};
+function planOf(k){ const p = HOURS_PLAN[k], t = romeDate(); return p && t>=p.from && t<=p.to ? p : null; }
+function hoursOf(k){ const p = planOf(k); return p ? p.h : HOURS[k]; }
+function openNow(k){ const p = planOf(k); if (p && (p.closed||[]).includes(romeDate())) return false; return isOpen(hoursOf(k)); }
+function planNote(k){ const p = planOf(k), t = romeDate(); if (!p) return ""; return (p.closed||[]).filter(x => x>=t).map(x => " · "+x.slice(8,10)+"/"+x.slice(5,7)+" "+CLOSED_W[lang]).join(""); }
 function isOpen(h){
   const parts = Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Rome",weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date()).map(p=>[p.type,p.value]));
   const wd = {Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6,Sun:7}[parts.weekday]; const now = (+parts.hour%24)*60 + (+parts.minute);
@@ -492,8 +503,8 @@ function render(){
       '</div>'+
       '<div class="ret">'+esc(retOf(d))+'</div>'+
       (d.kb ? '<div><span class="kb kb'+d.kb+'">'+(d.kb===1?L.kb1:L.kb2)+'</span></div>' : '')+
-      (HOURS[d.c+"|"+d.n] ? '<div class="hrs"><span class="dot '+(isOpen(HOURS[d.c+"|"+d.n])?'on':'off')+'">'+(isOpen(HOURS[d.c+"|"+d.n])?L.open:L.closed)+'</span> <b>'+L.hours+':</b> '+esc(hoursText(HOURS[d.c+"|"+d.n]))+'</div>' : '')+
-      (d.kb===1 && HOURS[d.c+"|"+d.n] && !isOpen(HOURS[d.c+"|"+d.n]) ? '<div class="kbnow">\uD83D\uDD11 '+KBN[lang]+'</div>' : '')+
+      (hoursOf(d.c+"|"+d.n) ? '<div class="hrs"><span class="dot '+(openNow(d.c+"|"+d.n)?'on':'off')+'">'+(openNow(d.c+"|"+d.n)?L.open:L.closed)+'</span> <b>'+L.hours+':</b> '+esc(hoursText(hoursOf(d.c+"|"+d.n))+planNote(d.c+"|"+d.n))+'</div>' : '')+
+      (d.kb===1 && hoursOf(d.c+"|"+d.n) && !openNow(d.c+"|"+d.n) ? '<div class="kbnow">\uD83D\uDD11 '+KBN[lang]+'</div>' : '')+
       (howOf(d) ? '<p class="how">'+esc(howOf(d))+'</p>' : '')+
       '<div class="actions"><a class="primary gm" href="'+navUrl(d)+'" target="_blank" rel="noopener"><img src="/logos/google-maps.svg" alt="" width="12" height="17">Google Maps</a>'+
       '<a class="waze" href="'+wazeUrl(d)+'" target="_blank" rel="noopener">Waze</a>'+
