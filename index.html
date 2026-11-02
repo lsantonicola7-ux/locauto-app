@@ -277,7 +277,7 @@ const TOTAL_EXPECTED = 1;
 const DATA = window.D;
 const HOURS = {
 "Roma|Roma Fiumicino Aeroporto": "Lun-Dom 07:00-23:59",
-"Roma|Roma Ciampino Aeroporto": "Lun-Sab 08:00-23:00 · Dom 08:00-21:00",
+"Roma|Roma Ciampino Aeroporto": "Lun-Dom 08:00-23:00",
 "Roma|Roma Stazione Termini": "Lun-Dom 07:30-20:00",
 "Roma|Roma Tiburtina Stazione Ferroviaria": "Lun-Ven 08:00-19:00 · Sab 08:00-13:00",
 "Roma|Roma Via Veneto": "Lun-Ven 08:00-20:00 · Sab-Dom 08:00-13:00",
@@ -296,7 +296,7 @@ const HOURS = {
 "Milano|Milano Stazione Centrale": "Lun-Dom 08:00-20:00",
 "Milano|Milano Corvetto": "Lun-Ven 08:30-13:00/14:30-18:00 · Sab 08:30-12:30",
 "Milano|Milano Cassala - Assago": "Lun-Ven 09:00-12:30/14:30-19:00 · Sab 09:00-12:30",
-"Milano|Milano Portello": "Lun-Ven 08:30-17:30",
+"Milano|Milano Portello": "Lun-Ven 08:30-17:30 · Sab 09:00-12:30",
 "Milano|Milano Peschiera Borromeo": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:00",
 "Milano|Milano Sesto San Giovanni": "Lun-Ven 08:30-12:30/14:30-18:00 · Sab 08:30-12:30",
 "Bergamo|Bergamo Aeroporto": "Lun-Dom 07:30-23:00",
@@ -333,7 +333,7 @@ const HOURS = {
 "Padova|Padova Stazione Ferroviaria": "Lun-Ven 08:00-13:00/14:00-19:00 · Sab 08:00-13:00",
 "Conegliano|Conegliano": "Lun-Ven 09:00-17:00 · Sab 09:00-13:00",
 "Bologna|Bologna Aeroporto": "Lun-Dom 08:00-23:00",
-"Bologna|Bologna Stazione Centrale": "Lun-Ven 08:00-19:00 · Sab 08:00-13:00",
+"Bologna|Bologna Stazione Centrale": "Lun-Ven 08:00-19:00 · Sab-Dom 08:00-13:00",
 "Ferrara|Ferrara": "Lun-Ven 09:00-12:30/15:00-19:00 · Sab 09:00-12:30",
 "Imola|Imola": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 09:00-12:00",
 "Modena|Modena": "Lun-Ven 09:00-13:00/14:00-18:00 · Sab 09:00-13:00",
@@ -385,9 +385,9 @@ const HOURS = {
 "Aosta|Aosta Aeroporto": "Lun-Ven 08:30-12:30/14:30-18:30 · Sab 08:30-12:30",
 "Trieste|Trieste Stazione Ferroviaria": "Lun-Ven 08:00-12:30/14:30-19:00 · Sab 08:00-12:30",
 "Bari|Bari Stazione Centrale": "Lun-Dom 08:00-20:00",
-"Pescara|Pescara Aeroporto": "Lun 08:30-14:30/17:00-21:00 · Mar 07:30-15:30/18:00-23:30 · Mer 07:30-13:30/17:00-21:30 · Gio 07:30-15:00/17:00-20:30 · Ven 07:30-15:00/17:00-21:00 · Sab 08:30-13:00/15:00-16:30/20:00-20:30 · Dom 09:00-12:00/14:00-15:00/19:00-20:00"
+"Pescara|Pescara Aeroporto": "Lun-Gio 08:30-13:30/14:30-19:30 · Ven 08:30-13:30/17:00-22:30 · Sab 08:30-13:30/15:00-17:00 · Dom 08:30-14:00/15:30-17:30"
 };
-const UPDATED = "26/10/2026";
+const UPDATED = "02/11/2026";
 // Orari pianificati dallo staff (prevalgono su HOURS nel periodo indicato, poi si torna a HOURS automaticamente).
 // NON modificare né rimuovere le voci ancora attive: sono volute dal proprietario e differiscono di proposito dal sito ufficiale.
 // La sync settimanale aggiorna solo HOURS; una voce può essere rimossa solo dopo la sua data "to".
