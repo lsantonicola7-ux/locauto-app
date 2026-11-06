@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Locauto Via Veneto Car Return</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0074BD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef6fb; --panel:#ffffff; --ink:#0f1c26; --muted:#546472; --line:#d2e3ee;
+  --sign:#008DCD; --blue:#0079B4; --amber:#f2b705; --amberInk:#1a1400;
+  --gmaps:#1a73e8; --apple:#131820; --waze:#33ccff; --wazeInk:#07202b;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#0a1620; --panel:#10212d; --ink:#eaf3f9; --muted:#96a9b8; --line:#1f3748;
+  --sign:#0a79b0; --blue:#5EB9E8; --apple:#f2f4f7;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0a1620; --panel:#10212d; --ink:#eaf3f9; --muted:#96a9b8; --line:#1f3748;
+  --sign:#0a79b0; --blue:#5EB9E8; --apple:#f2f4f7;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:16px 32px;display:grid;gap:14px}
+
+.sign{background:var(--sign);color:#fff;border-radius:14px;padding:18px 18px 22px;position:relative;overflow:hidden}
+.sign::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:repeating-linear-gradient(90deg,var(--amber) 0 22px,transparent 22px 34px)}
+.kicker{font:700 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+h1{font:800 clamp(32px,9vw,46px)/.95 "Barlow Condensed","Roboto Condensed","Arial Narrow",sans-serif;text-transform:uppercase;margin:8px 0 6px;letter-spacing:.01em;text-wrap:balance}
+.sub{margin:0;opacity:.88;font-size:15px}
+
+/* Replica of the car-park sign customers will see */
+.park{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;gap:12px;background:var(--amber);color:var(--amberInk);border-radius:12px;padding:10px 14px;border:2px solid #1a1400}
+.park .p{background:#fff;border:2px solid #1a1400;border-radius:8px;font:800 44px/1 "Barlow Condensed","Roboto Condensed",sans-serif;padding:4px 12px}
+.park .a{font:800 40px/1 "Barlow Condensed","Roboto Condensed",sans-serif;-webkit-text-stroke:2px #1a1400;color:#fff;paint-order:stroke}
+.park .pf{font:700 20px/1.05 "Barlow Condensed","Roboto Condensed",sans-serif}
+.park .n{font:800 64px/.9 "Barlow Condensed","Roboto Condensed",sans-serif}
+
+.q{font:700 22px/1.1 "Barlow Condensed","Roboto Condensed",sans-serif;text-transform:uppercase;letter-spacing:.04em;margin:6px 0 0}
+.q small{display:block;font:500 15px/1.3 Barlow,sans-serif;text-transform:none;letter-spacing:0;color:var(--muted);margin-top:2px}
+
+.apps{display:grid;gap:10px}
+.app{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:14px;text-decoration:none;color:var(--ink);background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:14px 16px;min-height:74px;transition:transform .12s ease,border-color .12s ease}
+.app:hover{border-color:var(--blue)}
+.app:active{transform:scale(.985)}
+.app:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.app .ic{width:44px;height:44px;border-radius:11px;display:grid;place-items:center}
+.app .nm{font:700 22px/1.1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.02em}
+.app .ds{font-size:14px;color:var(--muted)}
+.app .go{font:700 14px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.app.best{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.tag{display:none;font:700 11px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;background:var(--blue);color:#fff;border-radius:4px;padding:4px 6px;margin-left:6px;vertical-align:2px}
+.app.best .tag{display:inline-block}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h2{font:700 18px/1 "Barlow Condensed","Roboto Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px}
+ol{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
+ol li{display:grid;grid-template-columns:28px 1fr;gap:10px;counter-increment:s}
+ol li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--sign);color:#fff;display:grid;place-items:center;font:700 16px/1 "Barlow Condensed","Roboto Condensed",sans-serif}
+ol li i{display:block;color:var(--muted);font-style:normal;font-size:14px}
+.kb{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:15px}
+.kb b{font-weight:600}
+
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fact .l{font:700 12px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fact .v{font-weight:600;font-variant-numeric:tabular-nums;user-select:all}
+.coord{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.coord code{font:500 14px/1.3 "IBM Plex Mono",ui-monospace,monospace;color:var(--muted);user-select:all}
+.coord button{font:700 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:8px 10px;cursor:pointer}
+.coord button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+footer{color:var(--muted);font-size:13px;text-align:center}
+@media (max-width:440px){.facts{grid-template-columns:1fr}}
+@media (max-width:380px){.park{gap:8px}.park .n{font-size:52px}}
+@media (prefers-reduced-motion:reduce){.app{transition:none}}
+
+/* Locauto brand skin */
+:root{--sign:#0074BD}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sign:#0a6fae}}
+:root[data-theme="dark"]{--sign:#0a6fae}
+.sign{background:var(--sign)!important}
+.sign::after{content:none!important}
+.kicker{color:#fff!important;opacity:.92}
+h1 .arrow{background:#fff!important;color:var(--sign)!important}
+.bar i{background:#00A666!important}
+.ic-img{background:#fff;border:1px solid #dadce0;overflow:hidden}
+.ic-img img{display:block}
+#app-apple .ic-img{background:#e9e9ee}
+#app-apple .ic-img img{width:36px;height:36px;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+/* brand rails: vertical side banners on wide screens, logo strip on phones */
+.brands{max-width:560px;margin:16px auto 0;padding-inline:16px}
+.brandcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px}
+.rail{display:contents}
+.rail img{display:block;height:auto;min-width:0}
+.rail-l img{width:96px}
+.rail-r .segs{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}
+.seg{display:contents}
+.rail-r img{height:20px;width:auto;max-width:34%}
+@media (min-width:1080px){
+  body{padding-inline:196px}
+  .brands{display:contents}
+  .brandcard{display:contents}
+  .rail{display:flex;position:fixed;top:0;bottom:0;width:196px;z-index:20;flex-direction:column}
+  .rail-l{left:0;background:linear-gradient(180deg,#0074BD,#005a94);align-items:center;justify-content:center;padding:24px}
+  .rail-l img{width:100%;background:#fff;border-radius:14px;padding:18px 14px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .rail-l::after{content:"Car return";position:absolute;bottom:28px;left:0;right:0;text-align:center;color:#fff;opacity:.85;font:600 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase}
+  .rail-r{right:0}
+  .rail-r .segs{display:flex;flex-direction:column;height:100%;gap:0;justify-content:stretch}
+  .seg{display:flex;flex:1;align-items:center;justify-content:center;padding:18px}
+  .seg-e{background:#169B62}.seg-n{background:#00843D}.seg-a{background:#2A5DAA}
+  .rail-r img{width:100%;max-width:none;height:auto;background:#fff;border-radius:12px;padding:14px 12px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+}
+
+/* same look as the office cards on the main page */
+.card.office{--accent:#0074BD;position:relative;overflow:hidden;border:none;border-radius:16px;padding:16px 16px 16px 22px;gap:10px;box-shadow:0 1px 2px rgba(15,28,38,.06),0 8px 22px rgba(15,28,38,.07)}
+.card.office::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent)}
+.card.office .type{font:700 13px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.card.office .name{font:700 24px/1.05 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.02em;text-transform:none;margin:0}
+.card.office .hrs{font-size:15px}
+.card.office .how{margin:0;color:var(--muted);font-size:14.5px}
+.card.office .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.card.office .actions a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px;border-radius:12px;padding:10px 8px;font:600 15px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:#fff;box-shadow:0 2px 6px rgba(15,28,38,.10)}
+.card.office .actions a.call{background:#1a7f37}
+.card.office .actions a.mail{background:#0074BD}
+.card.office .actions a:active,.sos:active{transform:scale(.97)}
+.road{margin-top:8px;padding-top:12px;border-top:1px dashed var(--line);display:grid;gap:8px}
+.road .l{font:600 12px/1 "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sos{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;min-height:48px;border-radius:12px;padding:10px 12px;background:#C62828;color:#fff;text-decoration:none;font:600 15px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.sos b{font-weight:700;letter-spacing:.02em}
+.sos2{text-align:center;color:var(--blue);font-size:14.5px;text-decoration:none;border-bottom:0;padding:4px}
+.closednow{display:flex;gap:12px;align-items:flex-start;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--amber);color:var(--amberInk);font-size:16px;line-height:1.3;position:relative;z-index:1}
+.closednow[hidden]{display:none}
+.closednow .ic{font-size:24px;line-height:1}
+.kb.on{border:2px solid #E0A100;background:rgba(255,210,0,.22)}
+.langs{display:flex;gap:5px;justify-content:flex-end;flex-wrap:wrap}
+.langs button{font:600 14px "Barlow Condensed","Roboto Condensed",sans-serif;letter-spacing:.08em;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 9px;min-height:36px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--sign);border-color:var(--sign);color:#fff}
+</style>
+</head>
+<body>
+
+
+<div class="brands"><div class="brandcard"><aside class="rail rail-l" aria-label="Locauto"><img src="/logos/locauto.svg" alt="Locauto Group" width="103" height="41"></aside><aside class="rail rail-r" aria-label="Enterprise · National · Alamo"><div class="segs"><span class="seg seg-e"><img src="/logos/enterprise.svg" alt="Enterprise Rent-A-Car" width="251" height="53"></span><span class="seg seg-n"><img src="/logos/national.svg" alt="National Car Rental" width="250" height="63"></span><span class="seg seg-a"><img src="/logos/alamo.svg" alt="Alamo Rent a Car" width="217" height="100"></span></div></aside></div></div>
+<div class="wrap">
+  <header class="sign">
+    <div class="kicker" data-k="kicker">Car return</div>
+    <h1 data-k="h1">Rome Via Veneto</h1>
+    <p class="sub" data-k="sub">Return your car to the SABA Villa Borghese car park, Area B, row 11.</p>
+    <div class="closednow" id="closednow" role="status" hidden>
+      <span class="ic" aria-hidden="true">&#128273;</span>
+      <div data-k="closed"><b>Office closed now: leave the keys in the key box</b> in Area B, row 13.</div>
+    </div>
+  </header>
+
+  <div class="langs" id="langs"><button type="button" data-lang="it">IT</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="fr">FR</button><button type="button" data-lang="es">ES</button><button type="button" data-lang="pt">PT</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="zh" lang="zh-Hans">中文</button></div>
+
+
+  <div class="park" role="img" aria-label="Car park sign: Area B, Row 11">
+    <span class="p">P</span><span class="a">B</span>
+    <span class="pf">Fila<br>Row</span>
+    <span class="n">11</span>
+  </div>
+
+  <p class="q" data-k="dir">Open directions in</p>
+
+  <nav class="apps" aria-label="Navigation apps">
+    <a class="app" id="app-google" href="https://www.google.com/maps/dir/?api=1&destination=41.908917,12.484806&travelmode=driving" target="_blank" rel="noopener">
+      <span class="ic ic-img" aria-hidden="true"><img src="/logos/google-maps.svg" alt="" width="22" height="32"></span>
+      <span><span class="nm">Google Maps</span><span class="tag" data-k="sug">Suggested</span><br><span class="ds">Android · iPhone</span></span>
+      <span class="go" data-k="go">Go ›</span>
+    </a>
+    <a class="app" id="app-apple" href="https://maps.apple.com/?daddr=41.908917,12.484806&dirflg=d&q=Locauto%20Car%20Return%20Via%20Veneto" target="_blank" rel="noopener">
+      <span class="ic ic-img" aria-hidden="true"><img src="/logos/apple-maps.svg" alt="" width="44" height="44"></span>
+      <span><span class="nm">Apple Maps</span><span class="tag" data-k="sug">Suggested</span><br><span class="ds">iPhone · CarPlay</span></span>
+      <span class="go" data-k="go">Go ›</span>
+    </a>
+    <a class="app" id="app-waze" href="https://waze.com/ul?ll=41.908917,12.484806&navigate=yes" target="_blank" rel="noopener">
+      <span class="ic" style="background:var(--waze)" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24"><path fill="#fff" stroke="#07202b" stroke-width="1.3" d="M12.5 4C8 4 4.8 7 4.8 11c0 1.3-.9 2.2-1.8 2.6.6 1.4 2 2.4 3.5 2.8a2 2 0 0 0 3.8.6h3.4a2 2 0 0 0 3.8-.7c2-.9 3.5-3 3.5-5.3C21 7.2 17.3 4 12.5 4Z"/><circle cx="10.5" cy="10" r=".9" fill="#07202b"/><circle cx="14.5" cy="10" r=".9" fill="#07202b"/><path d="M10 12.6c1.3 1.1 3.3 1.1 4.6 0" stroke="#07202b" stroke-width="1.1" fill="none" stroke-linecap="round"/></svg>
+      </span>
+      <span><span class="nm">Waze</span><span class="tag" data-k="sug">Suggested</span><br><span class="ds">Android · iPhone</span></span>
+      <span class="go" data-k="go">Go ›</span>
+    </a>
+  </nav>
+
+  <section class="card" aria-labelledby="h-how">
+    <h2 id="h-how" data-k="arrive">When you arrive</h2>
+    <ol>
+      <li><span data-k="s1">Enter the <b>SABA Villa Borghese car park</b> from <b>Viale del Muro Torto</b> and take the ticket at the barrier (leave it in the car).</span></li>
+      <li><span data-k="s2">Go straight, then turn right towards <b>“Rent a Car” – Area B</b>.</span></li>
+      <li><span data-k="s3">Park in <b>Area B, row 11</b>: during opening hours Locauto staff will check the car.</span></li>
+      <li><span data-k="kb"><b>After hours:</b> leave the keys in the key box in <b>Area B, row 13</b>.</span></li>
+    </ol>
+  </section>
+
+  <section class="card office" aria-labelledby="h-info">
+    <div class="type" data-k="type">City centre</div>
+    <h2 id="h-info" class="name">Locauto Roma Via Veneto</h2>
+    <div class="hrs" data-k="hrs"><b>Mon–Fri</b> 08:00–20:00 · <b>Sat–Sun</b> 08:00–13:00</div>
+    <p class="how">SABA Villa Borghese car park · Viale del Muro Torto, Roma<br>Office / Ufficio: Via Sardegna 25, Roma</p>
+    <div class="actions">
+      <a class="call" href="tel:+390642742395"><span aria-hidden="true">&#9742;</span> <span data-k="call">Call office</span></a>
+    </div>
+    <div class="road">
+      <a class="sos" href="tel:+390243020450"><span aria-hidden="true">&#9888;</span> <span data-k="road">Roadside assistance</span> <b>+39 02 43020450</b></a>
+      <a class="sos2" href="tel:+390266165125"><span data-k="alt">Alternative number:</span> +39 02 66165125</a>
+    </div>
+    <div class="coord">
+      <code id="coords">41.908917, 12.484806</code>
+      <button type="button" id="copy" data-k="copy">Copy coordinates</button>
+    </div>
+  </section>
+
+  <a class="card other" href="/" style="text-decoration:none;color:var(--ink);display:block"><b data-k="otherT" style="font:700 18px/1.1 'Barlow Condensed','Roboto Condensed',sans-serif;text-transform:uppercase;letter-spacing:.06em">Returning to another Locauto office? →</b><br><span data-k="otherS" style="color:var(--muted)">All Locauto offices in Italy</span></a>
+  <footer data-k="foot">Locauto Rent · Rome Via Veneto</footer>
+</div>
+
+<script>
+var FT={"it": {"kicker": "Riconsegna auto", "h1": "Roma Via Veneto", "sub": "Riconsegna l'auto al parcheggio SABA Villa Borghese, Area B, fila 11.", "closed": "<b>Ufficio chiuso ora: lascia le chiavi nel key box</b> in Area B, fila 13.", "dir": "Apri le indicazioni con", "sug": "Consigliato", "go": "Vai ›", "arrive": "Quando arrivi", "s1": "Entra nel <b>parcheggio SABA Villa Borghese</b> da <b>Viale del Muro Torto</b> e prendi il ticket alla sbarra (lascialo nell'auto).", "s2": "Prosegui dritto, poi gira a destra verso <b>“Rent a Car” – Area B</b>.", "s3": "Parcheggia in <b>Area B, fila 11</b>: negli orari di apertura lo staff Locauto controlla l'auto.", "kb": "<b>Fuori orario:</b> lascia le chiavi nel key box in <b>Area B, fila 13</b>.", "type": "Centro città", "hrs": "<b>Lun–Ven</b> 08:00–20:00 · <b>Sab–Dom</b> 08:00–13:00", "call": "Chiama l'ufficio", "mail": "Email", "road": "Assistenza stradale", "alt": "Numero alternativo:", "copy": "Copia coordinate", "copied": "Copiato", "otherT": "Riconsegni in un'altra sede? →", "otherS": "Tutti gli uffici Locauto in Italia", "foot": "Locauto Rent · Roma Via Veneto"}, "en": {"kicker": "Car return", "h1": "Rome Via Veneto", "sub": "Return your car to the SABA Villa Borghese car park, Area B, row 11.", "closed": "<b>Office closed now: leave the keys in the key box</b> in Area B, row 13.", "dir": "Open directions in", "sug": "Suggested", "go": "Go ›", "arrive": "When you arrive", "s1": "Enter the <b>SABA Villa Borghese car park</b> from <b>Viale del Muro Torto</b> and take the ticket at the barrier (leave it in the car).", "s2": "Go straight, then turn right towards <b>“Rent a Car” – Area B</b>.", "s3": "Park in <b>Area B, row 11</b>: during opening hours Locauto staff will check the car.", "kb": "<b>After hours:</b> leave the keys in the key box in <b>Area B, row 13</b>.", "type": "City centre", "hrs": "<b>Mon–Fri</b> 08:00–20:00 · <b>Sat–Sun</b> 08:00–13:00", "call": "Call office", "mail": "Email", "road": "Roadside assistance", "alt": "Alternative number:", "copy": "Copy coordinates", "copied": "Copied", "otherT": "Returning to another Locauto office? →", "otherS": "All Locauto offices in Italy", "foot": "Locauto Rent · Rome Via Veneto"}, "fr": {"kicker": "Restitution du véhicule", "h1": "Rome Via Veneto", "sub": "Rendez la voiture au parking SABA Villa Borghese, Zone B, rangée 11.", "closed": "<b>Agence fermée : laissez les clés dans la boîte à clés</b> en Zone B, rangée 13.", "dir": "Ouvrir l'itinéraire avec", "sug": "Conseillé", "go": "Aller ›", "arrive": "À votre arrivée", "s1": "Entrez dans le <b>parking SABA Villa Borghese</b> par <b>Viale del Muro Torto</b> et prenez le ticket à la barrière (laissez-le dans la voiture).", "s2": "Continuez tout droit, puis tournez à droite vers <b>« Rent a Car » – Zone B</b>.", "s3": "Garez-vous en <b>Zone B, rangée 11</b> : pendant les heures d'ouverture, le personnel Locauto contrôle la voiture.", "kb": "<b>Hors horaires :</b> laissez les clés dans la boîte à clés en <b>Zone B, rangée 13</b>.", "type": "Centre-ville", "hrs": "<b>Lun–Ven</b> 08:00–20:00 · <b>Sam–Dim</b> 08:00–13:00", "call": "Appeler l'agence", "mail": "E-mail", "road": "Assistance routière", "alt": "Autre numéro :", "copy": "Copier les coordonnées", "copied": "Copié", "otherT": "Retour dans une autre agence ? →", "otherS": "Toutes les agences Locauto en Italie", "foot": "Locauto Rent · Rome Via Veneto"}, "es": {"kicker": "Devolución del vehículo", "h1": "Roma Via Veneto", "sub": "Devuelve el coche en el aparcamiento SABA Villa Borghese, Área B, fila 11.", "closed": "<b>Oficina cerrada ahora: deja las llaves en el buzón de llaves</b> del Área B, fila 13.", "dir": "Abrir indicaciones con", "sug": "Recomendado", "go": "Ir ›", "arrive": "Cuando llegues", "s1": "Entra en el <b>aparcamiento SABA Villa Borghese</b> por <b>Viale del Muro Torto</b> y coge el ticket en la barrera (déjalo en el coche).", "s2": "Sigue recto y luego gira a la derecha hacia <b>“Rent a Car” – Área B</b>.", "s3": "Aparca en el <b>Área B, fila 11</b>: en horario de apertura el personal de Locauto revisa el coche.", "kb": "<b>Fuera de horario:</b> deja las llaves en el buzón de llaves del <b>Área B, fila 13</b>.", "type": "Centro ciudad", "hrs": "<b>Lun–Vie</b> 08:00–20:00 · <b>Sáb–Dom</b> 08:00–13:00", "call": "Llamar a la oficina", "mail": "Correo", "road": "Asistencia en carretera", "alt": "Otro número:", "copy": "Copiar coordenadas", "copied": "Copiado", "otherT": "¿Devuelves en otra oficina? →", "otherS": "Todas las oficinas Locauto en Italia", "foot": "Locauto Rent · Roma Via Veneto"}, "pt": {"kicker": "Devolução do veículo", "h1": "Roma Via Veneto", "sub": "Devolva o carro no estacionamento SABA Villa Borghese, Área B, fileira 11.", "closed": "<b>Escritório fechado agora: deixe as chaves na caixa de chaves</b> da Área B, fileira 13.", "dir": "Abrir direções com", "sug": "Recomendado", "go": "Ir ›", "arrive": "Quando chegar", "s1": "Entre no <b>estacionamento SABA Villa Borghese</b> pela <b>Viale del Muro Torto</b> e pegue o ticket na cancela (deixe-o no carro).", "s2": "Siga em frente e depois vire à direita em direção a <b>“Rent a Car” – Área B</b>.", "s3": "Estacione na <b>Área B, fileira 11</b>: no horário de funcionamento a equipe Locauto verifica o carro.", "kb": "<b>Fora do horário:</b> deixe as chaves na caixa de chaves da <b>Área B, fileira 13</b>.", "type": "Centro da cidade", "hrs": "<b>Seg–Sex</b> 08:00–20:00 · <b>Sáb–Dom</b> 08:00–13:00", "call": "Ligar para o escritório", "mail": "E-mail", "road": "Assistência em estrada", "alt": "Outro número:", "copy": "Copiar coordenadas", "copied": "Copiado", "otherT": "Devolver noutro escritório? →", "otherS": "Todos os escritórios Locauto em Itália", "foot": "Locauto Rent · Roma Via Veneto"}, "ru": {"kicker": "Возврат автомобиля", "h1": "Рим, Via Veneto", "sub": "Верните автомобиль на парковку SABA Villa Borghese, зона Area B, ряд 11.", "closed": "<b>Офис сейчас закрыт: оставьте ключи в ящике для ключей (Key box)</b> в зоне Area B, ряд 13.", "dir": "Открыть маршрут в", "sug": "Рекомендуем", "go": "Ехать ›", "arrive": "Когда приедете", "s1": "Въезжайте на <b>парковку SABA Villa Borghese</b> с <b>Viale del Muro Torto</b> и возьмите талон у шлагбаума (оставьте его в автомобиле).", "s2": "Езжайте прямо, затем поверните направо к <b>«Rent a Car» – Area B</b>.", "s3": "Припаркуйтесь в <b>зоне Area B, ряд 11</b>: в часы работы сотрудники Locauto проверят автомобиль.", "kb": "<b>В нерабочее время:</b> оставьте ключи в ящике для ключей (Key box) в <b>зоне Area B, ряд 13</b>.", "type": "Центр города", "hrs": "<b>Пн–Пт</b> 08:00–20:00 · <b>Сб–Вс</b> 08:00–13:00", "call": "Позвонить в офис", "mail": "Email", "road": "Помощь на дороге", "alt": "Другой номер:", "copy": "Скопировать координаты", "copied": "Скопировано", "otherT": "Возвращаете в другом офисе? →", "otherS": "Все офисы Locauto в Италии", "foot": "Locauto Rent · Рим, Via Veneto"}, "zh": {"kicker": "还车", "h1": "罗马 Via Veneto", "sub": "请将车辆还至 SABA Villa Borghese 停车场 B 区（Area B）第11排。", "closed": "<b>门店现已关门：请将钥匙放入钥匙箱（Key box）</b>，位于 B 区（Area B）第13排。", "dir": "打开导航", "sug": "推荐", "go": "前往 ›", "arrive": "到达后", "s1": "从 <b>Viale del Muro Torto</b> 进入 <b>SABA Villa Borghese 停车场</b>，在道闸处取停车票（请留在车内）。", "s2": "直行后右转，前往 <b>“Rent a Car”——B 区（Area B）</b>。", "s3": "请停在 <b>B 区（Area B）第11排</b>：营业时间内 Locauto 工作人员会检查车辆。", "kb": "<b>非营业时间：</b>请将钥匙放入 <b>B 区（Area B）第13排</b>的钥匙箱（Key box）。", "type": "市中心", "hrs": "<b>周一至周五</b> 08:00–20:00 · <b>周六至周日</b> 08:00–13:00", "call": "致电门店", "mail": "电子邮件", "road": "道路救援", "alt": "备用号码：", "copy": "复制坐标", "copied": "已复制", "otherT": "在其他门店还车？→", "otherS": "意大利所有 Locauto 门店", "foot": "Locauto Rent · 罗马 Via Veneto"}};
+var LANGS=["it","en","fr","es","pt","ru","zh"],lang=(navigator.language||"en").slice(0,2).toLowerCase();
+if(LANGS.indexOf(lang)<0)lang="en";
+try{var sv=localStorage.getItem("lang");if(sv&&LANGS.indexOf(sv)>=0)lang=sv;}catch(e){}
+function applyLang(){
+  var t=FT[lang];document.documentElement.lang=lang==="zh"?"zh-Hans":lang;
+  if(lang==="ru"&&!document.getElementById("cyrfont")){var l=document.createElement("link");l.id="cyrfont";l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&display=swap";document.head.appendChild(l);}
+  document.querySelectorAll("[data-k]").forEach(function(e){var v=t[e.dataset.k];if(v!=null)e.innerHTML=v;});
+  document.querySelectorAll("#langs [data-lang]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===lang);});
+  var c=document.getElementById("copy");if(c)c.textContent=t.copy;
+}
+document.querySelectorAll("#langs [data-lang]").forEach(function(b){b.addEventListener("click",function(){lang=b.dataset.lang;try{localStorage.setItem("lang",lang);}catch(e){}applyLang();});});
+applyLang();
+
+(function(){
+  var ua = navigator.userAgent || "";
+  var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var el = document.getElementById(ios ? "app-apple" : "app-google");
+  if (el) el.classList.add("best");
+  var btn = document.getElementById("copy");
+  btn.addEventListener("click", function(){
+    var txt = document.getElementById("coords").textContent;
+    function done(){ btn.textContent = FT[lang].copied; setTimeout(function(){ btn.textContent = FT[lang].copy; }, 1800); }
+    function fallback(){ var r = document.createRange(); r.selectNodeContents(document.getElementById("coords")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "⌘ / Ctrl + C"; }
+    try { navigator.clipboard.writeText(txt).then(done, fallback); } catch(e){ fallback(); }
+  });
+})();
+
+(function(){
+  function romeNow(){
+    try{var p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Rome",weekday:"short",hour:"numeric",hour12:false}).formatToParts(new Date());
+      var h=+p.filter(function(x){return x.type==="hour"})[0].value;var w=p.filter(function(x){return x.type==="weekday"})[0].value;
+      return {h:h===24?0:h,we:(w==="Sat"||w==="Sun")};}catch(e){return null}
+  }
+  function upd(){
+    var n=romeNow(); if(n===null) return;
+    var closed=n.we ? (n.h<8||n.h>=13) : (n.h<8||n.h>=20); // Mon-Fri 08-20, Sat-Sun 08-13
+    var b=document.getElementById("closednow"); if(b) b.hidden=!closed;
+    
+  }
+  upd(); setInterval(upd,60000);
+  document.addEventListener("visibilitychange",upd); window.addEventListener("pageshow",upd);
+})();
+</script>
+
+</body>
+</html>
